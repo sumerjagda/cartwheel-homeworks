@@ -1,0 +1,108 @@
+-- 1. Traces per scenario (top 50)
+┌─scenario_id──┬─traces─┐
+│ support-0056 │      4 │
+│ support-0001 │      2 │
+│ support-0005 │      2 │
+│ support-0009 │      2 │
+│ support-0013 │      2 │
+│ support-0017 │      2 │
+│ support-0021 │      2 │
+│ support-0025 │      2 │
+│ support-0029 │      2 │
+│ support-0033 │      2 │
+│ support-0036 │      2 │
+│ support-0038 │      2 │
+│ support-0041 │      2 │
+│ support-0046 │      2 │
+│ support-0051 │      2 │
+│ support-0061 │      2 │
+│ support-0066 │      2 │
+│ support-0070 │      2 │
+│ support-0074 │      2 │
+│ support-0078 │      2 │
+│ support-0079 │      2 │
+│ support-0082 │      2 │
+│ support-0090 │      2 │
+│ support-0092 │      2 │
+│ support-0097 │      2 │
+│ support-0099 │      2 │
+│ support-0169 │      2 │
+│ support-0170 │      2 │
+│ support-0171 │      2 │
+│ support-0172 │      2 │
+│ support-0173 │      2 │
+│ support-0174 │      2 │
+│ support-0175 │      2 │
+│ support-0177 │      2 │
+│ support-0181 │      2 │
+│ support-0182 │      2 │
+│ support-0187 │      2 │
+│ support-0193 │      2 │
+│ support-0200 │      2 │
+│ support-0205 │      2 │
+│ support-0221 │      2 │
+│ support-0222 │      2 │
+│ support-0223 │      2 │
+│ support-0224 │      2 │
+│ support-0225 │      2 │
+│ support-0226 │      2 │
+│ support-0227 │      2 │
+│ support-0228 │      2 │
+│ support-0229 │      2 │
+│ support-0230 │      2 │
+└──────────────┴────────┘
+
+-- 2. Traces per user role
+┌─role─────┬─traces─┐
+│ shopper  │    253 │
+│ merchant │     30 │
+│ support  │     27 │
+└──────────┴────────┘
+
+-- 3. Error count by observation name
+┌─name─┬─errors─┐
+│ cartwheel.session_message │     10 │
+│ cancel_order.tool │      1 │
+└──────┴────────┘
+
+-- 4. Escalation count
+┌─escalations─┐
+│          12 │
+└─────────────┘
+
+-- 5. Token and cost totals
+┌─input_tokens─┬─output_tokens─┬─total_cost─┐
+│      1129690 │         51370 │     0.2003 │
+└──────────────┴───────────────┴────────────┘
+
+-- 6. Longest traces by span count
+┌─trace_id─────────────────────────┬─spans─┬─duration_ms─┐
+│ b37990bbb540e2cc61bae3566b96b7ca │    16 │        4986 │
+│ 944c9c7b973f4ec13525d8f8f17e93e7 │    16 │        4925 │
+│ 05796c05e7b953de3bc391c347156960 │    16 │        4625 │
+│ 483ad81c7c298c9671073f0c0fb23d30 │    14 │        5351 │
+│ 36f20dcacffb991aea7e6f85fa1e333e │    14 │        5284 │
+│ dada76462bf0adb8a1510201edfa6f8d │    14 │        4866 │
+│ 5b55a624868ff3d5523a88eaa3e8d3ff │    14 │        4779 │
+│ 7b775dddf7f5f1581829a1855d185e46 │    14 │        4555 │
+│ 8a80e1e65ebd604b847a4545ec39644c │    14 │        4526 │
+│ cf7d59c5b61c51cee236a69787347b7f │    14 │        4489 │
+└──────────────────────────────────┴───────┴─────────────┘
+
+-- 7. Tool-call frequency
+┌─name────────────────────┬─calls─┐
+│ get_order.tool          │   211 │
+│ get_store_info.tool     │   132 │
+│ get_policy.tool         │   112 │
+│ issue_refund.tool       │    50 │
+│ search_help_center.tool │    44 │
+│ search_products.tool    │    37 │
+│ cancel_order.tool       │    13 │
+│ list_my_orders.tool     │    13 │
+│ escalate_to_human.tool  │    12 │
+└─────────────────────────┴───────┘
+
+-- 8. Permission-denied count
+┌─permission_denials─┐
+│                 15 │
+└────────────────────┘

@@ -69,12 +69,21 @@ or credential changes, and anything outside Cartwheel.
   call a tool without explaining first.
 - Cite the policy id (for example cw-returns) for every policy claim.
 - Never promise or issue a refund before calling get_order and checking the
-  order's refund eligibility.
+  order's refund eligibility. If refund_eligible is false, decline the refund
+  and cite the applicable return policy id (check get_store_info to see
+  whether the store uses cw-returns or a store-specific override policy).
+- State when required information is missing or inconsistent (for example, if
+  the user's stated store, product, or date conflicts with the order record)
+  rather than inventing a value; do NOT call issue_refund or cancel_order when
+  those details conflict—point out the mismatch and ask the user to confirm
+  first.
 
 ## Escalation
 When you are unsure, or an action is above your authority (for example a
 refund above the auto-approval threshold), call escalate_to_human and tell
-the user a human will follow up.
+the user a human will follow up. For account changes of any kind (such as
+changing an email address), always call escalate_to_human rather than simply
+refusing.
 
 ## Tone
 Plain and warm. No legalese.
@@ -427,6 +436,14 @@ def find_order(
     return _call(wrapper, hw_tools.find_order, query)
 
 
+@function_tool
+def get_store_info(
+    wrapper: RunContextWrapper[AuthContext], store: str
+) -> dict[str, Any]:
+    """Look up public store details, return window overrides, and the applicable return policy id."""
+    return _call(wrapper, hw_tools.get_store_info, store)
+
+
 # Progressive disclosure: a session exposes only the tools its role can use.
 # Fewer tools mean fewer wrong choices and cleaner evals. At dev scale the
 # only difference is that support staff, who have no orders of their own,
@@ -434,6 +451,7 @@ def find_order(
 _COMMON_TOOLS = [
     search_help_center,
     get_policy,
+    get_store_info,
     search_products,
     get_order,
     issue_refund,

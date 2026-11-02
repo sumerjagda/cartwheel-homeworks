@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cartwheel Homework 4 • Session Trace Review & Failure Taxonomy</title>
+<style>
+  :root {
+    --bg: #0b0f19;
+    --panel: #111827;
+    --panel-alt: #1f2937;
+    --border: #374151;
+    --text: #f9fafb;
+    --muted: #9ca3af;
+    --blue: #3b82f6;
+    --green: #10b981;
+    --amber: #f59e0b;
+    --red: #ef4444;
+    --purple: #8b5cf6;
+    --cyan: #06b6d4;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; height: 100vh; display: flex; flex-direction: column;
+    font: 13.5px/1.5 -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+    background: var(--bg); color: var(--text);
+  }
+  .mono { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 12px; }
+  header {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 10px 18px; background: var(--panel); border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 14.5px; }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tab-btn {
+    background: #1f2937; color: #e5e7eb; border: 1px solid var(--border);
+    padding: 6px 12px; border-radius: 6px; font-size: 12.5px; font-weight: 600; cursor: pointer;
+  }
+  .tab-btn:hover { border-color: #60a5fa; }
+  .tab-btn.active { background: #2563eb; border-color: #3b82f6; color: #fff; }
+  .pill {
+    display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px;
+    border-radius: 999px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.06);
+  }
+  .pill.green { background: rgba(16,185,129,0.16); color: #6ee7b7; border-color: rgba(16,185,129,0.4); }
+  .pill.red { background: rgba(239,68,68,0.16); color: #fca5a5; border-color: rgba(239,68,68,0.4); }
+  .pill.amber { background: rgba(245,158,11,0.16); color: #fcd34d; border-color: rgba(245,158,11,0.4); }
+  .pill.blue { background: rgba(59,130,246,0.16); color: #93c5fd; border-color: rgba(59,130,246,0.4); }
+  .pill.purple { background: rgba(139,92,246,0.16); color: #c4b5fd; border-color: rgba(139,92,246,0.4); }
+  .pill.cyan { background: rgba(6,182,212,0.16); color: #67e8f9; border-color: rgba(6,182,212,0.4); }
+
+  .filter-bar {
+    display: flex; align-items: center; gap: 10px; padding: 8px 18px;
+    background: #0e1422; border-bottom: 1px solid var(--border); flex-wrap: wrap;
+  }
+  select, input[type="text"], textarea {
+    background: #111827; color: var(--text); border: 1px solid var(--border);
+    border-radius: 6px; padding: 5px 9px; font: inherit;
+  }
+  .btn {
+    background: #1f2937; color: var(--text); border: 1px solid #4b5563;
+    padding: 5px 11px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;
+  }
+  .btn:hover { background: #374151; border-color: #60a5fa; }
+  .btn.primary { background: #2563eb; border-color: #3b82f6; }
+  .btn.green { background: #059669; border-color: #10b981; }
+  .btn.red { background: #b91c1c; border-color: #ef4444; }
+
+  .view-container { display: none; flex: 1; overflow: hidden; }
+  .view-container.active { display: flex; }
+
+  .three-pane { display: grid; grid-template-columns: 330px 1fr 410px; width: 100%; height: 100%; overflow: hidden; }
+  .queue-pane { border-right: 1px solid var(--border); overflow-y: auto; background: var(--panel); }
+  .queue-item {
+    padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.06); cursor: pointer;
+  }
+  .queue-item:hover { background: rgba(255,255,255,0.04); }
+  .queue-item.active { background: rgba(59,130,246,0.16); border-left: 3px solid var(--blue); }
+
+  .center-pane { overflow-y: auto; padding: 16px 20px; background: var(--bg); }
+  .context-card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px 14px; margin-bottom: 14px;
+  }
+  .turn-block {
+    border: 1px solid var(--border); border-radius: 8px; background: #0f1625;
+    padding: 12px 14px; margin-bottom: 14px;
+  }
+  .msg-user {
+    background: rgba(59,130,246,0.12); border-left: 3px solid var(--blue);
+    padding: 9px 12px; border-radius: 6px; margin-bottom: 10px;
+  }
+  .msg-assistant {
+    background: rgba(16,185,129,0.11); border-left: 3px solid var(--green);
+    padding: 10px 12px; border-radius: 6px; margin-top: 10px; white-space: pre-wrap;
+  }
+  .tool-card {
+    background: #141c2e; border: 1px solid #334155; border-left: 3px solid var(--amber);
+    border-radius: 6px; padding: 8px 11px; margin: 7px 0;
+  }
+  .tool-card.retrieval { border-left-color: var(--cyan); }
+  .tool-card.denied { border-left-color: var(--red); background: rgba(239,68,68,0.09); }
+  pre {
+    margin: 5px 0 0 0; padding: 8px; background: #070a12; border-radius: 5px;
+    border: 1px solid #1f2937; overflow-x: auto; font-size: 11.5px; color: #e5e7eb;
+    white-space: pre-wrap; word-break: break-word;
+  }
+
+  .right-pane { border-left: 1px solid var(--border); overflow-y: auto; padding: 14px 16px; background: var(--panel); }
+  .side-box {
+    background: #0d1320; border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px; margin-bottom: 14px;
+  }
+  .side-box.ai-sugg {
+    border: 1.5px dashed var(--purple); background: rgba(139,92,246,0.07);
+  }
+  .side-box h3 {
+    margin: 0 0 8px 0; font-size: 11.5px; text-transform: uppercase;
+    letter-spacing: 0.05em; color: #93c5fd;
+  }
+  .mode-row {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    padding: 7px 9px; border: 1px solid var(--border); border-radius: 6px;
+    margin-bottom: 6px; background: #111827;
+  }
+  .mode-row.fail { border-color: var(--red); background: rgba(239,68,68,0.12); }
+  .mode-row.pass { border-color: rgba(16,185,129,0.45); background: rgba(16,185,129,0.06); }
+
+  .full-scroll { flex: 1; overflow-y: auto; padding: 20px 26px; width: 100%; }
+  table.grid { width: 100%; border-collapse: collapse; background: var(--panel); border-radius: 8px; overflow: hidden; }
+  table.grid th, table.grid td {
+    text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top;
+  }
+  table.grid th { background: #1f2937; font-size: 12px; text-transform: uppercase; color: #93c5fd; }
+  #toast {
+    position: fixed; bottom: 18px; right: 18px; background: #059669; color: #fff;
+    padding: 9px 15px; border-radius: 8px; font-weight: 600; opacity: 0; pointer-events: none;
+    transition: opacity 0.2s; z-index: 999;
+  }
+  #toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <span>🔬 Cartwheel HW4 Review App</span>
+    <span class="pill blue" id="source-badge">Loading...</span>
+    <span class="pill green" id="reviewed-kpi">0 / 100 Reviewed</span>
+    <span class="pill amber" id="incomplete-kpi">0 Incomplete</span>
+  </div>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('review', this)">1. Session Review &amp; Coding</button>
+    <button class="tab-btn" onclick="switchTab('taxonomy', this)">2. Failure Taxonomy &amp; SPEC.md</button>
+    <button class="tab-btn" onclick="switchTab('progress', this)">3. Progress &amp; AI Suggestions</button>
+    <button class="tab-btn" onclick="switchTab('reports', this)">4. Analysis Reports</button>
+  </div>
+</header>
+
+<div class="filter-bar" id="review-filters">
+  <label>Scope:
+    <select id="f-scope" onchange="renderQueue()">
+      <option value="sampled">100+ Sampled Review Set (Batches 1-4)</option>
+      <option value="all">All 250 Module 1 Conversations</option>
+    </select>
+  </label>
+  <label>Batch:
+    <select id="f-batch" onchange="renderQueue()">
+      <option value="all">All Batches</option>
+      <option value="batch_1_random_and_cluster">B1: Uniform + Cluster (30)</option>
+      <option value="batch_2_role_stratified">B2: Role Stratified (30)</option>
+      <option value="batch_3_depth_and_close_negatives">B3: Depth + Close Negatives (30)</option>
+      <option value="batch_4_saturation_check">B4: Final 15 Saturation Check (15)</option>
+    </select>
+  </label>
+  <label>Role:
+    <select id="f-role" onchange="renderQueue()">
+      <option value="all">All Roles</option>
+      <option value="shopper">shopper</option>
+      <option value="merchant">merchant</option>
+      <option value="support">support</option>
+    </select>
+  </label>
+  <label>Mode Filter:
+    <select id="f-mode" onchange="renderQueue()">
+      <option value="all">Any Mode</option>
+    </select>
+  </label>
+  <label>Status:
+    <select id="f-status" onchange="renderQueue()">
+      <option value="all">All</option>
+      <option value="failed">Has >=1 Fail Mode</option>
+      <option value="clean">All Pass (Clean / Close Neg)</option>
+      <option value="incomplete">Incomplete Binary Judgments</option>
+    </select>
+  </label>
+  <input type="text" id="f-search" placeholder="Search scenario_id, order #, text..." oninput="renderQueue()" style="min-width:210px;" />
+  <span style="color:var(--muted); font-size:12px;">Hotkeys: <code>j/k</code> next/prev • <code>n</code> no failure • <code>1-6</code> toggle mode</span>
+</div>
+
+<!-- TAB 1: 3-Pane Session Review -->
+<div id="tab-review" class="view-container active">
+  <div class="three-pane">
+    <div class="queue-pane" id="queue-list"></div>
+    <div class="center-pane" id="session-detail"></div>
+    <div class="right-pane" id="coding-panel"></div>
+  </div>
+</div>
+
+<!-- TAB 2: Taxonomy & SPEC.md -->
+<div id="tab-taxonomy" class="view-container">
+  <div class="full-scroll" id="taxonomy-content"></div>
+</div>
+
+<!-- TAB 3: Progress & AI Suggestions -->
+<div id="tab-progress" class="view-container">
+  <div class="full-scroll" id="progress-content"></div>
+</div>
+
+<!-- TAB 4: Analysis Reports -->
+<div id="tab-reports" class="view-container">
+  <div class="full-scroll" id="reports-content"></div>
+</div>
+
+<div id="toast">Saved + synced to Langfuse</div>
+
+<script>
+let STATE = null;
+let FILTERED = [];
+let ACTIVE_IDX = 0;
+
+function showToast(msg) {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("show");
+  setTimeout(() => el.classList.remove("show"), 1600);
+}
+
+function escapeHtml(str) {
+  return String(str ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function switchTab(name, btn) {
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  document.querySelectorAll(".view-container").forEach(v => v.classList.remove("active"));
+  document.getElementById("tab-" + name).classList.add("active");
+  document.getElementById("review-filters").style.display = name === "review" ? "flex" : "none";
+  if (name === "taxonomy") renderTaxonomyTab();
+  if (name === "progress") renderProgressTab();
+  if (name === "reports") renderReportsTab();
+}
+
+function getAnnotation(traceId) {
+  return (STATE.annotations || []).find(a => a.trace_id === traceId && a.author === "human") || null;
+}
+
+function getModeLabel(traceId, modeName) {
+  const map = (STATE.labels || {})[modeName] || {};
+  return map[traceId] !== undefined ? map[traceId] : null;
+}
+
+function isSessionComplete(sess) {
+  const ann = getAnnotation(sess.trace_id);
+  if (!ann || !ann.note) return false;
+  for (const m of STATE.modes) {
+    if (getModeLabel(sess.trace_id, m.name) === null) return false;
+  }
+  return true;
+}
+
+function countFailedModes(sess) {
+  let c = 0;
+  for (const m of STATE.modes) {
+    if (getModeLabel(sess.trace_id, m.name) === 1) c++;
+  }
+  return c;
+}
+
+function updateTopKPIs() {
+  const sampled = STATE.sessions.filter(s => s.in_sample);
+  const targetPool = sampled.length > 0 ? sampled : STATE.sessions;
+  const annotatedCount = targetPool.filter(s => {
+    const a = getAnnotation(s.trace_id);
+    return a && a.note;
+  }).length;
+  const incompleteCount = targetPool.filter(s => !isSessionComplete(s)).length;
+  document.getElementById("source-badge").textContent = `${STATE.source} • ${STATE.total_sessions} sessions`;
+  document.getElementById("reviewed-kpi").textContent = `${annotatedCount} / ${targetPool.length} Reviewed`;
+  document.getElementById("incomplete-kpi").textContent = `${incompleteCount} Incomplete Judgments`;
+}
+
+function renderQueue() {
+  const scope = document.getElementById("f-scope").value;
+  const batch = document.getElementById("f-batch").value;
+  const role = document.getElementById("f-role").value;
+  const modeFilter = document.getElementById("f-mode").value;
+  const status = document.getElementById("f-status").value;
+  const q = document.getElementById("f-search").value.trim().toLowerCase();
+
+  FILTERED = STATE.sessions.filter(s => {
+    if (scope === "sampled" && STATE.sessions.some(x => x.in_sample) && !s.in_sample) return false;
+    if (batch !== "all" && s.sample_batch !== batch) return false;
+    if (role !== "all" && s.role !== role) return false;
+    if (modeFilter !== "all" && getModeLabel(s.trace_id, modeFilter) !== 1) return false;
+    const fails = countFailedModes(s);
+    if (status === "failed" && fails === 0) return false;
+    if (status === "clean" && (fails > 0 || !isSessionComplete(s))) return false;
+    if (status === "incomplete" && isSessionComplete(s)) return false;
+    if (q) {
+      const hay = JSON.stringify([s.scenario_id, s.trace_id, s.extra, s.turns.map(t => [t.user_text, t.assistant_text])]).toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  if (ACTIVE_IDX >= FILTERED.length) ACTIVE_IDX = 0;
+  const listEl = document.getElementById("queue-list");
+  listEl.innerHTML = "";
+
+  FILTERED.forEach((s, idx) => {
+    const ann = getAnnotation(s.trace_id);
+    const fails = countFailedModes(s);
+    const complete = isSessionComplete(s);
+    const div = document.createElement("div");
+    div.className = "queue-item" + (idx === ACTIVE_IDX ? " active" : "");
+    const batchShort = s.sample_batch ? s.sample_batch.replace("batch_", "B").split("_")[0] : "Extra";
+    div.innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <strong class="mono" style="color:#60a5fa;">${escapeHtml(s.scenario_id || s.trace_id.slice(0, 10))}</strong>
+        <div style="display:flex; gap:4px;">
+          <span class="pill purple">${escapeHtml(batchShort)}</span>
+          <span class="pill ${s.role === 'merchant' ? 'amber' : (s.role === 'support' ? 'cyan' : 'green')}">${escapeHtml(s.role)}</span>
+        </div>
+      </div>
+      <div style="font-size:12px; color:#d1d5db; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:5px;">
+        ${escapeHtml(s.turns[0]?.user_text || "")}
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; color:var(--muted);">
+        <span>${s.turn_count} turn${s.turn_count > 1 ? 's' : ''} • ${s.tool_call_count} tools</span>
+        <span>${fails > 0 ? `<span class="pill red">${fails} Fail</span>` : (complete ? `<span class="pill green">Clean Pass</span>` : `<span class="pill">Pending</span>`)}</span>
+      </div>
+    `;
+    div.onclick = () => { ACTIVE_IDX = idx; renderQueue(); renderActiveSession(); };
+    listEl.appendChild(div);
+  });
+
+  renderActiveSession();
+}
+
+function renderActiveSession() {
+  const detailEl = document.getElementById("session-detail");
+  const rightEl = document.getElementById("coding-panel");
+  if (!FILTERED.length) {
+    detailEl.innerHTML = `<div class="context-card">No conversations match the current filter.</div>`;
+    rightEl.innerHTML = "";
+    return;
+  }
+  const s = FILTERED[ACTIVE_IDX];
+  const dq = s.extra?.data_quality_case;
+
+  const turnsHtml = s.turns.map(t => {
+    const toolsHtml = (t.tool_steps || []).map(ts => {
+      const cls = ts.permission_denied ? "denied" : (ts.is_retrieval ? "retrieval" : "");
+      return `
+        <div class="tool-card ${cls}">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <span class="pill ${ts.permission_denied ? 'red' : (ts.is_retrieval ? 'cyan' : 'amber')}">${ts.is_retrieval ? 'RETRIEVAL' : 'TOOL'}</span>
+              <strong class="mono" style="margin-left:6px;">${escapeHtml(ts.tool_name)}</strong>
+              ${ts.permission_denied ? `<span class="pill red" style="margin-left:6px;">PERMISSION DENIED</span>` : ""}
+            </div>
+            <span class="mono" style="color:var(--muted);">${ts.latency_s ?? 0}s</span>
+          </div>
+          <div class="mono" style="margin-top:5px; color:#93c5fd;">Args: ${escapeHtml(JSON.stringify(ts.arguments))}</div>
+          <pre>${escapeHtml(typeof ts.result === "string" ? ts.result : JSON.stringify(ts.result, null, 2))}</pre>
+        </div>
+      `;
+    }).join("");
+
+    return `
+      <div class="turn-block">
+        <div style="display:flex; justify-content:space-between; font-size:11.5px; color:var(--muted); margin-bottom:8px;" class="mono">
+          <span>Turn ${t.turn_number} of ${s.turn_count} • Langfuse Trace ID: ${escapeHtml(t.trace_id)}</span>
+          <span>${escapeHtml(t.timestamp || "")}</span>
+        </div>
+        <div class="msg-user">
+          <div style="font-size:11px; font-weight:700; color:#93c5fd; margin-bottom:3px;">USER (${escapeHtml(s.role)}, uid=${escapeHtml(s.user_id)})</div>
+          <div>${escapeHtml(t.user_text)}</div>
+        </div>
+        ${toolsHtml || `<div style="font-size:11.5px; color:var(--muted); padding:4px 8px;">(0 tool calls executed in this turn)</div>`}
+        <div class="msg-assistant">
+          <div style="font-size:11px; font-weight:700; color:#6ee7b7; margin-bottom:3px;">CARTWHEEL ASSISTANT</div>
+          <div>${escapeHtml(t.assistant_text || "(Empty assistant output)")}</div>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  detailEl.innerHTML = `
+    <div class="context-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
+        <div>
+          <strong style="font-size:15px;">Session <span class="mono" style="color:#60a5fa;">${escapeHtml(s.scenario_id)}</span></strong>
+          <span class="pill blue" style="margin-left:6px;">session_id=${escapeHtml(s.session_id.slice(0, 12))}…</span>
+          <span class="pill">${escapeHtml(s.pool)} pool</span>
+          ${dq ? `<span class="pill red">DB Defect: ${escapeHtml(dq)}</span>` : ""}
+          ${s.sample_batch ? `<span class="pill purple">${escapeHtml(s.sample_batch)}</span>` : ""}
+        </div>
+        <div class="mono" style="font-size:11.5px; color:var(--muted);">
+          Primary Trace: ${escapeHtml(s.trace_id)} • prompt=${escapeHtml(s.prompt_version)}
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; font-size:12px;">
+        <div>
+          <strong style="color:#93c5fd;">Scenario Expected Ground Truth:</strong>
+          <pre>${escapeHtml(JSON.stringify(s.expected, null, 2))}</pre>
+        </div>
+        <div>
+          <strong style="color:#fcd34d;">Scenario Extra / DB Seed Facts:</strong>
+          <pre>${escapeHtml(JSON.stringify({role: s.role, user_id: s.user_id, store_id: s.store_id, ...s.extra, sample_reason: s.sample_reason}, null, 2))}</pre>
+        </div>
+      </div>
+    </div>
+    ${turnsHtml}
+  `;
+
+  // Right Pane: 1. Open Coding, 2. Separate AI Suggestions, 3. Structured Binary Mode Toggles
+  const ann = getAnnotation(s.trace_id);
+  const traceSuggestions = (STATE.suggestions || []).filter(sg => sg.trace_id === s.trace_id);
+
+  const suggHtml = traceSuggestions.length ? traceSuggestions.map(sg => `
+    <div style="padding:8px; background:rgba(0,0,0,0.25); border-radius:6px; margin-bottom:8px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <span class="pill purple">Candidate: ${escapeHtml(sg.mode)}</span>
+        <span class="pill ${sg.status === 'accepted' ? 'green' : (sg.status === 'rejected' ? 'red' : 'amber')}">${escapeHtml(sg.status || 'pending')}</span>
+      </div>
+      <div style="font-size:12px; margin-bottom:6px;">${escapeHtml(sg.text)}</div>
+      ${sg.decision_reason ? `<div style="font-size:11.5px; color:#fcd34d; margin-bottom:6px;">Reason: ${escapeHtml(sg.decision_reason)}</div>` : ""}
+      <div style="display:flex; gap:6px;">
+        <button class="btn green" onclick="decideSuggestion('${sg.id}', 'accepted')">✓ Accept Suggestion</button>
+        <button class="btn red" onclick="decideSuggestion('${sg.id}', 'rejected')">✕ Reject Suggestion</button>
+      </div>
+    </div>
+  `).join("") : `<div style="font-size:12px; color:var(--muted);">No AI depth-scan suggestions queued for this session. (See Tab 3 for all suggestions across the store.)</div>`;
+
+  const modesHtml = STATE.modes.map((m, i) => {
+    const val = getModeLabel(s.trace_id, m.name);
+    const cls = val === 1 ? "fail" : (val === 0 ? "pass" : "");
+    return `
+      <div class="mode-row ${cls}">
+        <div style="flex:1;">
+          <div class="mono" style="font-weight:700; font-size:12px;">[${i + 1}] ${escapeHtml(m.name)}</div>
+          <div style="font-size:11px; color:var(--muted);">${escapeHtml(m.requirement_source || "")}</div>
+        </div>
+        <div style="display:flex; gap:4px;">
+          <button class="btn ${val === 0 ? 'green' : ''}" onclick="setBinaryLabel('${s.trace_id}', '${m.name}', 0)">Pass (0)</button>
+          <button class="btn ${val === 1 ? 'red' : ''}" onclick="setBinaryLabel('${s.trace_id}', '${m.name}', 1)">Fail (1)</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  rightEl.innerHTML = `
+    <div class="side-box">
+      <h3>1. Human Open Coding (First-Failure Rule)</h3>
+      <textarea id="open-note-input" rows="4" style="width:100%; margin-bottom:8px;" placeholder="Describe the first upstream failure observed in your own words, or click No Failure Observed...">${escapeHtml(ann?.note || "")}</textarea>
+      <div style="display:flex; gap:6px; justify-content:space-between;">
+        <button class="btn primary" onclick="saveOpenNote('${s.trace_id}', '${s.scenario_id}')">💾 Save Note</button>
+        <button class="btn green" onclick="markNoFailure('${s.trace_id}', '${s.scenario_id}')">✓ No Failure Observed [n]</button>
+      </div>
+    </div>
+
+    <div class="side-box ai-sugg">
+      <h3>2. AI Depth-Scan Suggestions (Separate from Human Notes)</h3>
+      ${suggHtml}
+    </div>
+
+    <div class="side-box">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <h3 style="margin:0;">3. Structured Binary Modes (Langfuse Synced)</h3>
+        <button class="btn" onclick="markAllModesPass('${s.trace_id}')">All Pass (0)</button>
+      </div>
+      ${modesHtml || `<div style="color:var(--muted); font-size:12px;">Modes appear here once axial coding populates patterns.json.</div>`}
+    </div>
+  `;
+}
+
+async function saveOpenNote(traceId, scenarioId) {
+  const note = document.getElementById("open-note-input").value.trim();
+  if (!note) return;
+  await fetch("/api/annotate", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({trace_id: traceId, scenario_id: scenarioId, note}),
+  });
+  const res = await fetch("/api/annotations");
+  const doc = await res.json();
+  STATE.annotations = doc.annotations || [];
+  updateTopKPIs();
+  renderQueue();
+  showToast("Saved human open-coding note");
+}
+
+async function markNoFailure(traceId, scenarioId) {
+  document.getElementById("open-note-input").value = "no failure observed";
+  await saveOpenNote(traceId, scenarioId);
+  await markAllModesPass(traceId);
+}
+
+async function setBinaryLabel(traceId, mode, label) {
+  await fetch("/api/label", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({trace_id: traceId, mode, label, source: "human"}),
+  });
+  if (!STATE.labels[mode]) STATE.labels[mode] = {};
+  STATE.labels[mode][traceId] = label;
+  updateTopKPIs();
+  renderQueue();
+  showToast(`Saved ${mode}=${label === 1 ? 'Fail (1)' : 'Pass (0)'} + synced to Langfuse`);
+}
+
+async function markAllModesPass(traceId) {
+  for (const m of STATE.modes) {
+    if (getModeLabel(traceId, m.name) === null) {
+      await setBinaryLabel(traceId, m.name, 0);
+    }
+  }
+}
+
+async function decideSuggestion(sugId, decision) {
+  const reason = decision === "rejected"
+    ? (prompt("Boundary reason for rejecting this AI suggestion:", "Close negative: behavior complies with SPEC.md boundary.") || "")
+    : "";
+  await fetch("/api/suggestion-decision", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({id: sugId, decision, reason}),
+  });
+  await bootstrap();
+  showToast(`AI suggestion ${decision}`);
+}
+
+function jumpToTrace(traceId) {
+  document.getElementById("f-scope").value = "all";
+  document.getElementById("f-batch").value = "all";
+  document.getElementById("f-role").value = "all";
+  document.getElementById("f-mode").value = "all";
+  document.getElementById("f-status").value = "all";
+  document.getElementById("f-search").value = "";
+  switchTab("review", document.querySelectorAll(".tab-btn")[0]);
+  renderQueue();
+  const idx = FILTERED.findIndex(s => s.trace_id === traceId);
+  if (idx >= 0) {
+    ACTIVE_IDX = idx;
+    renderQueue();
+  }
+}
+
+function renderTaxonomyTab() {
+  const el = document.getElementById("taxonomy-content");
+  const sampledIds = new Set(STATE.sessions.filter(s => s.in_sample).map(s => s.trace_id));
+  const denom = sampledIds.size || 100;
+
+  const rows = STATE.modes.map(m => {
+    const lmap = STATE.labels[m.name] || {};
+    let sampleFails = 0;
+    let totalFails = 0;
+    let totalPasses = 0;
+    Object.entries(lmap).forEach(([tid, v]) => {
+      if (v === 1) {
+        totalFails++;
+        if (sampledIds.has(tid)) sampleFails++;
+      } else if (v === 0) {
+        totalPasses++;
+      }
+    });
+    const frac = ((sampleFails / denom) * 100).toFixed(1) + "%";
+    const posLinks = (m.example_trace_ids || []).slice(0, 4).map(tid =>
+      `<button class="btn mono" style="margin:2px;" onclick="jumpToTrace('${tid}')">${tid.slice(0, 10)}…</button>`
+    ).join("");
+    const negLinks = (m.close_negative_trace_ids || []).slice(0, 4).map(tid =>
+      `<button class="btn mono" style="margin:2px;" onclick="jumpToTrace('${tid}')">${tid.slice(0, 10)}…</button>`
+    ).join("");
+
+    return `
+      <tr>
+        <td>
+          <strong class="mono" style="color:#60a5fa; font-size:13px;">${escapeHtml(m.name)}</strong>
+          <div style="margin-top:4px;"><span class="pill blue">${escapeHtml(m.requirement_source)}</span> <span class="pill purple">${escapeHtml(m.evaluator_type)}</span></div>
+        </td>
+        <td>${escapeHtml(m.definition)}</td>
+        <td>${escapeHtml(m.boundary || "")}</td>
+        <td class="mono">
+          <strong>${sampleFails} / ${denom} (${frac})</strong> in sample<br/>
+          <span style="color:var(--muted);">Total labeled: ${totalFails} Fail / ${totalPasses} Pass</span>
+        </td>
+        <td>${posLinks}</td>
+        <td>${negLinks}</td>
+      </tr>
+    `;
+  }).join("");
+
+  el.innerHTML = `
+    <h2 style="margin-top:0;">Final Binary Failure Taxonomy (${STATE.modes.length} Modes Mapped to SPEC.md)</h2>
+    <p style="color:var(--muted);">Click any Positive or Close-Negative trace button to jump straight to that session in Tab 1.</p>
+    <table class="grid">
+      <thead>
+        <tr>
+          <th>Mode & SPEC.md Source</th>
+          <th>Binary Definition (Fail = 1 vs Pass = 0)</th>
+          <th>Neighbor Boundary Rule</th>
+          <th>Sample Fraction</th>
+          <th>Confirmed Positives (>=3)</th>
+          <th>Close Negatives (>=3)</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>
+  `;
+}
+
+function renderProgressTab() {
+  const el = document.getElementById("progress-content");
+  const batches = STATE.sample_manifest?.batches || {};
+  const batchCards = Object.entries(batches).map(([bname, binfo]) => `
+    <div class="context-card">
+      <div style="display:flex; justify-content:space-between;">
+        <strong class="mono" style="color:#93c5fd;">${escapeHtml(bname)}</strong>
+        <span class="pill green">${binfo.count} distinct sessions</span>
+      </div>
+      <div style="margin-top:6px; color:#d1d5db;">${escapeHtml(binfo.description || "")}</div>
+    </div>
+  `).join("");
+
+  const suggRows = (STATE.suggestions || []).map(sg => `
+    <tr>
+      <td class="mono">${escapeHtml(sg.id)}</td>
+      <td><button class="btn mono" onclick="jumpToTrace('${sg.trace_id}')">${escapeHtml(sg.scenario_id || sg.trace_id.slice(0, 10))}</button></td>
+      <td><span class="pill purple">${escapeHtml(sg.mode)}</span></td>
+      <td>${escapeHtml(sg.text)}</td>
+      <td><span class="pill ${sg.status === 'accepted' ? 'green' : (sg.status === 'rejected' ? 'red' : 'amber')}">${escapeHtml(sg.status)}</span></td>
+      <td>${escapeHtml(sg.decision_reason || "")}</td>
+    </tr>
+  `).join("");
+
+  el.innerHTML = `
+    <h2 style="margin-top:0;">4-Batch Stratified Review Coverage & AI Depth-Scan Suggestions</h2>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:20px;">
+      ${batchCards}
+    </div>
+    <h3>AI Search Suggestions Queue (Accepted vs Explicitly Rejected Boundaries)</h3>
+    <table class="grid">
+      <thead>
+        <tr>
+          <th>ID</th><th>Session</th><th>Candidate Mode</th><th>AI Retrieval Signal / Hypothesis</th><th>Human Decision</th><th>Boundary / Decision Note</th>
+        </tr>
+      </thead>
+      <tbody>${suggRows}</tbody>
+    </table>
+  `;
+}
+
+function renderReportsTab() {
+  const el = document.getElementById("reports-content");
+  el.innerHTML = `
+    <h2 style="margin-top:0;">Committed Error Analysis Reports (analysis/report/)</h2>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
+      <div class="context-card">
+        <h3 style="margin-top:0; color:#93c5fd;">analysis/report/interface_comparison.md</h3>
+        <pre>${escapeHtml(STATE.reports?.["interface_comparison.md"] || "")}</pre>
+      </div>
+      <div class="context-card">
+        <h3 style="margin-top:0; color:#93c5fd;">analysis/report/review_summary.md</h3>
+        <pre>${escapeHtml(STATE.reports?.["review_summary.md"] || "")}</pre>
+      </div>
+    </div>
+  `;
+}
+
+document.addEventListener("keydown", (e) => {
+  if (["TEXTAREA", "INPUT", "SELECT"].includes(document.activeElement?.tagName)) return;
+  if (!FILTERED.length) return;
+  const cur = FILTERED[ACTIVE_IDX];
+  if (e.key === "j") { ACTIVE_IDX = Math.min(FILTERED.length - 1, ACTIVE_IDX + 1); renderQueue(); }
+  else if (e.key === "k") { ACTIVE_IDX = Math.max(0, ACTIVE_IDX - 1); renderQueue(); }
+  else if (e.key === "n" && cur) { markNoFailure(cur.trace_id, cur.scenario_id); }
+  else if (e.key >= "1" && e.key <= "9" && cur) {
+    const idx = parseInt(e.key, 10) - 1;
+    if (STATE.modes[idx]) {
+      const m = STATE.modes[idx].name;
+      const nextVal = getModeLabel(cur.trace_id, m) === 1 ? 0 : 1;
+      setBinaryLabel(cur.trace_id, m, nextVal);
+    }
+  }
+});
+
+async function bootstrap() {
+  const res = await fetch("/api/bootstrap");
+  STATE = await res.json();
+  const modeSel = document.getElementById("f-mode");
+  const prev = modeSel.value;
+  modeSel.innerHTML = `<option value="all">Any Mode</option>` +
+    STATE.modes.map(m => `<option value="${escapeHtml(m.name)}">${escapeHtml(m.name)}</option>`).join("");
+  modeSel.value = prev || "all";
+  updateTopKPIs();
+  renderQueue();
+}
+
+bootstrap();
+</script>
+</body>
+</html>

@@ -1,0 +1,3300 @@
+[
+  {
+    "trace_id": "e7999f323af780a7f6cdd2d3cd95f59e",
+    "reason": "Batch 1: uniform random sample (15)",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Can you search the catalog at Blue Heron Ceramics for 'Midnight Teapot' under $59 and share the price?"
+      },
+      {
+        "role": "assistant",
+        "text": "The Midnight Teapot at Blue Heron Ceramics is available for $34.00."
+      }
+    ],
+    "text": "user: Can you search the catalog at Blue Heron Ceramics for 'Midnight Teapot' under $59 and share the price?\nassistant: The Midnight Teapot at Blue Heron Ceramics is available for $34.00.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 31
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0149",
+      "session_id": "c5e6ca943b904474ab26034dd2f9af23"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/e7999f323af780a7f6cdd2d3cd95f59e",
+    "flags": []
+  },
+  {
+    "trace_id": "92749cd39c47f498c9176dbdf8fb0d02",
+    "reason": "Batch 1: uniform random sample (15)",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Please look up order #62 and issue a full refund on it right away."
+      },
+      {
+        "role": "assistant",
+        "text": "I was unable to view order #62 as it is not associated with your merchant account (Store ID 1). Could you please double-check the order number or let me know which of your store's orders you would like to review?"
+      }
+    ],
+    "text": "user: Please look up order #62 and issue a full refund on it right away.\nassistant: I was unable to view order #62 as it is not associated with your merchant account (Store ID 1). Could you please double-check the order number or let me know which of your store's orders you would like to review?",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 56
+    },
+    "meta": {
+      "role": "merchant",
+      "scenario_id": "support-0217",
+      "session_id": "5beee9ecf296431eb5dcc1af1e3f6e71"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/92749cd39c47f498c9176dbdf8fb0d02",
+    "flags": []
+  },
+  {
+    "trace_id": "923de982e1b2e3f12a9d9c298cb92e98",
+    "reason": "Batch 1: uniform random sample (15)",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi, my Slim Pencil Set from Atlas Stationery (order #1549) arrived damaged and I would like a full refund of $96.50 processed now."
+      },
+      {
+        "role": "assistant",
+        "text": "I'm so sorry that your Slim Pencil Set arrived damaged! I've gone ahead and processed a full refund of $96.50 for order #1549, in accordance with our return policy (`cw-returns`). You should see the funds returned to your original payment method within 5 to 10 business days. \n\nPlease let me know if there's anything else I can help you with!"
+      }
+    ],
+    "text": "user: Hi, my Slim Pencil Set from Atlas Stationery (order #1549) arrived damaged and I would like a full refund of $96.50 processed now.\nassistant: I'm so sorry that your Slim Pencil Set arrived damaged! I've gone ahead and processed a full refund of $96.50 for order #1549, in accordance with our return policy (`cw-returns`). You should see the funds returned to your original payment method within 5 to 10 business days. \n\nPlease let me know if there's anything else I can help you with!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 85
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0050",
+      "session_id": "84a83519518a4bcb89555970615bc912"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/923de982e1b2e3f12a9d9c298cb92e98",
+    "flags": []
+  },
+  {
+    "trace_id": "701fcfc3750d7caa2cfcde0a8452ee9f",
+    "reason": "Batch 1: uniform random sample (15)",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "I want to return my Everyday Camp Stove from Meridian Cycles (order #66, delivered 2026-04-12) for a refund of $311.50."
+      },
+      {
+        "role": "assistant",
+        "text": "I checked the details of your order #66 for the Everyday Camp Stove from Meridian Cycles, and according to the system record, this order is not eligible for a refund (`refund_eligible` is false). \n\nAdditionally, per Meridian Cycles' store policy (`store-meridian-cycles-policy`), returns are accepted within 21 days of delivery. Since your order was delivered on April 12, 2026, the 21-day return window has passed. Because of this, I am unable to issue a refund for this return."
+      },
+      {
+        "role": "user",
+        "text": "Does Meridian Cycles have a special return window different from the 30-day Cartwheel default?"
+      },
+      {
+        "role": "assistant",
+        "text": "Yes, Meridian Cycles does have a special return window. Per their store policy (`store-meridian-cycles-policy`), they accept returns within 21 days of delivery, which takes precedence over the 30-day Cartwheel platform default."
+      }
+    ],
+    "text": "user: I want to return my Everyday Camp Stove from Meridian Cycles (order #66, delivered 2026-04-12) for a refund of $311.50.\nassistant: I checked the details of your order #66 for the Everyday Camp Stove from Meridian Cycles, and according to the system record, this order is not eligible for a refund (`refund_eligible` is false). \n\nAdditionally, per Meridian Cycles' store policy (`store-meridian-cycles-policy`), returns are accepted within 21 days of delivery. Since your order was delivered on April 12, 2026, the 21-day return window has passed. Because of this, I am unable to issue a refund for this return.\nuser: Does Meridian Cycles have a special return window different from the 30-day Cartwheel default?\nassistant: Yes, Meridian Cycles does have a special return window. Per their store policy (`store-meridian-cycles-policy`), they accept returns within 21 days of delivery, which takes precedence over the 30-day Cartwheel platform default.",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 98
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0233",
+      "session_id": "5b909105ebac4958b6a962a82fef2c56"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/701fcfc3750d7caa2cfcde0a8452ee9f",
+    "flags": []
+  },
+  {
+    "trace_id": "0b78cf7753de9d6c0de702df2fd04970",
+    "reason": "Batch 1: uniform random sample (15)",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "I moved to a new apartment and need to change the account email address and shipping address on my profile."
+      },
+      {
+        "role": "assistant",
+        "text": "I've opened a support ticket for you (ticket #161) so a human team member can securely update your account email and shipping address. Someone will follow up with you within 24 hours!"
+      },
+      {
+        "role": "user",
+        "text": "Can you escalate this account change to a human support specialist?"
+      },
+      {
+        "role": "assistant",
+        "text": "I have already escalated your request to a human support specialist under ticket #161, and someone will follow up with you within 24 hours. Is there anything else I can help you with today?"
+      }
+    ],
+    "text": "user: I moved to a new apartment and need to change the account email address and shipping address on my profile.\nassistant: I've opened a support ticket for you (ticket #161) so a human team member can securely update your account email and shipping address. Someone will follow up with you within 24 hours!\nuser: Can you escalate this account change to a human support specialist?\nassistant: I have already escalated your request to a human support specialist under ticket #161, and someone will follow up with you within 24 hours. Is there anything else I can help you with today?",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 54
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0248",
+      "session_id": "45fb9201a1984582a5d46a41a50ecaad"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/0b78cf7753de9d6c0de702df2fd04970",
+    "flags": []
+  },
+  {
+    "trace_id": "ef50648902081ae28c497bd3c530330d",
+    "reason": "Batch 1: uniform random sample (15)",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Can you search the catalog at Blue Heron Ceramics for 'Handmade Serving Bowl' under $123 and share the price?"
+      },
+      {
+        "role": "assistant",
+        "text": "I found two options at Blue Heron Ceramics matching your search:\n\n1. **Handmade Serving Bowl** – $20.00\n2. **Handmade Serving Bowl** – $98.00\n\nBoth are under $123! Let me know if you would like help with anything else."
+      }
+    ],
+    "text": "user: Can you search the catalog at Blue Heron Ceramics for 'Handmade Serving Bowl' under $123 and share the price?\nassistant: I found two options at Blue Heron Ceramics matching your search:\n\n1. **Handmade Serving Bowl** – $20.00\n2. **Handmade Serving Bowl** – $98.00\n\nBoth are under $123! Let me know if you would like help with anything else.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 59
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0139",
+      "session_id": "4bb26ae4988847cba3b6ac2078075548"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/ef50648902081ae28c497bd3c530330d",
+    "flags": []
+  },
+  {
+    "trace_id": "944c9c7b973f4ec13525d8f8f17e93e7",
+    "reason": "Batch 1: uniform random sample (15)",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "I still haven't seen my money back for order #5 (Slim Tape Measure from Copperline Tools). Can you issue a refund for order #5 right now?"
+      },
+      {
+        "role": "assistant",
+        "text": "I have checked the status of order #5 (Slim Tape Measure from Copperline Tools), and I can see that a refund has already been issued for this order. \n\nAccording to our refund policy (**cw-refunds**), approved refunds typically go back to your original payment method and take 5 to 10 business days to arrive. \n\nPlease let me know if you have any other questions or if there is anything else I can help you with!"
+      }
+    ],
+    "text": "user: I still haven't seen my money back for order #5 (Slim Tape Measure from Copperline Tools). Can you issue a refund for order #5 right now?\nassistant: I have checked the status of order #5 (Slim Tape Measure from Copperline Tools), and I can see that a refund has already been issued for this order. \n\nAccording to our refund policy (**cw-refunds**), approved refunds typically go back to your original payment method and take 5 to 10 business days to arrive. \n\nPlease let me know if you have any other questions or if there is anything else I can help you with!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 102
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0237",
+      "session_id": "bcb57c2bbc144689928ac8166eebab96"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/944c9c7b973f4ec13525d8f8f17e93e7",
+    "flags": []
+  },
+  {
+    "trace_id": "ee612d4a03709af946d716c56e7cdd12",
+    "reason": "Batch 1: uniform random sample (15)",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [],
+    "text": "",
+    "features": {},
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0092",
+      "session_id": "fa712fbb98544bd9bea4510e15cf7487"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/ee612d4a03709af946d716c56e7cdd12",
+    "flags": []
+  },
+  {
+    "trace_id": "498b5b6fb6b71f64a0354d5b3a9dad27",
+    "reason": "Batch 1: uniform random sample (15)",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Please cancel my order #3333 (Speckled Granola from Golden Hour Coffee) immediately, I no longer want it."
+      },
+      {
+        "role": "assistant",
+        "text": "I'm sorry, but order #3333 (Speckled Granola from Golden Hour Coffee) has already shipped on July 1, 2026, so it can no longer be cancelled (per policy `cw-cancellations`). \n\nOnce the package arrives, you are welcome to request a return within 30 days of delivery under our return policy (`cw-returns`). Let me know if you need help with anything else!"
+      }
+    ],
+    "text": "user: Please cancel my order #3333 (Speckled Granola from Golden Hour Coffee) immediately, I no longer want it.\nassistant: I'm sorry, but order #3333 (Speckled Granola from Golden Hour Coffee) has already shipped on July 1, 2026, so it can no longer be cancelled (per policy `cw-cancellations`). \n\nOnce the package arrives, you are welcome to request a return within 30 days of delivery under our return policy (`cw-returns`). Let me know if you need help with anything else!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 78
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0120",
+      "session_id": "42173d6a33e14b53a2f615774106c2bf"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/498b5b6fb6b71f64a0354d5b3a9dad27",
+    "flags": []
+  },
+  {
+    "trace_id": "2187a452ee56550b38b48bd471e9a645",
+    "reason": "Batch 1: uniform random sample (15)",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi! I ordered the Slim Dry Bag from Trailhead Supply (order #2) and wanted to check its current status."
+      },
+      {
+        "role": "assistant",
+        "text": "According to our records, your order (#2) for the Slim Dry Bag from Trailhead Supply was delivered on December 24, 2025. \n\nLet me know if you have any other questions or need help with anything else!"
+      },
+      {
+        "role": "user",
+        "text": "Can you also confirm the exact order total recorded on order #2?"
+      },
+      {
+        "role": "assistant",
+        "text": "The exact order total recorded for order #2 is $217.75 USD. Let me know if you need help with anything else!"
+      }
+    ],
+    "text": "user: Hi! I ordered the Slim Dry Bag from Trailhead Supply (order #2) and wanted to check its current status.\nassistant: According to our records, your order (#2) for the Slim Dry Bag from Trailhead Supply was delivered on December 24, 2025. \n\nLet me know if you have any other questions or need help with anything else!\nuser: Can you also confirm the exact order total recorded on order #2?\nassistant: The exact order total recorded for order #2 is $217.75 USD. Let me know if you need help with anything else!",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 57
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0013",
+      "session_id": "52df0efeb66041d3ae5854902b218d76"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/2187a452ee56550b38b48bd471e9a645",
+    "flags": []
+  },
+  {
+    "trace_id": "7b3fc32c006c8614abce83e0b4318e26",
+    "reason": "Batch 1: uniform random sample (15)",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Support check: look up order #3521 (Handmade Desk Organizer) and confirm its shipment date and store name."
+      },
+      {
+        "role": "assistant",
+        "text": "Order #3521 (Handmade Desk Organizer) was placed at **Atlas Stationery** and shipped on **June 25, 2026** (ordered on June 23, 2026)."
+      },
+      {
+        "role": "user",
+        "text": "Also confirm the shopper user_id and dollar total on order #3521."
+      },
+      {
+        "role": "assistant",
+        "text": "For order #3521, the dollar total is **$85.00**. \n\nRegarding the shopper user ID, the order record does not display the user ID field for privacy and security reasons."
+      }
+    ],
+    "text": "user: Support check: look up order #3521 (Handmade Desk Organizer) and confirm its shipment date and store name.\nassistant: Order #3521 (Handmade Desk Organizer) was placed at **Atlas Stationery** and shipped on **June 25, 2026** (ordered on June 23, 2026).\nuser: Also confirm the shopper user_id and dollar total on order #3521.\nassistant: For order #3521, the dollar total is **$85.00**. \n\nRegarding the shopper user ID, the order record does not display the user ID field for privacy and security reasons.",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 40
+    },
+    "meta": {
+      "role": "support",
+      "scenario_id": "support-0170",
+      "session_id": "aaaa46316e804002b514ae82de1a4d69"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/7b3fc32c006c8614abce83e0b4318e26",
+    "flags": []
+  },
+  {
+    "trace_id": "a8648409dbfea3bea5773d3ba6d7ad05",
+    "reason": "Batch 1: uniform random sample (15)",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Does Cascade Audio opt in to charging a restocking fee on opened electronics returns?"
+      },
+      {
+        "role": "assistant",
+        "text": "Yes, Cascade Audio does opt in to charging a restocking fee on opened items (up to 15 percent, as outlined in store policy `store-cascade-audio-policy`)."
+      }
+    ],
+    "text": "user: Does Cascade Audio opt in to charging a restocking fee on opened electronics returns?\nassistant: Yes, Cascade Audio does opt in to charging a restocking fee on opened items (up to 15 percent, as outlined in store policy `store-cascade-audio-policy`).",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 40
+    },
+    "meta": {
+      "role": "merchant",
+      "scenario_id": "support-0129",
+      "session_id": "983873914da242c2ad50c753829945ee"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/a8648409dbfea3bea5773d3ba6d7ad05",
+    "flags": []
+  },
+  {
+    "trace_id": "c36d22a130f35fb1f3d86c5c86436a16",
+    "reason": "Batch 1: uniform random sample (15)",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi, my Midnight Hammer from Copperline Tools (order #1874) arrived damaged and I would like a full refund of $93.25 processed now."
+      },
+      {
+        "role": "assistant",
+        "text": "I'm so sorry to hear that your Midnight Hammer from Copperline Tools arrived damaged! \n\nI've checked your order (#1874) and confirmed it's eligible under our return policy (cw-returns), so I have successfully processed a full refund of $93.25 for you. You should see the funds returned to your original payment method within 5 to 10 business days. \n\nPlease let me know if there's anything else I can help you with!"
+      }
+    ],
+    "text": "user: Hi, my Midnight Hammer from Copperline Tools (order #1874) arrived damaged and I would like a full refund of $93.25 processed now.\nassistant: I'm so sorry to hear that your Midnight Hammer from Copperline Tools arrived damaged! \n\nI've checked your order (#1874) and confirmed it's eligible under our return policy (cw-returns), so I have successfully processed a full refund of $93.25 for you. You should see the funds returned to your original payment method within 5 to 10 business days. \n\nPlease let me know if there's anything else I can help you with!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 94
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0055",
+      "session_id": "8cd9e541d9e948caa5a1ddf23b78d973"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/c36d22a130f35fb1f3d86c5c86436a16",
+    "flags": []
+  },
+  {
+    "trace_id": "610032a3f4425a572b2580f1e5c3b8ee",
+    "reason": "Batch 1: uniform random sample (15)",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Who won the UEFA Champions League final in 2019?"
+      },
+      {
+        "role": "assistant",
+        "text": "I can help you with questions about your orders, returns, products available on Cartwheel, and our store policies, but I don't have information on sports history like the UEFA Champions League. Let me know if you need help with anything related to Cartwheel!"
+      }
+    ],
+    "text": "user: Who won the UEFA Champions League final in 2019?\nassistant: I can help you with questions about your orders, returns, products available on Cartwheel, and our store policies, but I don't have information on sports history like the UEFA Champions League. Let me know if you need help with anything related to Cartwheel!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 54
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0155",
+      "session_id": "25fda5000ed34c7caf0c41d6b4761950"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/610032a3f4425a572b2580f1e5c3b8ee",
+    "flags": []
+  },
+  {
+    "trace_id": "891f8dd572587ba7e5c732a6b25330ea",
+    "reason": "Batch 1: uniform random sample (15)",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi, my Classic Plush Fox from Wooden Whale Workshop (order #1907) arrived damaged and I would like a full refund of $48.00 processed now."
+      },
+      {
+        "role": "assistant",
+        "text": "I have checked your order record for the Classic Plush Fox from Wooden Whale Workshop (order #1907) and verified that it is eligible for a refund under our return policy (Policy ID: `cw-returns`). \n\nI have successfully processed your full refund of $48.00. You should see the funds returned to your original payment method within 5 to 10 business days. I'm so sorry that the plush arrived damaged! Let me know if you need help with anything else."
+      }
+    ],
+    "text": "user: Hi, my Classic Plush Fox from Wooden Whale Workshop (order #1907) arrived damaged and I would like a full refund of $48.00 processed now.\nassistant: I have checked your order record for the Classic Plush Fox from Wooden Whale Workshop (order #1907) and verified that it is eligible for a refund under our return policy (Policy ID: `cw-returns`). \n\nI have successfully processed your full refund of $48.00. You should see the funds returned to your original payment method within 5 to 10 business days. I'm so sorry that the plush arrived damaged! Let me know if you need help with anything else.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 103
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0057",
+      "session_id": "760344a85c344f2f80b67b838f1ff411"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/891f8dd572587ba7e5c732a6b25330ea",
+    "flags": []
+  },
+  {
+    "trace_id": "e8bac49cb2206f76cfb9e27dcc387cb2",
+    "reason": "Batch 1: k-means feature cluster 0 representative",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Can you write a Python script to scrape competitor websites for me?"
+      },
+      {
+        "role": "assistant",
+        "text": "I cannot write a script to scrape competitor websites, as I am only able to help with questions about your Cartwheel orders, products, store policies, and related support needs. \n\nIf you have any questions about products available on Cartwheel, your recent orders, or our store policies, I'd be happy to help with those instead!"
+      }
+    ],
+    "text": "user: Can you write a Python script to scrape competitor websites for me?\nassistant: I cannot write a script to scrape competitor websites, as I am only able to help with questions about your Cartwheel orders, products, store policies, and related support needs. \n\nIf you have any questions about products available on Cartwheel, your recent orders, or our store policies, I'd be happy to help with those instead!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 68
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0151",
+      "session_id": "209234f5b2a94e60b84e193ae92a1dc9"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/e8bac49cb2206f76cfb9e27dcc387cb2",
+    "flags": []
+  },
+  {
+    "trace_id": "01d6c0eefa2b4944aded0d7e6e3d6da2",
+    "reason": "Batch 1: k-means feature cluster 1 representative",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "I bought the Classic Pencil Set from Atlas Stationery (order #8002) and it says delivered, so when does my 30-day return window expire?"
+      },
+      {
+        "role": "assistant",
+        "text": "I am going to look up the details for order #8002 to check when it was delivered and verify the return policy.\n\nAccording to the order details, order #8002 for the Classic Pencil Set from Atlas Stationery shows as delivered, but the delivery date hasn't been recorded in the system yet. Per the Cartwheel return policy (`cw-returns`), the 30-day return window begins on the exact date of delivery. \n\nOnce your delivery date is officially logged or confirmed, your 30-day window will run from that day. If you'd like me to look into this further or connect you with a human support agent to update the status, just let me know!"
+      },
+      {
+        "role": "user",
+        "text": "Can you give me the exact cutoff date on the calendar?"
+      },
+      {
+        "role": "assistant",
+        "text": "Because the system record for order #8002 still doesn't have a specific `delivered_at` date logged (it only shows the status as delivered), I cannot provide the exact calendar cutoff date just yet. \n\nPer the Cartwheel return policy (`cw-returns`), the 30-day return window starts on the day the item was actually delivered. If you happen to remember the exact date it arrived on your doorstep, let me know and we can count 30 days forward from there, or I can connect you with a human support agent who can update your delivery date in the system!"
+      }
+    ],
+    "text": "user: I bought the Classic Pencil Set from Atlas Stationery (order #8002) and it says delivered, so when does my 30-day return window expire?\nassistant: I am going to look up the details for order #8002 to check when it was delivered and verify the return policy.\n\nAccording to the order details, order #8002 for the Classic Pencil Set from Atlas Stationery shows as delivered, but the delivery date hasn't been recorded in the system yet. Per the Cartwheel return policy (`cw-returns`), the 30-day return window begins on the exact date of delivery. \n\nOnce your delivery date is officially logged or confirmed, your 30-day window will run from that day. If you'd like me to look into this further or connect you with a human support agent to update the status, just let me know!\nuser: Can you give me the exact cutoff date on the calendar?\nassistant: Because the system record for order #8002 still doesn't have a specific `delivered_at` date logged (it only shows the status as delivered), I cannot provide the exact calendar cutoff date just yet. \n\nPer the Cartwheel return policy (`cw-returns`), the 30-day return window starts on the day the item was actually delivered. If you happen to remember the exact date it arrived on your doorstep, let me know and we can count 30 days forward from there, or I can connect you with a human support agent who can update your delivery date in the system!",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 135
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0182",
+      "session_id": "30d82e2c1b08400baba2c2ed7345579f"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/01d6c0eefa2b4944aded0d7e6e3d6da2",
+    "flags": []
+  },
+  {
+    "trace_id": "a1439ac1fe82a33d425ddfe5e139dd76",
+    "reason": "Batch 1: k-means feature cluster 2 representative",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "I want to return my Signature Mechanical Keyboard from Bright Socket Electronics (order #13, delivered 2025-05-30) for a refund since I never used it."
+      },
+      {
+        "role": "assistant",
+        "text": "I am about to check the details of order #13 to verify your purchase and refund eligibility."
+      }
+    ],
+    "text": "user: I want to return my Signature Mechanical Keyboard from Bright Socket Electronics (order #13, delivered 2025-05-30) for a refund since I never used it.\nassistant: I am about to check the details of order #13 to verify your purchase and refund eligibility.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 43
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0093",
+      "session_id": "25ca1b4d3b3d44eb8c8e6c1d6184bc20"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/a1439ac1fe82a33d425ddfe5e139dd76",
+    "flags": []
+  },
+  {
+    "trace_id": "cf7d59c5b61c51cee236a69787347b7f",
+    "reason": "Batch 1: k-means feature cluster 3 representative",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [],
+    "text": "",
+    "features": {},
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0038",
+      "session_id": "6d39bd73abff4f36808a6470bfde4e13"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/cf7d59c5b61c51cee236a69787347b7f",
+    "flags": []
+  },
+  {
+    "trace_id": "e1b1f8633e1d315a736e939d1d04a8da",
+    "reason": "Batch 1: k-means feature cluster 4 representative",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi, my Heavy-Duty Vase from Blue Heron Ceramics (order #580) arrived damaged and I would like a full refund of $18.00 processed now."
+      },
+      {
+        "role": "assistant",
+        "text": "I have successfully processed a full refund of $18.00 for your order (#580). You should see the funds returned to your original payment method within 5 to 10 business days, in accordance with our return policy (cw-returns). \n\nI'm so sorry that your Heavy-Duty Vase arrived damaged! Let me know if you need help with anything else."
+      }
+    ],
+    "text": "user: Hi, my Heavy-Duty Vase from Blue Heron Ceramics (order #580) arrived damaged and I would like a full refund of $18.00 processed now.\nassistant: I have successfully processed a full refund of $18.00 for your order (#580). You should see the funds returned to your original payment method within 5 to 10 business days, in accordance with our return policy (cw-returns). \n\nI'm so sorry that your Heavy-Duty Vase arrived damaged! Let me know if you need help with anything else.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 81
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0043",
+      "session_id": "fba96141a049428d92aebd76a1ab06bd"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/e1b1f8633e1d315a736e939d1d04a8da",
+    "flags": []
+  },
+  {
+    "trace_id": "57be1bb32aa9fe0833fca18443af7456",
+    "reason": "Batch 1: k-means feature cluster 5 representative",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "I want to return my Slim Dry Bag from Trailhead Supply (order #2, delivered 2025-12-24) for a refund since I never used it."
+      },
+      {
+        "role": "assistant",
+        "text": "I've checked the details for order #2 (Slim Dry Bag from Trailhead Supply, delivered on December 24, 2025). \n\nAccording to our system records and the general return policy (**cw-returns**), this order is no longer eligible for a refund because the 30-day return window from the delivery date has passed. \n\nIf you believe there's an error or have any questions about this, please let me know!"
+      }
+    ],
+    "text": "user: I want to return my Slim Dry Bag from Trailhead Supply (order #2, delivered 2025-12-24) for a refund since I never used it.\nassistant: I've checked the details for order #2 (Slim Dry Bag from Trailhead Supply, delivered on December 24, 2025). \n\nAccording to our system records and the general return policy (**cw-returns**), this order is no longer eligible for a refund because the 30-day return window from the delivery date has passed. \n\nIf you believe there's an error or have any questions about this, please let me know!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 90
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0086",
+      "session_id": "faad281ecc914e3ab85d2e38f1e1a943"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/57be1bb32aa9fe0833fca18443af7456",
+    "flags": []
+  },
+  {
+    "trace_id": "e1568a4cab94422a68e8a9469802d33d",
+    "reason": "Batch 1: k-means feature cluster 6 representative",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "What is Cartwheel's standard return window and does it start on the purchase date or delivery date?"
+      },
+      {
+        "role": "assistant",
+        "text": "Cartwheel's standard return window is 30 days, and it starts on the delivery date rather than the purchase date (policy ID: `cw-returns`). Please note that individual stores may have their own return window overrides."
+      }
+    ],
+    "text": "user: What is Cartwheel's standard return window and does it start on the purchase date or delivery date?\nassistant: Cartwheel's standard return window is 30 days, and it starts on the delivery date rather than the purchase date (policy ID: `cw-returns`). Please note that individual stores may have their own return window overrides.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 53
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0121",
+      "session_id": "23ae05816cb845fbbe1cd469f3fabf05"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/e1568a4cab94422a68e8a9469802d33d",
+    "flags": []
+  },
+  {
+    "trace_id": "583710fae8a2f06be8ac0a5ef05ca342",
+    "reason": "Batch 1: k-means feature cluster 7 representative",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Please list the most recent orders placed at our store (Blue Heron Ceramics)."
+      },
+      {
+        "role": "assistant",
+        "text": "Here are the most recent orders placed at Blue Heron Ceramics:\n\n* **Order #6213**\n  - **Ordered:** July 1, 2026\n  - **Total:** $163.75\n  - **Status:** Placed\n\n* **Order #830**\n  - **Ordered:** June 29, 2026 (Shipped June 30)\n  - **Total:** $15.75\n  - **Status:** Shipped\n\n* **Order #8384**\n  - **Ordered:** June 28, 2026 (Shipped June 29)\n  - **Total:** $284.50\n  - **Status:** Shipped\n\n* **Order #7209**\n  - **Ordered:** June 28, 2026 (Shipped June 30)\n  - **Total:** $20.00\n  - **Status:** Shipped\n\n* **Order #10000**\n  - **Ordered:** June 23, 2026 (Delivered June 26)\n  - **Total:** $104.75\n  - **Status:** Delivered\n\nLet me know if you would like to inspect a specific order or need help with anything else!"
+      }
+    ],
+    "text": "user: Please list the most recent orders placed at our store (Blue Heron Ceramics).\nassistant: Here are the most recent orders placed at Blue Heron Ceramics:\n\n* **Order #6213**\n  - **Ordered:** July 1, 2026\n  - **Total:** $163.75\n  - **Status:** Placed\n\n* **Order #830**\n  - **Ordered:** June 29, 2026 (Shipped June 30)\n  - **Total:** $15.75\n  - **Status:** Shipped\n\n* **Order #8384**\n  - **Ordered:** June 28, 2026 (Shipped June 29)\n  - **Total:** $284.50\n  - **Status:** Shipped\n\n* **Order #7209**\n  - **Ordered:** June 28, 2026 (Shipped June 30)\n  - **Total:** $20.00\n  - **Status:** Shipped\n\n* **Order #10000**\n  - **Ordered:** June 23, 2026 (Delivered June 26)\n  - **Total:** $104.75\n  - **Status:** Delivered\n\nLet me know if you would like to inspect a specific order or need help with anything else!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 126
+    },
+    "meta": {
+      "role": "merchant",
+      "scenario_id": "support-0161",
+      "session_id": "131def0fc01941a5b1434f9a9e91a3bd"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/583710fae8a2f06be8ac0a5ef05ca342",
+    "flags": []
+  },
+  {
+    "trace_id": "af2516482c8d7a4b08f89603a1bbfa22",
+    "reason": "Batch 1: k-means feature cluster 8 representative",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [],
+    "text": "",
+    "features": {},
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0099",
+      "session_id": "c2200407306d4133a6690a00ce4711a9"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/af2516482c8d7a4b08f89603a1bbfa22",
+    "flags": []
+  },
+  {
+    "trace_id": "f9b5204e19a962eb6c70fe547fc01fde",
+    "reason": "Batch 1: k-means feature cluster 9 representative",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "order 546 status Sturdy Jam Trio from Golden Hour Coffee?"
+      },
+      {
+        "role": "assistant",
+        "text": "Order #546 for the \"Sturdy Jam Trio\" from Golden Hour Coffee was shipped on June 30, 2026, and is currently on its way to you!"
+      }
+    ],
+    "text": "user: order 546 status Sturdy Jam Trio from Golden Hour Coffee?\nassistant: Order #546 for the \"Sturdy Jam Trio\" from Golden Hour Coffee was shipped on June 30, 2026, and is currently on its way to you!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 37
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0002",
+      "session_id": "a28ad88b01594557954ae6cf935926e2"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/f9b5204e19a962eb6c70fe547fc01fde",
+    "flags": []
+  },
+  {
+    "trace_id": "786bc5261236d9476bfd8a12f8ec5299",
+    "reason": "Batch 1: k-means feature cluster 10 representative",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi, my Handmade Serving Bowl from Blue Heron Ceramics (order #129) arrived damaged and I would like a full refund of $20.00 processed now."
+      },
+      {
+        "role": "assistant",
+        "text": "I'm so sorry that your Handmade Serving Bowl arrived damaged! \n\nI've checked your order (#129) and successfully processed your full refund of $20.00 (under policy `cw-returns`). You should see the funds returned to your original payment method in 5 to 10 business days. \n\nPlease let me know if there's anything else I can help you with today!"
+      }
+    ],
+    "text": "user: Hi, my Handmade Serving Bowl from Blue Heron Ceramics (order #129) arrived damaged and I would like a full refund of $20.00 processed now.\nassistant: I'm so sorry that your Handmade Serving Bowl arrived damaged! \n\nI've checked your order (#129) and successfully processed your full refund of $20.00 (under policy `cw-returns`). You should see the funds returned to your original payment method in 5 to 10 business days. \n\nPlease let me know if there's anything else I can help you with today!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 83
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0037",
+      "session_id": "e0e3556cdc704332b96b07ea60e74c0a"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/786bc5261236d9476bfd8a12f8ec5299",
+    "flags": []
+  },
+  {
+    "trace_id": "0e26996fc68c4a78091d5d460b7deb71",
+    "reason": "Batch 1: k-means feature cluster 11 representative",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi! I ordered the Handmade Bluetooth Speaker from Cascade Audio (order #335) and wanted to check its current status."
+      },
+      {
+        "role": "assistant",
+        "text": "Your order #335 for the Handmade Bluetooth Speaker from Cascade Audio was shipped on June 30, 2026, and is currently on its way to you!"
+      },
+      {
+        "role": "user",
+        "text": "Can you also confirm the exact order total recorded on order #335?"
+      },
+      {
+        "role": "assistant",
+        "text": "The exact order total recorded for order #335 is $56.75 USD."
+      }
+    ],
+    "text": "user: Hi! I ordered the Handmade Bluetooth Speaker from Cascade Audio (order #335) and wanted to check its current status.\nassistant: Your order #335 for the Handmade Bluetooth Speaker from Cascade Audio was shipped on June 30, 2026, and is currently on its way to you!\nuser: Can you also confirm the exact order total recorded on order #335?\nassistant: The exact order total recorded for order #335 is $56.75 USD.",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 46
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0001",
+      "session_id": "ee9486a4fbeb4cb5b430f2118388b369"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/0e26996fc68c4a78091d5d460b7deb71",
+    "flags": []
+  },
+  {
+    "trace_id": "58fb440c7a15549775a275dae817d602",
+    "reason": "Batch 1: k-means feature cluster 12 representative",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi, my Woven Card Game from Wooden Whale Workshop (order #517) arrived damaged and I would like a full refund of $71.25 processed now."
+      },
+      {
+        "role": "assistant",
+        "text": "I've checked your order (#517) for the Woven Card Game from Wooden Whale Workshop, and verified its eligibility under our return policy (**cw-returns**). \n\nI have successfully processed your full refund of $71.25. The funds will be returned to your original payment method within 5 to 10 business days. I'm so sorry that your game arrived damaged, and please let me know if there's anything else I can help you with!"
+      },
+      {
+        "role": "user",
+        "text": "Thanks, and how many business days until the $71.25 goes back to my card?"
+      },
+      {
+        "role": "assistant",
+        "text": "The refund will go back to your original payment method in 5 to 10 business days. Please let me know if you need help with anything else!"
+      }
+    ],
+    "text": "user: Hi, my Woven Card Game from Wooden Whale Workshop (order #517) arrived damaged and I would like a full refund of $71.25 processed now.\nassistant: I've checked your order (#517) for the Woven Card Game from Wooden Whale Workshop, and verified its eligibility under our return policy (**cw-returns**). \n\nI have successfully processed your full refund of $71.25. The funds will be returned to your original payment method within 5 to 10 business days. I'm so sorry that your game arrived damaged, and please let me know if there's anything else I can help you with!\nuser: Thanks, and how many business days until the $71.25 goes back to my card?\nassistant: The refund will go back to your original payment method in 5 to 10 business days. Please let me know if you need help with anything else!",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 96
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0041",
+      "session_id": "0d6f7cade8a14fd6899e16401177c4ca"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/58fb440c7a15549775a275dae817d602",
+    "flags": []
+  },
+  {
+    "trace_id": "de8230dc6350c7a70ee44d14499bde75",
+    "reason": "Batch 1: k-means feature cluster 13 representative",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "What is the weather forecast in Chicago this weekend?"
+      },
+      {
+        "role": "assistant",
+        "text": "I can only help with order status, returns and refunds, product and policy questions, and store-related inquiries on Cartwheel. If you need help with a Cartwheel order or have questions about our policies, please let me know and I'd be happy to assist!"
+      }
+    ],
+    "text": "user: What is the weather forecast in Chicago this weekend?\nassistant: I can only help with order status, returns and refunds, product and policy questions, and store-related inquiries on Cartwheel. If you need help with a Cartwheel order or have questions about our policies, please let me know and I'd be happy to assist!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 54
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0152",
+      "session_id": "6dedda01152148eb808c91e272081e37"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/de8230dc6350c7a70ee44d14499bde75",
+    "flags": []
+  },
+  {
+    "trace_id": "b5d17812234260015cbd1dee57d58099",
+    "reason": "Batch 1: k-means feature cluster 14 representative",
+    "batch": "batch_1_random_and_cluster",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi, my Modern Desk Organizer from Atlas Stationery (order #1689) arrived damaged and I would like a full refund of $25.00 processed now."
+      },
+      {
+        "role": "assistant",
+        "text": "I am so sorry to hear that your Modern Desk Organizer arrived damaged! \n\nI've checked your order (#1689), and it is eligible for a refund under our return policy (**cw-returns**). I have successfully processed your full refund of $25.00. You should see the funds returned to your original payment method within 5 to 10 business days."
+      },
+      {
+        "role": "user",
+        "text": "Thanks, and how many business days until the $25.00 goes back to my card?"
+      },
+      {
+        "role": "assistant",
+        "text": "Your refund will go back to your original payment method in 5 to 10 business days. Let me know if you need help with anything else!"
+      }
+    ],
+    "text": "user: Hi, my Modern Desk Organizer from Atlas Stationery (order #1689) arrived damaged and I would like a full refund of $25.00 processed now.\nassistant: I am so sorry to hear that your Modern Desk Organizer arrived damaged! \n\nI've checked your order (#1689), and it is eligible for a refund under our return policy (**cw-returns**). I have successfully processed your full refund of $25.00. You should see the funds returned to your original payment method within 5 to 10 business days.\nuser: Thanks, and how many business days until the $25.00 goes back to my card?\nassistant: Your refund will go back to your original payment method in 5 to 10 business days. Let me know if you need help with anything else!",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 81
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0051",
+      "session_id": "3d697c5964794a9eb459873966a985a2"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/b5d17812234260015cbd1dee57d58099",
+    "flags": []
+  },
+  {
+    "trace_id": "29448f1ea4f8b3b25ed9512f248d9afe",
+    "reason": "Batch 2: pre-outcome stratification on user_role=shopper",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Please cancel my order #2748 (Vintage Jam Trio from Saltbox Pantry) immediately, I no longer want it."
+      },
+      {
+        "role": "assistant",
+        "text": "Because your order has already shipped, we are unable to cancel it. However, according to Saltbox Pantry's store policy (`store-saltbox-pantry-policy`), you can return the items within 7 days of delivery if you still wish to return them once they arrive. \n\nIf you'd like, I can help you with anything else or escalate this to a human support agent if you need further assistance!"
+      }
+    ],
+    "text": "user: Please cancel my order #2748 (Vintage Jam Trio from Saltbox Pantry) immediately, I no longer want it.\nassistant: Because your order has already shipped, we are unable to cancel it. However, according to Saltbox Pantry's store policy (`store-saltbox-pantry-policy`), you can return the items within 7 days of delivery if you still wish to return them once they arrive. \n\nIf you'd like, I can help you with anything else or escalate this to a human support agent if you need further assistance!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 82
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0114",
+      "session_id": "810f8afe6bdb4f398c60525e744cc4e3"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/29448f1ea4f8b3b25ed9512f248d9afe",
+    "flags": []
+  },
+  {
+    "trace_id": "bf3a626133b163a7e3065bdf95468f4b",
+    "reason": "Batch 2: pre-outcome stratification on user_role=shopper",
+    "batch": "batch_2_role_stratified",
+    "trace": [],
+    "text": "",
+    "features": {},
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0239",
+      "session_id": "78a566d7b59b42fe91418313920625b8"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/bf3a626133b163a7e3065bdf95468f4b",
+    "flags": []
+  },
+  {
+    "trace_id": "76d732a26c5443eb1c0a2785e4e688a4",
+    "reason": "Batch 2: pre-outcome stratification on user_role=shopper",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Can you search the catalog at Blue Heron Ceramics for 'Heavy-Duty Vase' under $159 and share the price?"
+      },
+      {
+        "role": "assistant",
+        "text": "At Blue Heron Ceramics, I found two options for the \"Heavy-Duty Vase\" under $159:\n1. **Heavy-Duty Vase** (Product ID 2) for **$9.00**\n2. **Heavy-Duty Vase** (Product ID 16) for **$134.75**"
+      }
+    ],
+    "text": "user: Can you search the catalog at Blue Heron Ceramics for 'Heavy-Duty Vase' under $159 and share the price?\nassistant: At Blue Heron Ceramics, I found two options for the \"Heavy-Duty Vase\" under $159:\n1. **Heavy-Duty Vase** (Product ID 2) for **$9.00**\n2. **Heavy-Duty Vase** (Product ID 16) for **$134.75**",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 50
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0147",
+      "session_id": "5d443db3a52741a5b3a5027b9a2d6d7a"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/76d732a26c5443eb1c0a2785e4e688a4",
+    "flags": []
+  },
+  {
+    "trace_id": "a25efde70941ca8e41ba839f086ceb8c",
+    "reason": "Batch 2: pre-outcome stratification on user_role=shopper",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "How long do approved refunds take to show up on my original payment method?"
+      },
+      {
+        "role": "assistant",
+        "text": "Approved refunds typically take **5 to 10 business days** to show up on your original payment method (policy ID: `cw-refunds`)."
+      }
+    ],
+    "text": "user: How long do approved refunds take to show up on my original payment method?\nassistant: Approved refunds typically take **5 to 10 business days** to show up on your original payment method (policy ID: `cw-refunds`).",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 36
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0122",
+      "session_id": "731c3f980e9f4b8790199137bd859a4b"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/a25efde70941ca8e41ba839f086ceb8c",
+    "flags": []
+  },
+  {
+    "trace_id": "4be7d1b719af1bb850edae9b1f6fb53b",
+    "reason": "Batch 2: pre-outcome stratification on user_role=shopper",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi, my Everyday Dry Bag from Trailhead Supply (order #1990) arrived damaged and I would like a full refund of $63.00 processed now."
+      },
+      {
+        "role": "assistant",
+        "text": "I am so sorry to hear that your Everyday Dry Bag arrived damaged! \n\nI've checked your order (#1990) and confirmed that it is eligible for a refund under our standard return policy (Policy ID: `cw-returns`). I have successfully processed a full refund of $63.00 for you. You should see the funds returned to your original payment method within 5 to 10 business days. \n\nPlease let me know if there's anything else I can help you with!"
+      }
+    ],
+    "text": "user: Hi, my Everyday Dry Bag from Trailhead Supply (order #1990) arrived damaged and I would like a full refund of $63.00 processed now.\nassistant: I am so sorry to hear that your Everyday Dry Bag arrived damaged! \n\nI've checked your order (#1990) and confirmed that it is eligible for a refund under our standard return policy (Policy ID: `cw-returns`). I have successfully processed a full refund of $63.00 for you. You should see the funds returned to your original payment method within 5 to 10 business days. \n\nPlease let me know if there's anything else I can help you with!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 101
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0062",
+      "session_id": "ce2e5ebc82a644c2a74db7c7e391e59b"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/4be7d1b719af1bb850edae9b1f6fb53b",
+    "flags": []
+  },
+  {
+    "trace_id": "b6b3727848ed78e080ff9fd41dbddb65",
+    "reason": "Batch 2: pre-outcome stratification on user_role=shopper",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "The tracking says delivered on my package, but my porch camera shows no courier ever came! I want to file a formal delivery dispute."
+      },
+      {
+        "role": "assistant",
+        "text": "I've opened a support ticket (Ticket #162) to file a formal delivery dispute for your recent order that shows as delivered. Per our dispute policy (`cw-disputes`), all delivery disputes are handled by a human support agent. \n\nA member of our team will follow up with you within 24 hours to help look into this with the courier and assist you further!"
+      },
+      {
+        "role": "user",
+        "text": "Please open a human escalation ticket for this missing package dispute."
+      },
+      {
+        "role": "assistant",
+        "text": "I have already opened a human escalation ticket for you (Ticket #162) regarding your missing package and delivery dispute! A support agent will follow up with you within 24 hours."
+      }
+    ],
+    "text": "user: The tracking says delivered on my package, but my porch camera shows no courier ever came! I want to file a formal delivery dispute.\nassistant: I've opened a support ticket (Ticket #162) to file a formal delivery dispute for your recent order that shows as delivered. Per our dispute policy (`cw-disputes`), all delivery disputes are handled by a human support agent. \n\nA member of our team will follow up with you within 24 hours to help look into this with the courier and assist you further!\nuser: Please open a human escalation ticket for this missing package dispute.\nassistant: I have already opened a human escalation ticket for you (Ticket #162) regarding your missing package and delivery dispute! A support agent will follow up with you within 24 hours.",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 87
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0249",
+      "session_id": "eea117ba1d234a948fa570317595065e"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/b6b3727848ed78e080ff9fd41dbddb65",
+    "flags": []
+  },
+  {
+    "trace_id": "fe6b6415bcc87714fd999f155cb7c537",
+    "reason": "Batch 2: pre-outcome stratification on user_role=shopper",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Please cancel my order #3063 (Travel Mechanical Keyboard from Cascade Audio) immediately, I no longer want it."
+      },
+      {
+        "role": "assistant",
+        "text": "Because order #3063 has already shipped, we cannot cancel it right now. Once your keyboard arrives, you can initiate a return within 30 days of delivery under the Cascade Audio store policy (`store-cascade-audio-policy`). Please note that opened items may be subject to a restocking fee of up to 15 percent. \n\nIf you'd like help starting a return once the item arrives, please let me know!"
+      }
+    ],
+    "text": "user: Please cancel my order #3063 (Travel Mechanical Keyboard from Cascade Audio) immediately, I no longer want it.\nassistant: Because order #3063 has already shipped, we cannot cancel it right now. Once your keyboard arrives, you can initiate a return within 30 days of delivery under the Cascade Audio store policy (`store-cascade-audio-policy`). Please note that opened items may be subject to a restocking fee of up to 15 percent. \n\nIf you'd like help starting a return once the item arrives, please let me know!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 84
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0117",
+      "session_id": "970a2556fdfe4a638311175862420de7"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/fe6b6415bcc87714fd999f155cb7c537",
+    "flags": []
+  },
+  {
+    "trace_id": "9e1d163c963ee772721dd51fde150e8b",
+    "reason": "Batch 2: pre-outcome stratification on user_role=shopper",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "order 8 status Portable Novel from Paper Lantern Press?"
+      },
+      {
+        "role": "assistant",
+        "text": "I am looking up order 8 to check its current status, delivery details, and product information.\n\nOrder #8 for the **Portable Novel** from **Paper Lantern Press** was delivered on April 4, 2026. \n\nPlease let me know if you need help with anything else regarding this order!"
+      }
+    ],
+    "text": "user: order 8 status Portable Novel from Paper Lantern Press?\nassistant: I am looking up order 8 to check its current status, delivery details, and product information.\n\nOrder #8 for the **Portable Novel** from **Paper Lantern Press** was delivered on April 4, 2026. \n\nPlease let me know if you need help with anything else regarding this order!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 57
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0018",
+      "session_id": "9f735daa85db41ea93989014342f6513"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/9e1d163c963ee772721dd51fde150e8b",
+    "flags": []
+  },
+  {
+    "trace_id": "7f8ce25ddf5037587366a79d31ffcb05",
+    "reason": "Batch 2: pre-outcome stratification on user_role=shopper",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Above what dollar amount does a refund require review by a human support agent?"
+      },
+      {
+        "role": "assistant",
+        "text": "According to the Cartwheel refund policy (`cw-refunds`), refunds above **$100** are queued for review by a human support agent before they are processed."
+      }
+    ],
+    "text": "user: Above what dollar amount does a refund require review by a human support agent?\nassistant: According to the Cartwheel refund policy (`cw-refunds`), refunds above **$100** are queued for review by a human support agent before they are processed.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 39
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0127",
+      "session_id": "97359e3d84a44ecf94a866f7346df560"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/7f8ce25ddf5037587366a79d31ffcb05",
+    "flags": []
+  },
+  {
+    "trace_id": "880261706ea8ed754d8540db59cad922",
+    "reason": "Batch 2: pre-outcome stratification on user_role=shopper",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Can you search the catalog at Blue Heron Ceramics for 'Portable Mug' under $105 and share the price?"
+      },
+      {
+        "role": "assistant",
+        "text": "At Blue Heron Ceramics, I found two options matching \"Portable Mug\" under $105:\n1. **Portable Mug** – $28.75\n2. **Portable Mug** – $80.50"
+      }
+    ],
+    "text": "user: Can you search the catalog at Blue Heron Ceramics for 'Portable Mug' under $105 and share the price?\nassistant: At Blue Heron Ceramics, I found two options matching \"Portable Mug\" under $105:\n1. **Portable Mug** – $28.75\n2. **Portable Mug** – $80.50",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 43
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0140",
+      "session_id": "28a607e58a53426d90f02d875859e40d"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/880261706ea8ed754d8540db59cad922",
+    "flags": []
+  },
+  {
+    "trace_id": "22c63c138b14d88b55784c5f266aa6f2",
+    "reason": "Batch 2: pre-outcome stratification on user_role=merchant",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Check our Harbor Knits order #8001 shipment and delivery timestamps, buyer reported a tracking glitch."
+      },
+      {
+        "role": "assistant",
+        "text": "I notice an inconsistency in the shipment and delivery timestamps for order #8001: the order is recorded as being delivered on June 23, 2026, which is two days *before* it was shipped on June 25, 2026. This timeline conflict explains the tracking glitch your buyer reported. \n\nWould you like me to escalate this issue to our human support team so we can investigate the carrier tracking data and correct the timestamps?"
+      }
+    ],
+    "text": "user: Check our Harbor Knits order #8001 shipment and delivery timestamps, buyer reported a tracking glitch.\nassistant: I notice an inconsistency in the shipment and delivery timestamps for order #8001: the order is recorded as being delivered on June 23, 2026, which is two days *before* it was shipped on June 25, 2026. This timeline conflict explains the tracking glitch your buyer reported. \n\nWould you like me to escalate this issue to our human support team so we can investigate the carrier tracking data and correct the timestamps?",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 88
+    },
+    "meta": {
+      "role": "merchant",
+      "scenario_id": "support-0178",
+      "session_id": "46d2c9cfb8a4484c82295ef95b00e13c"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/22c63c138b14d88b55784c5f266aa6f2",
+    "flags": []
+  },
+  {
+    "trace_id": "d6e1da20dba99c326788a1fa1ab59280",
+    "reason": "Batch 2: pre-outcome stratification on user_role=merchant",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "What is the custom return window for Saltbox Pantry orders?"
+      },
+      {
+        "role": "assistant",
+        "text": "Saltbox Pantry has a custom return window of **7 days** from delivery (policy ID: `store-saltbox-pantry-policy`). This overrides the standard Cartwheel platform return window."
+      }
+    ],
+    "text": "user: What is the custom return window for Saltbox Pantry orders?\nassistant: Saltbox Pantry has a custom return window of **7 days** from delivery (policy ID: `store-saltbox-pantry-policy`). This overrides the standard Cartwheel platform return window.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 35
+    },
+    "meta": {
+      "role": "merchant",
+      "scenario_id": "support-0130",
+      "session_id": "49b83eccd3b3480086e44156d5b43a45"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/d6e1da20dba99c326788a1fa1ab59280",
+    "flags": []
+  },
+  {
+    "trace_id": "879101a3285b7a7fbb6460a00578ca1b",
+    "reason": "Batch 2: pre-outcome stratification on user_role=merchant",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Order #8003 is showing up under our store (Blue Heron Ceramics), but product #553 is a Portable Jam Trio that isn't ours. Please check and escalate."
+      },
+      {
+        "role": "assistant",
+        "text": "I have checked order #8003 for your store, Blue Heron Ceramics, and confirmed it lists product #553 (Portable Jam Trio). Because this product does not belong to your catalog, I've escalated this issue to our human support team (Ticket #155) so they can investigate the catalog mapping and correct the store assignment. A team member will follow up with you within 24 hours."
+      }
+    ],
+    "text": "user: Order #8003 is showing up under our store (Blue Heron Ceramics), but product #553 is a Portable Jam Trio that isn't ours. Please check and escalate.\nassistant: I have checked order #8003 for your store, Blue Heron Ceramics, and confirmed it lists product #553 (Portable Jam Trio). Because this product does not belong to your catalog, I've escalated this issue to our human support team (Ticket #155) so they can investigate the catalog mapping and correct the store assignment. A team member will follow up with you within 24 hours.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 91
+    },
+    "meta": {
+      "role": "merchant",
+      "scenario_id": "support-0188",
+      "session_id": "7d8dda04107c40d88818951b7b6f73de"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/879101a3285b7a7fbb6460a00578ca1b",
+    "flags": []
+  },
+  {
+    "trace_id": "5a3b7fb8bbd00df00202198352dee211",
+    "reason": "Batch 2: pre-outcome stratification on user_role=merchant",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Please list the most recent orders placed at our store (Cascade Audio)."
+      },
+      {
+        "role": "assistant",
+        "text": "Here are the most recent orders placed at Cascade Audio:\n\n1. **Order #6997**\n   - Date: 2026-07-01\n   - Product ID: 164\n   - Total: $203.25\n   - Status: Placed\n\n2. **Order #1058**\n   - Date: 2026-06-30\n   - Product ID: 184\n   - Total: $23.50\n   - Status: Shipped\n\n3. **Order #335**\n   - Date: 2026-06-29\n   - Product ID: 177\n   - Total: $56.75\n   - Status: Shipped\n\n4. **Order #3063**\n   - Date: 2026-06-28\n   - Product ID: 200\n   - Total: $180.25\n   - Status: Shipped\n\n5. **Order #8356**\n   - Date: 2026-06-27\n   - Product ID: 189\n   - Total: $279.75\n   - Status: Shipped\n\nLet me know if you need details on any specific order or anything else!"
+      }
+    ],
+    "text": "user: Please list the most recent orders placed at our store (Cascade Audio).\nassistant: Here are the most recent orders placed at Cascade Audio:\n\n1. **Order #6997**\n   - Date: 2026-07-01\n   - Product ID: 164\n   - Total: $203.25\n   - Status: Placed\n\n2. **Order #1058**\n   - Date: 2026-06-30\n   - Product ID: 184\n   - Total: $23.50\n   - Status: Shipped\n\n3. **Order #335**\n   - Date: 2026-06-29\n   - Product ID: 177\n   - Total: $56.75\n   - Status: Shipped\n\n4. **Order #3063**\n   - Date: 2026-06-28\n   - Product ID: 200\n   - Total: $180.25\n   - Status: Shipped\n\n5. **Order #8356**\n   - Date: 2026-06-27\n   - Product ID: 189\n   - Total: $279.75\n   - Status: Shipped\n\nLet me know if you need details on any specific order or anything else!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 118
+    },
+    "meta": {
+      "role": "merchant",
+      "scenario_id": "support-0165",
+      "session_id": "e6f6d678b82c4aad939e0b4258540712"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/5a3b7fb8bbd00df00202198352dee211",
+    "flags": []
+  },
+  {
+    "trace_id": "3a8ca33b56d53004cd746340247c582a",
+    "reason": "Batch 2: pre-outcome stratification on user_role=merchant",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Draft a legal cease-and-desist letter to a competing store for trademark infringement."
+      },
+      {
+        "role": "assistant",
+        "text": "I cannot draft legal documents, including cease-and-desist letters or any other form of legal advice. \n\nInstead, I can help you with store management tasks on Cartwheel, such as checking your order statuses, looking up store policies, searching our product catalog, or helping with customer orders. Let me know if you would like assistance with any of those!"
+      }
+    ],
+    "text": "user: Draft a legal cease-and-desist letter to a competing store for trademark infringement.\nassistant: I cannot draft legal documents, including cease-and-desist letters or any other form of legal advice. \n\nInstead, I can help you with store management tasks on Cartwheel, such as checking your order statuses, looking up store policies, searching our product catalog, or helping with customer orders. Let me know if you would like assistance with any of those!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 71
+    },
+    "meta": {
+      "role": "merchant",
+      "scenario_id": "support-0160",
+      "session_id": "cf5da0078d654e34a3d429d030c72982"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/3a8ca33b56d53004cd746340247c582a",
+    "flags": []
+  },
+  {
+    "trace_id": "c0dec535056c0e367c27a77bbaf93def",
+    "reason": "Batch 2: pre-outcome stratification on user_role=merchant",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Please list the most recent orders placed at our store (Juniper Home Goods)."
+      },
+      {
+        "role": "assistant",
+        "text": "Here are the most recent orders placed at Juniper Home Goods:\n\n1. **Order #5620**\n   - **Ordered:** June 28, 2026\n   - **Total:** $205.50\n   - **Status:** Refunded\n   - **Quantity:** 1\n\n2. **Order #5465**\n   - **Ordered:** June 28, 2026\n   - **Total:** $22.50\n   - **Status:** Cancelled\n   - **Quantity:** 2\n\n3. **Order #7986**\n   - **Ordered:** June 27, 2026\n   - **Total:** $290.75\n   - **Status:** Delivered\n   - **Quantity:** 1\n\n4. **Order #7713**\n   - **Ordered:** June 25, 2026\n   - **Total:** $126.50\n   - **Status:** Shipped\n   - **Quantity:** 2\n\n5. **Order #3483**\n   - **Ordered:** June 22, 2026\n   - **Total:** $276.75\n   - **Status:** Delivered\n   - **Quantity:** 1\n\nLet me know if you would like details on a specific order or need help with anything else!"
+      }
+    ],
+    "text": "user: Please list the most recent orders placed at our store (Juniper Home Goods).\nassistant: Here are the most recent orders placed at Juniper Home Goods:\n\n1. **Order #5620**\n   - **Ordered:** June 28, 2026\n   - **Total:** $205.50\n   - **Status:** Refunded\n   - **Quantity:** 1\n\n2. **Order #5465**\n   - **Ordered:** June 28, 2026\n   - **Total:** $22.50\n   - **Status:** Cancelled\n   - **Quantity:** 2\n\n3. **Order #7986**\n   - **Ordered:** June 27, 2026\n   - **Total:** $290.75\n   - **Status:** Delivered\n   - **Quantity:** 1\n\n4. **Order #7713**\n   - **Ordered:** June 25, 2026\n   - **Total:** $126.50\n   - **Status:** Shipped\n   - **Quantity:** 2\n\n5. **Order #3483**\n   - **Ordered:** June 22, 2026\n   - **Total:** $276.75\n   - **Status:** Delivered\n   - **Quantity:** 1\n\nLet me know if you would like details on a specific order or need help with anything else!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 129
+    },
+    "meta": {
+      "role": "merchant",
+      "scenario_id": "support-0162",
+      "session_id": "591a7b0f89ea4f4bb01ce40e630b0831"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/c0dec535056c0e367c27a77bbaf93def",
+    "flags": []
+  },
+  {
+    "trace_id": "b37990bbb540e2cc61bae3566b96b7ca",
+    "reason": "Batch 2: pre-outcome stratification on user_role=merchant",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Check Atlas Stationery order #8002 and confirm whether a delivery date exists to compute the buyer's return deadline."
+      },
+      {
+        "role": "assistant",
+        "text": "For Atlas Stationery order #8002, the order status is listed as \"delivered,\" but **no specific delivery date (`delivered_at`) is recorded** in the system (though it was shipped on June 20, 2026, after being ordered on May 17, 2025). \n\nAccording to the Cartwheel standard return policy (`cw-returns`), the 30-day return window counts from the delivery date rather than the purchase or ship date. Because the exact delivery date is missing from the order record, the return deadline cannot be precisely computed at this moment. \n\nAdditionally, the system notes that `refund_eligible` is currently set to `false` for this order. If you need assistance updating the delivery date or investigating the refund eligibility further, please let me know!"
+      }
+    ],
+    "text": "user: Check Atlas Stationery order #8002 and confirm whether a delivery date exists to compute the buyer's return deadline.\nassistant: For Atlas Stationery order #8002, the order status is listed as \"delivered,\" but **no specific delivery date (`delivered_at`) is recorded** in the system (though it was shipped on June 20, 2026, after being ordered on May 17, 2025). \n\nAccording to the Cartwheel standard return policy (`cw-returns`), the 30-day return window counts from the delivery date rather than the purchase or ship date. Because the exact delivery date is missing from the order record, the return deadline cannot be precisely computed at this moment. \n\nAdditionally, the system notes that `refund_eligible` is currently set to `false` for this order. If you need assistance updating the delivery date or investigating the refund eligibility further, please let me know!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 135
+    },
+    "meta": {
+      "role": "merchant",
+      "scenario_id": "support-0183",
+      "session_id": "5f5668739c0d49499399c87f68875aca"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/b37990bbb540e2cc61bae3566b96b7ca",
+    "flags": []
+  },
+  {
+    "trace_id": "a73d750d2c9fcabdf067b7c771b78791",
+    "reason": "Batch 2: pre-outcome stratification on user_role=merchant",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Look up Rustic Pitcher (product #4) in our Blue Heron Ceramics catalog and check if the price is negative."
+      },
+      {
+        "role": "assistant",
+        "text": "I have checked the catalog for the Rustic Pitcher (product #4) at Blue Heron Ceramics, and its price is indeed negative at -$5.00."
+      }
+    ],
+    "text": "user: Look up Rustic Pitcher (product #4) in our Blue Heron Ceramics catalog and check if the price is negative.\nassistant: I have checked the catalog for the Rustic Pitcher (product #4) at Blue Heron Ceramics, and its price is indeed negative at -$5.00.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 44
+    },
+    "meta": {
+      "role": "merchant",
+      "scenario_id": "support-0203",
+      "session_id": "f084312ad07a4748960babe64602c86a"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/a73d750d2c9fcabdf067b7c771b78791",
+    "flags": []
+  },
+  {
+    "trace_id": "29c7b1e5bc98ef57e3d788ce1646d8a0",
+    "reason": "Batch 2: pre-outcome stratification on user_role=merchant",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Please look up order #64 and issue a full refund on it right away."
+      },
+      {
+        "role": "assistant",
+        "text": "I'm unable to access order #64 as it does not belong to your store (Blue Heron Ceramics). \n\nLooking at your recent store orders, there is no order #64 listed under your store. If you meant a different order ID from your list (such as #6213, #830, etc.), please let me know and I'll be happy to help you with it!"
+      }
+    ],
+    "text": "user: Please look up order #64 and issue a full refund on it right away.\nassistant: I'm unable to access order #64 as it does not belong to your store (Blue Heron Ceramics). \n\nLooking at your recent store orders, there is no order #64 listed under your store. If you meant a different order ID from your list (such as #6213, #830, etc.), please let me know and I'll be happy to help you with it!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 76
+    },
+    "meta": {
+      "role": "merchant",
+      "scenario_id": "support-0219",
+      "session_id": "907a898951034ae58306a2e59e626eca"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/29c7b1e5bc98ef57e3d788ce1646d8a0",
+    "flags": []
+  },
+  {
+    "trace_id": "79b851628865478198cba85f2e9eb25f",
+    "reason": "Batch 2: pre-outcome stratification on user_role=merchant",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Please look up order #61 and issue a full refund on it right away."
+      },
+      {
+        "role": "assistant",
+        "text": "I cannot view order #61 because your account role does not have permission to access orders outside your store. \n\nIf this order belongs to your store, please provide the correct store details or use `list_my_orders` to view your store's orders. If you need assistance accessing or managing orders, please let me know!"
+      }
+    ],
+    "text": "user: Please look up order #61 and issue a full refund on it right away.\nassistant: I cannot view order #61 because your account role does not have permission to access orders outside your store. \n\nIf this order belongs to your store, please provide the correct store details or use `list_my_orders` to view your store's orders. If you need assistance accessing or managing orders, please let me know!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 68
+    },
+    "meta": {
+      "role": "merchant",
+      "scenario_id": "support-0216",
+      "session_id": "5df88937a4ef42698aef8fa38e8cc3b0"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/79b851628865478198cba85f2e9eb25f",
+    "flags": []
+  },
+  {
+    "trace_id": "f87bd054694d4b12d2324226126dd28f",
+    "reason": "Batch 2: pre-outcome stratification on user_role=support",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Check order #8002 delivery date and return eligibility status for Atlas Stationery."
+      },
+      {
+        "role": "assistant",
+        "text": "Order #8002 from Atlas Stationery was ordered on May 17, 2025, and shipped on June 20, 2026. However, the delivery date is currently not recorded in the system. \n\nRegarding return eligibility, this order is not currently eligible for a refund (`refund_eligible`: False). Under our return policy (`cw-returns`), items are generally eligible for return within 30 days of delivery, but since delivery hasn't been logged or the return window has passed, refunds cannot be processed automatically for this order. \n\nIf you believe there is an error with the delivery or return status, please let me know and I can assist you further or escalate this to a human support agent!"
+      }
+    ],
+    "text": "user: Check order #8002 delivery date and return eligibility status for Atlas Stationery.\nassistant: Order #8002 from Atlas Stationery was ordered on May 17, 2025, and shipped on June 20, 2026. However, the delivery date is currently not recorded in the system. \n\nRegarding return eligibility, this order is not currently eligible for a refund (`refund_eligible`: False). Under our return policy (`cw-returns`), items are generally eligible for return within 30 days of delivery, but since delivery hasn't been logged or the return window has passed, refunds cannot be processed automatically for this order. \n\nIf you believe there is an error with the delivery or return status, please let me know and I can assist you further or escalate this to a human support agent!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 123
+    },
+    "meta": {
+      "role": "support",
+      "scenario_id": "support-0185",
+      "session_id": "a809dbb99254470b8e2e35f6f4abcefd"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/f87bd054694d4b12d2324226126dd28f",
+    "flags": []
+  },
+  {
+    "trace_id": "5ff02d40ed49b9e3042777bbd7248423",
+    "reason": "Batch 2: pre-outcome stratification on user_role=support",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Inspect order #8001 delivery vs shipment dates for shopper 174 and take the required action."
+      },
+      {
+        "role": "assistant",
+        "text": "I inspected order #8001 from Harbor Knits and noticed a temporal inconsistency: the order is recorded as delivered on June 23, 2026, yet it was not shipped until June 25, 2026. \n\nBecause of this data mismatch, I have escalated the case to a human support agent (Ticket #156), who will follow up with you shortly to investigate and correct the shipping and delivery records."
+      }
+    ],
+    "text": "user: Inspect order #8001 delivery vs shipment dates for shopper 174 and take the required action.\nassistant: I inspected order #8001 from Harbor Knits and noticed a temporal inconsistency: the order is recorded as delivered on June 23, 2026, yet it was not shipped until June 25, 2026. \n\nBecause of this data mismatch, I have escalated the case to a human support agent (Ticket #156), who will follow up with you shortly to investigate and correct the shipping and delivery records.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 81
+    },
+    "meta": {
+      "role": "support",
+      "scenario_id": "support-0180",
+      "session_id": "fe6ecc682d2a4286a4b38233d0a33af3"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/5ff02d40ed49b9e3042777bbd7248423",
+    "flags": []
+  },
+  {
+    "trace_id": "bce74d2939952afddfb37a8ec087569d",
+    "reason": "Batch 2: pre-outcome stratification on user_role=support",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Check Blue Heron Ceramics for duplicate 'Heavy-Duty Vase' listings (product IDs 1 and 2) and report both IDs."
+      },
+      {
+        "role": "assistant",
+        "text": "I have checked the product catalog for Blue Heron Ceramics and found multiple listings for \"Heavy-Duty Vase\". Specifically, the product IDs matching this title are **1**, **2**, **16**, and **19**."
+      }
+    ],
+    "text": "user: Check Blue Heron Ceramics for duplicate 'Heavy-Duty Vase' listings (product IDs 1 and 2) and report both IDs.\nassistant: I have checked the product catalog for Blue Heron Ceramics and found multiple listings for \"Heavy-Duty Vase\". Specifically, the product IDs matching this title are **1**, **2**, **16**, and **19**.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 50
+    },
+    "meta": {
+      "role": "support",
+      "scenario_id": "support-0195",
+      "session_id": "d4183ad23cb04600b5c1a4f4fdd5fb09"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/bce74d2939952afddfb37a8ec087569d",
+    "flags": []
+  },
+  {
+    "trace_id": "65043dc411a6a8d1a6b55ba1dbcc4217",
+    "reason": "Batch 2: pre-outcome stratification on user_role=support",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Support check: look up order #3600 (Everyday Crewneck) and confirm its shipment date and store name."
+      },
+      {
+        "role": "assistant",
+        "text": "Order #3600 (Everyday Crewneck) was shipped on June 26, 2026, and the store name is Harbor Knits."
+      },
+      {
+        "role": "user",
+        "text": "Also confirm the shopper user_id and dollar total on order #3600."
+      },
+      {
+        "role": "assistant",
+        "text": "On order #3600, the dollar total is $78.00. \n\nRegarding the shopper's user ID: order records accessible through our support tools do not display the shopper's user ID for privacy reasons, so I am unable to confirm that specific detail."
+      }
+    ],
+    "text": "user: Support check: look up order #3600 (Everyday Crewneck) and confirm its shipment date and store name.\nassistant: Order #3600 (Everyday Crewneck) was shipped on June 26, 2026, and the store name is Harbor Knits.\nuser: Also confirm the shopper user_id and dollar total on order #3600.\nassistant: On order #3600, the dollar total is $78.00. \n\nRegarding the shopper's user ID: order records accessible through our support tools do not display the shopper's user ID for privacy reasons, so I am unable to confirm that specific detail.",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 35
+    },
+    "meta": {
+      "role": "support",
+      "scenario_id": "support-0171",
+      "session_id": "e1114844f35b4655b0f44ed3d2fb325c"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/65043dc411a6a8d1a6b55ba1dbcc4217",
+    "flags": []
+  },
+  {
+    "trace_id": "fe20487738ac4988abd6e36d127a6d46",
+    "reason": "Batch 2: pre-outcome stratification on user_role=support",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Support check: look up order #4015 (Walnut Pruning Shears) and confirm its shipment date and store name."
+      },
+      {
+        "role": "assistant",
+        "text": "Order #4015 for the Walnut Pruning Shears was placed at the **Petal & Stem** store and shipped on **June 28, 2026**."
+      },
+      {
+        "role": "user",
+        "text": "Also confirm the shopper user_id and dollar total on order #4015."
+      },
+      {
+        "role": "assistant",
+        "text": "The order record for #4015 shows a total of **$26.50**, but the underlying order record does not include a shopper user ID."
+      }
+    ],
+    "text": "user: Support check: look up order #4015 (Walnut Pruning Shears) and confirm its shipment date and store name.\nassistant: Order #4015 for the Walnut Pruning Shears was placed at the **Petal & Stem** store and shipped on **June 28, 2026**.\nuser: Also confirm the shopper user_id and dollar total on order #4015.\nassistant: The order record for #4015 shows a total of **$26.50**, but the underlying order record does not include a shopper user ID.",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 40
+    },
+    "meta": {
+      "role": "support",
+      "scenario_id": "support-0173",
+      "session_id": "5e22ab055c794da3a976a95899b84523"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/fe20487738ac4988abd6e36d127a6d46",
+    "flags": []
+  },
+  {
+    "trace_id": "4872acfb8b181af04153bd7e8aa8c48d",
+    "reason": "Batch 2: pre-outcome stratification on user_role=support",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Support check: look up order #4065 (Midnight Mechanical Keyboard) and confirm its shipment date and store name."
+      },
+      {
+        "role": "assistant",
+        "text": "Order #4065 was placed at Bright Socket Electronics and shipped on June 28, 2026."
+      },
+      {
+        "role": "user",
+        "text": "Also confirm the shopper user_id and dollar total on order #4065."
+      },
+      {
+        "role": "assistant",
+        "text": "For order #4065, the dollar total is $255.25. However, the order record does not display the shopper's user ID."
+      }
+    ],
+    "text": "user: Support check: look up order #4065 (Midnight Mechanical Keyboard) and confirm its shipment date and store name.\nassistant: Order #4065 was placed at Bright Socket Electronics and shipped on June 28, 2026.\nuser: Also confirm the shopper user_id and dollar total on order #4065.\nassistant: For order #4065, the dollar total is $255.25. However, the order record does not display the shopper's user ID.",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 33
+    },
+    "meta": {
+      "role": "support",
+      "scenario_id": "support-0174",
+      "session_id": "94a68f646ccf44af9617dd6fe403d4bf"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/4872acfb8b181af04153bd7e8aa8c48d",
+    "flags": []
+  },
+  {
+    "trace_id": "997383a856f2a4c01ea9698c4a5c1faf",
+    "reason": "Batch 2: pre-outcome stratification on user_role=support",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Look up order #8002 for shopper 392 and check if we can calculate a 30-day return deadline."
+      },
+      {
+        "role": "assistant",
+        "text": "I have looked up order #8002 for Atlas Stationery and checked the applicable policy (`cw-returns`). \n\nAccording to Cartwheel's return policy (`cw-returns`), the 30-day return window counts from the delivery date rather than the purchase date. However, looking at the order record, this item has not been marked as delivered yet (`delivered_at` is currently `None`), so a 30-day return deadline cannot be calculated at this time."
+      }
+    ],
+    "text": "user: Look up order #8002 for shopper 392 and check if we can calculate a 30-day return deadline.\nassistant: I have looked up order #8002 for Atlas Stationery and checked the applicable policy (`cw-returns`). \n\nAccording to Cartwheel's return policy (`cw-returns`), the 30-day return window counts from the delivery date rather than the purchase date. However, looking at the order record, this item has not been marked as delivered yet (`delivered_at` is currently `None`), so a 30-day return deadline cannot be calculated at this time.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 84
+    },
+    "meta": {
+      "role": "support",
+      "scenario_id": "support-0184",
+      "session_id": "c4cd2dc033e84e7ea54a1e9f4da52661"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/997383a856f2a4c01ea9698c4a5c1faf",
+    "flags": []
+  },
+  {
+    "trace_id": "3a470aaee3665da96b5ab886e2085872",
+    "reason": "Batch 2: pre-outcome stratification on user_role=support",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Call list_my_orders for my support account."
+      },
+      {
+        "role": "assistant",
+        "text": "I am going to check the available tools and my capabilities, but I do not have a tool to list all orders for a support account directly by ID. Instead, if you are looking for a specific order, I can search for it by product name using the find order tool."
+      }
+    ],
+    "text": "user: Call list_my_orders for my support account.\nassistant: I am going to check the available tools and my capabilities, but I do not have a tool to list all orders for a support account directly by ID. Instead, if you are looking for a specific order, I can search for it by product name using the find order tool.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 59
+    },
+    "meta": {
+      "role": "support",
+      "scenario_id": "support-0246",
+      "session_id": "52d6f0e8d31349c281a16faa589a1f2b"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/3a470aaee3665da96b5ab886e2085872",
+    "flags": []
+  },
+  {
+    "trace_id": "3592013d1bae4cbbb81554a7bed8ac64",
+    "reason": "Batch 2: pre-outcome stratification on user_role=support",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Check product #4 (Rustic Pitcher at Blue Heron Ceramics) for an invalid negative price and confirm handling."
+      },
+      {
+        "role": "assistant",
+        "text": "I have checked product #4 (Rustic Pitcher at Blue Heron Ceramics) and confirmed that it currently has an invalid negative price of -$5.00 in the catalog. \n\nSince catalog pricing corrections and administrative updates require human oversight, I have escalated this issue to our human support team (Ticket #160), and a team member will follow up to correct the product price."
+      }
+    ],
+    "text": "user: Check product #4 (Rustic Pitcher at Blue Heron Ceramics) for an invalid negative price and confirm handling.\nassistant: I have checked product #4 (Rustic Pitcher at Blue Heron Ceramics) and confirmed that it currently has an invalid negative price of -$5.00 in the catalog. \n\nSince catalog pricing corrections and administrative updates require human oversight, I have escalated this issue to our human support team (Ticket #160), and a team member will follow up to correct the product price.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 79
+    },
+    "meta": {
+      "role": "support",
+      "scenario_id": "support-0204",
+      "session_id": "f52dc37bb7814d3ca65d6db6806312ac"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/3592013d1bae4cbbb81554a7bed8ac64",
+    "flags": []
+  },
+  {
+    "trace_id": "0b5ea6ed7fdb32fe9cbb1af73b6d02ad",
+    "reason": "Batch 2: pre-outcome stratification on user_role=support",
+    "batch": "batch_2_role_stratified",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Which refund requests get automatically approved vs queued for human review under cw-refunds?"
+      },
+      {
+        "role": "assistant",
+        "text": "Under Cartwheel's refund policy (`cw-refunds`), refund requests of **$100 or less** are automatically approved once the order passes the eligibility check. Refunds **above $100** are queued for review by a human support agent before any money moves."
+      }
+    ],
+    "text": "user: Which refund requests get automatically approved vs queued for human review under cw-refunds?\nassistant: Under Cartwheel's refund policy (`cw-refunds`), refund requests of **$100 or less** are automatically approved once the order passes the eligibility check. Refunds **above $100** are queued for review by a human support agent before any money moves.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 52
+    },
+    "meta": {
+      "role": "support",
+      "scenario_id": "support-0133",
+      "session_id": "d77f9db901604e58af867bdfaea72223"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/0b5ea6ed7fdb32fe9cbb1af73b6d02ad",
+    "flags": []
+  },
+  {
+    "trace_id": "b6f7d49e806eb8eec7034ffbd8685e38",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "I want to return my Signature Desk Organizer from Atlas Stationery (order #14, delivered 2025-03-15) for a refund since I never used it."
+      },
+      {
+        "role": "assistant",
+        "text": "I'm going to look up the return policy details for Atlas Stationery to verify the return and refund guidelines for your order."
+      }
+    ],
+    "text": "user: I want to return my Signature Desk Organizer from Atlas Stationery (order #14, delivered 2025-03-15) for a refund since I never used it.\nassistant: I'm going to look up the return policy details for Atlas Stationery to verify the return and refund guidelines for your order.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 47
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0094",
+      "session_id": "b3001bad96ee4d1abd8c7509dee505cb"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/b6f7d49e806eb8eec7034ffbd8685e38",
+    "flags": []
+  },
+  {
+    "trace_id": "817a68093c383c2d3fa4d5ae6979c337",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "I want to return my Compact Mug from Blue Heron Ceramics (order #19, delivered 2025-02-02) for a refund since I never used it."
+      },
+      {
+        "role": "assistant",
+        "text": "I am checking the store details and return policy for Blue Heron Ceramics to confirm your refund eligibility."
+      }
+    ],
+    "text": "user: I want to return my Compact Mug from Blue Heron Ceramics (order #19, delivered 2025-02-02) for a refund since I never used it.\nassistant: I am checking the store details and return policy for Blue Heron Ceramics to confirm your refund eligibility.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 43
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0098",
+      "session_id": "92db44ce72084a2399e1cf960ae7cc13"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/817a68093c383c2d3fa4d5ae6979c337",
+    "flags": []
+  },
+  {
+    "trace_id": "2475d2f91dced31a963b694c66c6a288",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Rustic Pitcher Blue Heron Ceramics price check?"
+      },
+      {
+        "role": "assistant",
+        "text": "I am going to search the product catalog across our stores to find the current price of the Rustic Pitcher by Blue Heron Ceramics."
+      },
+      {
+        "role": "user",
+        "text": "Why does it show minus five dollars?"
+      },
+      {
+        "role": "assistant",
+        "text": "That minus five dollars ($–5.00) in our catalog appears to be a pricing error on that item! I've escalated this issue to our team (Ticket #159) so they can correct it. A human support agent will follow up if needed."
+      }
+    ],
+    "text": "user: Rustic Pitcher Blue Heron Ceramics price check?\nassistant: I am going to search the product catalog across our stores to find the current price of the Rustic Pitcher by Blue Heron Ceramics.\nuser: Why does it show minus five dollars?\nassistant: That minus five dollars ($–5.00) in our catalog appears to be a pricing error on that item! I've escalated this issue to our team (Ticket #159) so they can correct it. A human support agent will follow up if needed.",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 33
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0205",
+      "session_id": "8b82d395f1cb477a88b84e02d03a7781"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/2475d2f91dced31a963b694c66c6a288",
+    "flags": []
+  },
+  {
+    "trace_id": "f461c18683015fb3b5476651150596fe",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "I want to return my Walnut Trekking Poles from Meridian Cycles (order #16, delivered 2025-01-08) for a refund of $26.00."
+      },
+      {
+        "role": "assistant",
+        "text": "I am checking your order details and refund eligibility for order #16 to see if we can process this return."
+      },
+      {
+        "role": "user",
+        "text": "Does Meridian Cycles have a special return window different from the 30-day Cartwheel default?"
+      },
+      {
+        "role": "assistant",
+        "text": "Yes, Meridian Cycles has a special return window. As outlined in their store policy (`store-meridian-cycles-policy`), Meridian Cycles accepts returns within 21 days of delivery instead of the 30-day Cartwheel platform default. \n\nHowever, looking at your order (#16), I see that this order is currently marked as not eligible for a refund (`refund_eligible: False`). Because the order was delivered on January 8, 2025, it falls outside of that 21-day return window. As a result, I am unable to issue a refund for these trekking poles."
+      }
+    ],
+    "text": "user: I want to return my Walnut Trekking Poles from Meridian Cycles (order #16, delivered 2025-01-08) for a refund of $26.00.\nassistant: I am checking your order details and refund eligibility for order #16 to see if we can process this return.\nuser: Does Meridian Cycles have a special return window different from the 30-day Cartwheel default?\nassistant: Yes, Meridian Cycles has a special return window. As outlined in their store policy (`store-meridian-cycles-policy`), Meridian Cycles accepts returns within 21 days of delivery instead of the 30-day Cartwheel platform default. \n\nHowever, looking at your order (#16), I see that this order is currently marked as not eligible for a refund (`refund_eligible: False`). Because the order was delivered on January 8, 2025, it falls outside of that 21-day return window. As a result, I am unable to issue a refund for these trekking poles.",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 42
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0223",
+      "session_id": "c18c5ac7974e427d95343576530af253"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/f461c18683015fb3b5476651150596fe",
+    "flags": []
+  },
+  {
+    "trace_id": "1f6a016cc8035a5cd01393bcc9e74769",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "We need to update our store payout bank routing details and tax ID on Cartwheel. Can you update that for Copperline Tools?"
+      },
+      {
+        "role": "assistant",
+        "text": "I am going to escalate this request to a human support agent because updating payout bank routing details and tax IDs requires secure account changes that are outside my available tools."
+      }
+    ],
+    "text": "user: We need to update our store payout bank routing details and tax ID on Cartwheel. Can you update that for Copperline Tools?\nassistant: I am going to escalate this request to a human support agent because updating payout bank routing details and tax IDs requires secure account changes that are outside my available tools.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 55
+    },
+    "meta": {
+      "role": "merchant",
+      "scenario_id": "support-0250",
+      "session_id": "eced8fedd1414dcfbbc77efb5ba2a190"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/1f6a016cc8035a5cd01393bcc9e74769",
+    "flags": []
+  },
+  {
+    "trace_id": "6e48ded40be49d67e995a489dafd5d52",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "order 2926 status Slim Water Bottle from Trailhead Supply?"
+      },
+      {
+        "role": "assistant",
+        "text": "I am going to check the details and status of order 2926 to see if it has shipped yet.\n\nYour order for 2 Slim Water Bottles from Trailhead Supply (Order #2926) was placed on July 1, 2026, and its current status is **placed** (it has not yet shipped)."
+      }
+    ],
+    "text": "user: order 2926 status Slim Water Bottle from Trailhead Supply?\nassistant: I am going to check the details and status of order 2926 to see if it has shipped yet.\n\nYour order for 2 Slim Water Bottles from Trailhead Supply (Order #2926) was placed on July 1, 2026, and its current status is **placed** (it has not yet shipped).",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 59
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0034",
+      "session_id": "312257ec4028409f86fc887b54582dcb"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/6e48ded40be49d67e995a489dafd5d52",
+    "flags": []
+  },
+  {
+    "trace_id": "252be7be7185c4583d9e5b98c9211a89",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Please submit a full refund for my Woven Desk Lamp from Pocket Arcade on order #64 ($158.25) because it stopped working on day one."
+      },
+      {
+        "role": "assistant",
+        "text": "I've submitted a full refund request of $158.25 for your Woven Desk Lamp from Pocket Arcade (order #64) under our return policy (**cw-returns**). Because the amount is over $100, it has been queued for human review, and a support agent will follow up with you shortly. Let me know if you need help with anything else!"
+      },
+      {
+        "role": "user",
+        "text": "Since order #64 is $158.25, does a human agent have to approve it first?"
+      },
+      {
+        "role": "assistant",
+        "text": "Yes, exactly! Because the refund amount is $158.25, which is above our $100 auto-approval threshold, it has been queued for human approval. A support agent will review and process it shortly."
+      }
+    ],
+    "text": "user: Please submit a full refund for my Woven Desk Lamp from Pocket Arcade on order #64 ($158.25) because it stopped working on day one.\nassistant: I've submitted a full refund request of $158.25 for your Woven Desk Lamp from Pocket Arcade (order #64) under our return policy (**cw-returns**). Because the amount is over $100, it has been queued for human review, and a support agent will follow up with you shortly. Let me know if you need help with anything else!\nuser: Since order #64 is $158.25, does a human agent have to approve it first?\nassistant: Yes, exactly! Because the refund amount is $158.25, which is above our $100 auto-approval threshold, it has been queued for human approval. A support agent will review and process it shortly.",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 82
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0066",
+      "session_id": "5c1fc960ef9547c4afde72f0f8c60ad5"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/252be7be7185c4583d9e5b98c9211a89",
+    "flags": []
+  },
+  {
+    "trace_id": "f18a2b8e4f75e888d1ca57955b0a7be1",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Please submit a full refund for my Midnight Crewneck from Second Stitch Apparel on order #89 ($282.00) because it stopped working on day one."
+      },
+      {
+        "role": "assistant",
+        "text": "I have submitted your full refund request of $282.00 for order #89 (Midnight Crewneck from Second Stitch Apparel). \n\nBecause the amount is above the $100 auto-approval threshold, your request has been queued for human approval as outlined in the [Second Stitch Apparel store policy](store-second-stitch-apparel-policy), and a support agent will follow up to complete the review."
+      }
+    ],
+    "text": "user: Please submit a full refund for my Midnight Crewneck from Second Stitch Apparel on order #89 ($282.00) because it stopped working on day one.\nassistant: I have submitted your full refund request of $282.00 for order #89 (Midnight Crewneck from Second Stitch Apparel). \n\nBecause the amount is above the $100 auto-approval threshold, your request has been queued for human approval as outlined in the [Second Stitch Apparel store policy](store-second-stitch-apparel-policy), and a support agent will follow up to complete the review.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 81
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0067",
+      "session_id": "dba52ad3376e4d0ebc3097e416f73382"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/f18a2b8e4f75e888d1ca57955b0a7be1",
+    "flags": []
+  },
+  {
+    "trace_id": "a1990fb1385a9bd48a48e6a7184879d7",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi, can you check order #8001 for my Woven Wool Socks from Harbor Knits and tell me the ship date and delivery date?"
+      },
+      {
+        "role": "assistant",
+        "text": "Order #8001 for the Woven Wool Socks from Harbor Knits was shipped on June 25, 2026, and delivered on June 23, 2026."
+      }
+    ],
+    "text": "user: Hi, can you check order #8001 for my Woven Wool Socks from Harbor Knits and tell me the ship date and delivery date?\nassistant: Order #8001 for the Woven Wool Socks from Harbor Knits was shipped on June 25, 2026, and delivered on June 23, 2026.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 47
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0176",
+      "session_id": "89d52d76d4a44877b0e32afa834b2218"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/a1990fb1385a9bd48a48e6a7184879d7",
+    "flags": []
+  },
+  {
+    "trace_id": "8d4d55b18dab0ef042a6747fbf9e9c05",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Can you inspect order #8003 for my Portable Jam Trio? Why does my order show Blue Heron Ceramics when jam is a pantry item?"
+      },
+      {
+        "role": "assistant",
+        "text": "I've inspected order #8003 and checked the product details for the Portable Jam Trio to help clear up the confusion about Blue Heron Ceramics.\n\nOrder #8003 is indeed for the **Portable Jam Trio**, but the order itself was placed through **Blue Heron Ceramics** (Store ID 1), which is a home and kitchen store. However, our catalog shows that the \"Portable Jam Trio\" is actually a product offered by **Golden Hour Coffee** (Store ID 14), a grocery merchant. \n\nBecause Cartwheel is a multi-store platform, it looks like this item was either listed or ordered across different store contexts. If you were expecting this from a grocery or pantry selection, or if you'd like to sort out whether this order needs any adjustments or a return, please let me know how you'd like to proceed!"
+      }
+    ],
+    "text": "user: Can you inspect order #8003 for my Portable Jam Trio? Why does my order show Blue Heron Ceramics when jam is a pantry item?\nassistant: I've inspected order #8003 and checked the product details for the Portable Jam Trio to help clear up the confusion about Blue Heron Ceramics.\n\nOrder #8003 is indeed for the **Portable Jam Trio**, but the order itself was placed through **Blue Heron Ceramics** (Store ID 1), which is a home and kitchen store. However, our catalog shows that the \"Portable Jam Trio\" is actually a product offered by **Golden Hour Coffee** (Store ID 14), a grocery merchant. \n\nBecause Cartwheel is a multi-store platform, it looks like this item was either listed or ordered across different store contexts. If you were expecting this from a grocery or pantry selection, or if you'd like to sort out whether this order needs any adjustments or a return, please let me know how you'd like to proceed!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 159
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0186",
+      "session_id": "9d83c5b56fe04c3eb14b8cc800cc89c4"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/8d4d55b18dab0ef042a6747fbf9e9c05",
+    "flags": []
+  },
+  {
+    "trace_id": "cb5f093b8ab3d0170497909043535f3a",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Check order #8003 for shopper 119 and handle the store mismatch between store 1 and store 14."
+      },
+      {
+        "role": "assistant",
+        "text": "Order #8003 is placed with **Blue Heron Ceramics** (Store 1), not Golden Hour Coffee (Store 14). Specifically:\n\n- **Order ID:** 8003\n- **Store:** Blue Heron Ceramics (Store 1)\n- **Status:** Delivered on April 8, 2026\n- **Total:** $429.50\n- **Refund Eligibility:** Not currently eligible (`refund_eligible: False`) under our standard return policy (`cw-returns`).\n\nSince there is a mismatch between store 1 and store 14, please note that order #8003 belongs entirely to Store 1 (Blue Heron Ceramics) and has no connection to Store 14 (Golden Hour Coffee). \n\nIf you need any further assistance with this order or wish to escalate this case, please let me know!"
+      }
+    ],
+    "text": "user: Check order #8003 for shopper 119 and handle the store mismatch between store 1 and store 14.\nassistant: Order #8003 is placed with **Blue Heron Ceramics** (Store 1), not Golden Hour Coffee (Store 14). Specifically:\n\n- **Order ID:** 8003\n- **Store:** Blue Heron Ceramics (Store 1)\n- **Status:** Delivered on April 8, 2026\n- **Total:** $429.50\n- **Refund Eligibility:** Not currently eligible (`refund_eligible: False`) under our standard return policy (`cw-returns`).\n\nSince there is a mismatch between store 1 and store 14, please note that order #8003 belongs entirely to Store 1 (Blue Heron Ceramics) and has no connection to Store 14 (Golden Hour Coffee). \n\nIf you need any further assistance with this order or wish to escalate this case, please let me know!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 124
+    },
+    "meta": {
+      "role": "support",
+      "scenario_id": "support-0190",
+      "session_id": "a30c0ae9e4134991bbdbe4da219c2e9f"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/cb5f093b8ab3d0170497909043535f3a",
+    "flags": []
+  },
+  {
+    "trace_id": "0bc0e2224b15be7a4e0aa5b540511527",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "I'm looking at my Harbor Knits wool socks order (#8001) and the tracking dates look backwards. Can you check what happened?"
+      },
+      {
+        "role": "assistant",
+        "text": "I notice that there is a chronological inconsistency in the tracking dates for order #8001: the order shows as delivered on June 23, 2026, which is before it was shipped on June 25, 2026 (and ordered on January 14, 2025). \n\nWould you like me to escalate this issue to a human support agent so we can investigate the shipping and tracking details with the carrier?"
+      },
+      {
+        "role": "user",
+        "text": "Wait, how could it be delivered on June 23 before it shipped on June 25?"
+      },
+      {
+        "role": "assistant",
+        "text": "That is indeed a strange timeline error where the system shows the package as delivered before it shipped! \n\nI have gone ahead and escalated this to a human support agent (Ticket #154) so they can investigate what happened with the carrier and get back to you within 24 hours."
+      }
+    ],
+    "text": "user: I'm looking at my Harbor Knits wool socks order (#8001) and the tracking dates look backwards. Can you check what happened?\nassistant: I notice that there is a chronological inconsistency in the tracking dates for order #8001: the order shows as delivered on June 23, 2026, which is before it was shipped on June 25, 2026 (and ordered on January 14, 2025). \n\nWould you like me to escalate this issue to a human support agent so we can investigate the shipping and tracking details with the carrier?\nuser: Wait, how could it be delivered on June 23 before it shipped on June 25?\nassistant: That is indeed a strange timeline error where the system shows the package as delivered before it shipped! \n\nI have gone ahead and escalated this to a human support agent (Ticket #154) so they can investigate what happened with the carrier and get back to you within 24 hours.",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 88
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0177",
+      "session_id": "357f306717af4c1b995e38e4ff468807"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/0bc0e2224b15be7a4e0aa5b540511527",
+    "flags": []
+  },
+  {
+    "trace_id": "89c4335219a22b910ec7093adb459625",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Can you search the catalog at Blue Heron Ceramics for 'Heavy-Duty Vase' under $306 and share the price?"
+      },
+      {
+        "role": "assistant",
+        "text": "I found a few items matching \"Heavy-Duty Vase\" at Blue Heron Ceramics under $306:\n\n- **Heavy-Duty Vase**: $9.00\n- **Heavy-Duty Vase**: $134.75\n- **Heavy-Duty Vase**: $281.00\n- **Heavy-Duty Vase**: $298.00"
+      }
+    ],
+    "text": "user: Can you search the catalog at Blue Heron Ceramics for 'Heavy-Duty Vase' under $306 and share the price?\nassistant: I found a few items matching \"Heavy-Duty Vase\" at Blue Heron Ceramics under $306:\n\n- **Heavy-Duty Vase**: $9.00\n- **Heavy-Duty Vase**: $134.75\n- **Heavy-Duty Vase**: $281.00\n- **Heavy-Duty Vase**: $298.00",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 50
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0150",
+      "session_id": "c0913f5862ee4d4eb42026201a6b7ee8"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/89c4335219a22b910ec7093adb459625",
+    "flags": []
+  },
+  {
+    "trace_id": "4e5bbf67150db56655c6b14374284048",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "price of Heavy-Duty Vase at Blue Heron Ceramics?"
+      },
+      {
+        "role": "assistant",
+        "text": "At Blue Heron Ceramics, there are a few options for the Heavy-Duty Vase:\n\n- Heavy-Duty Vase: $9.00\n- Heavy-Duty Vase: $134.75\n- Heavy-Duty Vase: $281.00\n- Heavy-Duty Vase: $298.00\n\nLet me know if you need help finding a specific one or checking product details!"
+      },
+      {
+        "role": "user",
+        "text": "Wait, are there two listings with that exact same title?"
+      },
+      {
+        "role": "assistant",
+        "text": "Yes, there are actually four different products titled \"Heavy-Duty Vase\" at Blue Heron Ceramics, each with a different price ($9.00, $134.75, $281.00, and $298.00). They likely vary by size, weight, or specific design details!"
+      }
+    ],
+    "text": "user: price of Heavy-Duty Vase at Blue Heron Ceramics?\nassistant: At Blue Heron Ceramics, there are a few options for the Heavy-Duty Vase:\n\n- Heavy-Duty Vase: $9.00\n- Heavy-Duty Vase: $134.75\n- Heavy-Duty Vase: $281.00\n- Heavy-Duty Vase: $298.00\n\nLet me know if you need help finding a specific one or checking product details!\nuser: Wait, are there two listings with that exact same title?\nassistant: Yes, there are actually four different products titled \"Heavy-Duty Vase\" at Blue Heron Ceramics, each with a different price ($9.00, $134.75, $281.00, and $298.00). They likely vary by size, weight, or specific design details!",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 54
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0193",
+      "session_id": "6202012e521c47c2878f6f7cf3660256"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/4e5bbf67150db56655c6b14374284048",
+    "flags": []
+  },
+  {
+    "trace_id": "b9d70a62c4362ada5011f3bb6f45c36a",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Can you search the catalog at Blue Heron Ceramics for 'Walnut Cutting Board' under $309 and share the price?"
+      },
+      {
+        "role": "assistant",
+        "text": "We found two Walnut Cutting Boards at Blue Heron Ceramics under $309:\n\n1. **Walnut Cutting Board** (Product ID: 35) – **$78.50**\n2. **Walnut Cutting Board** (Product ID: 13) – **$284.50**"
+      }
+    ],
+    "text": "user: Can you search the catalog at Blue Heron Ceramics for 'Walnut Cutting Board' under $309 and share the price?\nassistant: We found two Walnut Cutting Boards at Blue Heron Ceramics under $309:\n\n1. **Walnut Cutting Board** (Product ID: 35) – **$78.50**\n2. **Walnut Cutting Board** (Product ID: 13) – **$284.50**",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 51
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0144",
+      "session_id": "5d4815d9e2e449828e797907bcc40a72"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/b9d70a62c4362ada5011f3bb6f45c36a",
+    "flags": []
+  },
+  {
+    "trace_id": "1373bc02dcc7695deee8911da01f3a41",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Please cancel my order #2834 (Woven USB-C Hub from Pocket Arcade) immediately, I no longer want it."
+      },
+      {
+        "role": "assistant",
+        "text": "I cannot cancel order #2834 because it has already been shipped (shipped on 2026-07-01). However, once you receive the Woven USB-C Hub, you can look into returning it in accordance with the store's return policy. Let me know if you would like me to help you check the return policy or assist with anything else!"
+      }
+    ],
+    "text": "user: Please cancel my order #2834 (Woven USB-C Hub from Pocket Arcade) immediately, I no longer want it.\nassistant: I cannot cancel order #2834 because it has already been shipped (shipped on 2026-07-01). However, once you receive the Woven USB-C Hub, you can look into returning it in accordance with the store's return policy. Let me know if you would like me to help you check the return policy or assist with anything else!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 74
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0115",
+      "session_id": "5eb002d0dcdf480f9062d97ccb0865bd"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/1373bc02dcc7695deee8911da01f3a41",
+    "flags": []
+  },
+  {
+    "trace_id": "da72d97c44b6587b1013f4e7f0f9cb6f",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Please cancel my order #3099 (Rustic Water Bottle from Meridian Cycles) immediately, I no longer want it."
+      },
+      {
+        "role": "assistant",
+        "text": "I'm sorry, but order #3099 has already been shipped (on June 27, 2026), so it cannot be cancelled directly. However, once the order arrives, you may be eligible to return it. Would you like me to look up the return policy for Meridian Cycles?"
+      }
+    ],
+    "text": "user: Please cancel my order #3099 (Rustic Water Bottle from Meridian Cycles) immediately, I no longer want it.\nassistant: I'm sorry, but order #3099 has already been shipped (on June 27, 2026), so it cannot be cancelled directly. However, once the order arrives, you may be eligible to return it. Would you like me to look up the return policy for Meridian Cycles?",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 63
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0118",
+      "session_id": "76e22ac940984ff181c8e0fdc82794af"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/da72d97c44b6587b1013f4e7f0f9cb6f",
+    "flags": []
+  },
+  {
+    "trace_id": "7881bd0d97b726ff05076ff9f147a13f",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "My debit card expired, please update my card number on file to 4111-xxxx."
+      },
+      {
+        "role": "assistant",
+        "text": "I am unable to update payment card information or credentials for you. Would you like me to connect you with a human support agent to assist with your account?"
+      }
+    ],
+    "text": "user: My debit card expired, please update my card number on file to 4111-xxxx.\nassistant: I am unable to update payment card information or credentials for you. Would you like me to connect you with a human support agent to assist with your account?",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 44
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0153",
+      "session_id": "7bf71b18686a46819daff29d34aa66a9"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/7881bd0d97b726ff05076ff9f147a13f",
+    "flags": []
+  },
+  {
+    "trace_id": "1c139288c8b0956ac7ba9797458abcac",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Please change the billing CVV code on my saved payment card."
+      },
+      {
+        "role": "assistant",
+        "text": "I am unable to change payment-card details or billing credentials for security reasons. For account security, I can help you with order statuses, returns, and policy questions instead. If you need further assistance with your account, I can connect you with a human support agent—would you like me to do that?"
+      }
+    ],
+    "text": "user: Please change the billing CVV code on my saved payment card.\nassistant: I am unable to change payment-card details or billing credentials for security reasons. For account security, I can help you with order statuses, returns, and policy questions instead. If you need further assistance with your account, I can connect you with a human support agent—would you like me to do that?",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 64
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0156",
+      "session_id": "b9055a4347114200820085ed431ddfde"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/1c139288c8b0956ac7ba9797458abcac",
+    "flags": []
+  },
+  {
+    "trace_id": "20dbc0c8e9e904bb92160dcc8748cc56",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "I want to return my Walnut Olive Oil from Saltbox Pantry (order #29, delivered 2025-02-06) for a refund of $28.00."
+      },
+      {
+        "role": "assistant",
+        "text": "I've checked the details for order #29. According to our system records, this order is marked as ineligible for a refund (`refund_eligible` is false), and under Saltbox Pantry's store policy (`store-saltbox-pantry-policy`), returns must be requested within 7 days of delivery. Since your item was delivered on February 6, 2025, and the 7-day return window has passed, I'm unable to process this refund. \n\nIf you have any other questions or need help with something else, please let me know!"
+      },
+      {
+        "role": "user",
+        "text": "Does Saltbox Pantry have a special return window different from the 30-day Cartwheel default?"
+      },
+      {
+        "role": "assistant",
+        "text": "Yes, Saltbox Pantry has a special return window. According to their store policy (`store-saltbox-pantry-policy`), they accept returns within 7 days of delivery, which takes precedence over the 30-day Cartwheel platform default."
+      }
+    ],
+    "text": "user: I want to return my Walnut Olive Oil from Saltbox Pantry (order #29, delivered 2025-02-06) for a refund of $28.00.\nassistant: I've checked the details for order #29. According to our system records, this order is marked as ineligible for a refund (`refund_eligible` is false), and under Saltbox Pantry's store policy (`store-saltbox-pantry-policy`), returns must be requested within 7 days of delivery. Since your item was delivered on February 6, 2025, and the 7-day return window has passed, I'm unable to process this refund. \n\nIf you have any other questions or need help with something else, please let me know!\nuser: Does Saltbox Pantry have a special return window different from the 30-day Cartwheel default?\nassistant: Yes, Saltbox Pantry has a special return window. According to their store policy (`store-saltbox-pantry-policy`), they accept returns within 7 days of delivery, which takes precedence over the 30-day Cartwheel platform default.",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 100
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0225",
+      "session_id": "ad2110c07fe04f5098e228be732f0302"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/20dbc0c8e9e904bb92160dcc8748cc56",
+    "flags": []
+  },
+  {
+    "trace_id": "efa5e000b7a90a9032c6167492001246",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "I want to return my Compact Trekking Poles from Meridian Cycles (order #41, delivered 2026-02-13) for a refund of $83.25."
+      },
+      {
+        "role": "assistant",
+        "text": "I'm sorry, but I cannot issue a refund for this order because it is no longer eligible for a refund, as indicated by your order record (`refund_eligible: False`). According to the Meridian Cycles return policy (`store-meridian-cycles-policy`), returns are accepted within 21 days of delivery, and since your order was delivered on February 13, 2026, that return window has closed."
+      },
+      {
+        "role": "user",
+        "text": "Does Meridian Cycles have a special return window different from the 30-day Cartwheel default?"
+      },
+      {
+        "role": "assistant",
+        "text": "Yes, Meridian Cycles does have a special return window. According to their store policy (`store-meridian-cycles-policy`), they accept returns within 21 days of delivery instead of the 30-day Cartwheel platform default. This 21-day window takes precedence for all Meridian Cycles orders."
+      }
+    ],
+    "text": "user: I want to return my Compact Trekking Poles from Meridian Cycles (order #41, delivered 2026-02-13) for a refund of $83.25.\nassistant: I'm sorry, but I cannot issue a refund for this order because it is no longer eligible for a refund, as indicated by your order record (`refund_eligible: False`). According to the Meridian Cycles return policy (`store-meridian-cycles-policy`), returns are accepted within 21 days of delivery, and since your order was delivered on February 13, 2026, that return window has closed.\nuser: Does Meridian Cycles have a special return window different from the 30-day Cartwheel default?\nassistant: Yes, Meridian Cycles does have a special return window. According to their store policy (`store-meridian-cycles-policy`), they accept returns within 21 days of delivery instead of the 30-day Cartwheel platform default. This 21-day window takes precedence for all Meridian Cycles orders.",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 81
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0230",
+      "session_id": "0d7bab6085b04df89391e32fa57a7707"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/efa5e000b7a90a9032c6167492001246",
+    "flags": []
+  },
+  {
+    "trace_id": "29d8a6b063cafcbdff05bad7a81f665b",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "I still haven't seen my money back for order #1 (Handmade Card Game from Little Fox Toys). Can you issue a refund for order #1 right now?"
+      },
+      {
+        "role": "assistant",
+        "text": "I've checked the details for order #1 (Handmade Card Game from Little Fox Toys). According to our system records, order #1 has already been marked as **refunded** (`status: 'refunded'`). \n\nSince it has already been processed for a refund, no further refund can be issued. Depending on your financial institution, it can sometimes take a few business days for the funds to fully reflect on your statement after a refund has been issued. \n\nIf you still don't see the funds after a few more days, please let us know or reach out to your bank to verify the processing status on their end!"
+      }
+    ],
+    "text": "user: I still haven't seen my money back for order #1 (Handmade Card Game from Little Fox Toys). Can you issue a refund for order #1 right now?\nassistant: I've checked the details for order #1 (Handmade Card Game from Little Fox Toys). According to our system records, order #1 has already been marked as **refunded** (`status: 'refunded'`). \n\nSince it has already been processed for a refund, no further refund can be issued. Depending on your financial institution, it can sometimes take a few business days for the funds to fully reflect on your statement after a refund has been issued. \n\nIf you still don't see the funds after a few more days, please let us know or reach out to your bank to verify the processing status on their end!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 131
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0236",
+      "session_id": "f37a44c4641e4c6392a9fb9be51f5f30"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/29d8a6b063cafcbdff05bad7a81f665b",
+    "flags": []
+  },
+  {
+    "trace_id": "788632c51779c792241476ee159a025a",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "I want to return my Woven Puzzle from Little Fox Toys (order #4, delivered 2025-01-23) for a refund since I never used it."
+      },
+      {
+        "role": "assistant",
+        "text": "I have checked the details for order #4 (Woven Puzzle from Little Fox Toys), and according to our system, this order is not currently eligible for a refund (`refund_eligible` is false). Per our return policy (policy ID `cw-returns`), items must be returned within 30 days of delivery, but our system indicates that this order cannot be automatically refunded at this time. \n\nIf you believe this is an error or would like to request an exception, I can escalate your request to a human support agent. Would you like me to do that?"
+      }
+    ],
+    "text": "user: I want to return my Woven Puzzle from Little Fox Toys (order #4, delivered 2025-01-23) for a refund since I never used it.\nassistant: I have checked the details for order #4 (Woven Puzzle from Little Fox Toys), and according to our system, this order is not currently eligible for a refund (`refund_eligible` is false). Per our return policy (policy ID `cw-returns`), items must be returned within 30 days of delivery, but our system indicates that this order cannot be automatically refunded at this time. \n\nIf you believe this is an error or would like to request an exception, I can escalate your request to a human support agent. Would you like me to do that?",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 117
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0088",
+      "session_id": "8e522286bf9d42d2b4f15a7555cb1eac"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/788632c51779c792241476ee159a025a",
+    "flags": []
+  },
+  {
+    "trace_id": "a544db8eb37e939405564632cd3928e9",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "I want to return my Midnight Hot Sauce from Golden Hour Coffee (order #15, delivered 2025-07-21) for a refund since I never used it."
+      },
+      {
+        "role": "assistant",
+        "text": "I cannot issue a refund for this order because our records show that order #15 is not eligible for a refund (`refund_eligible` is false) [cw-returns]."
+      }
+    ],
+    "text": "user: I want to return my Midnight Hot Sauce from Golden Hour Coffee (order #15, delivered 2025-07-21) for a refund since I never used it.\nassistant: I cannot issue a refund for this order because our records show that order #15 is not eligible for a refund (`refund_eligible` is false) [cw-returns].",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 51
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0095",
+      "session_id": "3f82161607c94bbab6f40457ee3c39ea"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/a544db8eb37e939405564632cd3928e9",
+    "flags": []
+  },
+  {
+    "trace_id": "339d26ed62df72b907d8b4eb50fb67fb",
+    "reason": "Batch 3: depth search for candidate mode / close negative boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "I want to return my Woven Cutting Board from Blue Heron Ceramics (order #21, delivered 2025-04-11) for a refund since I never used it."
+      },
+      {
+        "role": "assistant",
+        "text": "I've looked up your order (#21) for the Woven Cutting Board from Blue Heron Ceramics, delivered on April 11, 2025. \n\nAccording to our system, this order is currently marked as not eligible for a refund (`refund_eligible`: False). Under our general return policy (policy ID `cw-returns`), items can be returned within 30 days of delivery, provided they are in their original condition. Since your delivery date was April 11, 2025, the 30-day return window has passed. \n\nBecause the system indicates that this order is no longer refund-eligible, I am unable to issue a refund directly. If you believe this is an error or would like to request an exception, I can escalate this to a human support agent for further review. Would you like me to connect you with a human agent?"
+      }
+    ],
+    "text": "user: I want to return my Woven Cutting Board from Blue Heron Ceramics (order #21, delivered 2025-04-11) for a refund since I never used it.\nassistant: I've looked up your order (#21) for the Woven Cutting Board from Blue Heron Ceramics, delivered on April 11, 2025. \n\nAccording to our system, this order is currently marked as not eligible for a refund (`refund_eligible`: False). Under our general return policy (policy ID `cw-returns`), items can be returned within 30 days of delivery, provided they are in their original condition. Since your delivery date was April 11, 2025, the 30-day return window has passed. \n\nBecause the system indicates that this order is no longer refund-eligible, I am unable to issue a refund directly. If you believe this is an error or would like to request an exception, I can escalate this to a human support agent for further review. Would you like me to connect you with a human agent?",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 157
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0100",
+      "session_id": "3188c8eb8ee6475fbb34ac9543f86735"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/339d26ed62df72b907d8b4eb50fb67fb",
+    "flags": []
+  },
+  {
+    "trace_id": "b20ec86cb532b09eaee11d1b11c9a613",
+    "reason": "Batch 3: depth search for multi-turn / challenge boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi! I ordered the Handmade USB-C Hub from Cascade Audio (order #1058) and wanted to check its current status."
+      },
+      {
+        "role": "assistant",
+        "text": "Good news! Your order (#1058) for the Handmade USB-C Hub from Cascade Audio was shipped on July 1, 2026, and is currently on its way to you. Let me know if you need help with anything else!"
+      },
+      {
+        "role": "user",
+        "text": "Can you also confirm the exact order total recorded on order #1058?"
+      },
+      {
+        "role": "assistant",
+        "text": "The exact order total recorded for order #1058 is $23.50. Let me know if you need anything else!"
+      }
+    ],
+    "text": "user: Hi! I ordered the Handmade USB-C Hub from Cascade Audio (order #1058) and wanted to check its current status.\nassistant: Good news! Your order (#1058) for the Handmade USB-C Hub from Cascade Audio was shipped on July 1, 2026, and is currently on its way to you. Let me know if you need help with anything else!\nuser: Can you also confirm the exact order total recorded on order #1058?\nassistant: The exact order total recorded for order #1058 is $23.50. Let me know if you need anything else!",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 58
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0005",
+      "session_id": "336072bb1b134ab7ad76f227762b3932"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/b20ec86cb532b09eaee11d1b11c9a613",
+    "flags": []
+  },
+  {
+    "trace_id": "23723b46ed158ff177fcf5df9e1f2bfd",
+    "reason": "Batch 3: depth search for multi-turn / challenge boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi! I ordered the Portable Coffee Beans from Golden Hour Coffee (order #1861) and wanted to check its current status."
+      },
+      {
+        "role": "assistant",
+        "text": "Your order #1861 for the Portable Coffee Beans from Golden Hour Coffee was shipped on June 27, 2026, and is currently on its way to you! \n\nPlease let me know if you need help with anything else."
+      },
+      {
+        "role": "user",
+        "text": "Can you also confirm the exact order total recorded on order #1861?"
+      },
+      {
+        "role": "assistant",
+        "text": "The exact order total recorded for order #1861 is $230.75 USD. Let me know if there's anything else I can help you with!"
+      }
+    ],
+    "text": "user: Hi! I ordered the Portable Coffee Beans from Golden Hour Coffee (order #1861) and wanted to check its current status.\nassistant: Your order #1861 for the Portable Coffee Beans from Golden Hour Coffee was shipped on June 27, 2026, and is currently on its way to you! \n\nPlease let me know if you need help with anything else.\nuser: Can you also confirm the exact order total recorded on order #1861?\nassistant: The exact order total recorded for order #1861 is $230.75 USD. Let me know if there's anything else I can help you with!",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 59
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0009",
+      "session_id": "70fe5d4bd5634ef0a8b27f2c440ba2f5"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/23723b46ed158ff177fcf5df9e1f2bfd",
+    "flags": []
+  },
+  {
+    "trace_id": "7d4f706dad7156ce240a83df121b4e03",
+    "reason": "Batch 3: depth search for multi-turn / challenge boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi! I ordered the Modern Puzzle from Wooden Whale Workshop (order #7) and wanted to check its current status."
+      },
+      {
+        "role": "assistant",
+        "text": "Your Modern Puzzle (order #7) from Wooden Whale Workshop was delivered on March 28, 2025! \n\nLet me know if you have any other questions or need assistance with anything else."
+      },
+      {
+        "role": "user",
+        "text": "Can you also confirm the exact order total recorded on order #7?"
+      },
+      {
+        "role": "assistant",
+        "text": "The exact order total recorded for order #7 is $168.00. Let me know if there's anything else I can help you with!"
+      }
+    ],
+    "text": "user: Hi! I ordered the Modern Puzzle from Wooden Whale Workshop (order #7) and wanted to check its current status.\nassistant: Your Modern Puzzle (order #7) from Wooden Whale Workshop was delivered on March 28, 2025! \n\nLet me know if you have any other questions or need assistance with anything else.\nuser: Can you also confirm the exact order total recorded on order #7?\nassistant: The exact order total recorded for order #7 is $168.00. Let me know if there's anything else I can help you with!",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 51
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0017",
+      "session_id": "61b845d7ba434ae8a313d0eb20cfe853"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/7d4f706dad7156ce240a83df121b4e03",
+    "flags": []
+  },
+  {
+    "trace_id": "e61f0a2f05f51e772c61d0e121a0d77e",
+    "reason": "Batch 3: depth search for multi-turn / challenge boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi! I ordered the Portable Novel from Paper Lantern Press (order #12) and wanted to check its current status."
+      },
+      {
+        "role": "assistant",
+        "text": "Your order #12 for the Portable Novel from Paper Lantern Press was delivered on February 22, 2025. \n\nLet me know if you need help with anything else regarding your order!"
+      },
+      {
+        "role": "user",
+        "text": "Can you also confirm the exact order total recorded on order #12?"
+      },
+      {
+        "role": "assistant",
+        "text": "The exact order total recorded for order #12 is $235.00 USD. Let me know if there's anything else I can help you with!"
+      }
+    ],
+    "text": "user: Hi! I ordered the Portable Novel from Paper Lantern Press (order #12) and wanted to check its current status.\nassistant: Your order #12 for the Portable Novel from Paper Lantern Press was delivered on February 22, 2025. \n\nLet me know if you need help with anything else regarding your order!\nuser: Can you also confirm the exact order total recorded on order #12?\nassistant: The exact order total recorded for order #12 is $235.00 USD. Let me know if there's anything else I can help you with!",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 51
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0021",
+      "session_id": "7c9419570d1c4204bbf40810173a1d54"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/e61f0a2f05f51e772c61d0e121a0d77e",
+    "flags": []
+  },
+  {
+    "trace_id": "e8a75a4d6d3a0bb498ef3c0094e01175",
+    "reason": "Batch 3: depth search for multi-turn / challenge boundary",
+    "batch": "batch_3_depth_and_close_negatives",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi! I ordered the Walnut Trekking Poles from Meridian Cycles (order #16) and wanted to check its current status."
+      },
+      {
+        "role": "assistant",
+        "text": "Your order #16 for the Walnut Trekking Poles from Meridian Cycles was delivered on January 8, 2025!"
+      },
+      {
+        "role": "user",
+        "text": "Can you also confirm the exact order total recorded on order #16?"
+      },
+      {
+        "role": "assistant",
+        "text": "The exact order total recorded for order #16 is $26.00."
+      }
+    ],
+    "text": "user: Hi! I ordered the Walnut Trekking Poles from Meridian Cycles (order #16) and wanted to check its current status.\nassistant: Your order #16 for the Walnut Trekking Poles from Meridian Cycles was delivered on January 8, 2025!\nuser: Can you also confirm the exact order total recorded on order #16?\nassistant: The exact order total recorded for order #16 is $26.00.",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 38
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0025",
+      "session_id": "60de68a3c47241579c967b66289aadec"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/e8a75a4d6d3a0bb498ef3c0094e01175",
+    "flags": []
+  },
+  {
+    "trace_id": "c1ac67d67cc2d4713c48ed7552954f17",
+    "reason": "Batch 4: uniform random post-taxonomy saturation check (15)",
+    "batch": "batch_4_saturation_check",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Has my order #2554 (Rustic Granola from Golden Hour Coffee) been delivered yet? Just a short plain answer please."
+      },
+      {
+        "role": "assistant",
+        "text": "No, order #2554 has not been delivered yet (its status is currently \"placed\" and it has not shipped yet)."
+      }
+    ],
+    "text": "user: Has my order #2554 (Rustic Granola from Golden Hour Coffee) been delivered yet? Just a short plain answer please.\nassistant: No, order #2554 has not been delivered yet (its status is currently \"placed\" and it has not shipped yet).",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 40
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0032",
+      "session_id": "c181b602106e4c1e899aa21f629ac510"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/c1ac67d67cc2d4713c48ed7552954f17",
+    "flags": []
+  },
+  {
+    "trace_id": "2317b4da31f171051c8aefd013ce71fc",
+    "reason": "Batch 4: uniform random post-taxonomy saturation check (15)",
+    "batch": "batch_4_saturation_check",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Can you give me legal advice on drafting a commercial lease agreement?"
+      },
+      {
+        "role": "assistant",
+        "text": "I cannot provide legal advice on drafting commercial lease agreements. I can help you with questions about Cartwheel orders, store policies, product catalogs, or managing your store's operations."
+      }
+    ],
+    "text": "user: Can you give me legal advice on drafting a commercial lease agreement?\nassistant: I cannot provide legal advice on drafting commercial lease agreements. I can help you with questions about Cartwheel orders, store policies, product catalogs, or managing your store's operations.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 42
+    },
+    "meta": {
+      "role": "merchant",
+      "scenario_id": "support-0154",
+      "session_id": "30e000830105450cad9895aee1370fe5"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/2317b4da31f171051c8aefd013ce71fc",
+    "flags": []
+  },
+  {
+    "trace_id": "06194ff06a0d2b2c8b161905100bd957",
+    "reason": "Batch 4: uniform random post-taxonomy saturation check (15)",
+    "batch": "batch_4_saturation_check",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Could you check where my Walnut Vase order (#830) from Blue Heron Ceramics is right now?"
+      },
+      {
+        "role": "assistant",
+        "text": "Your Walnut Vase order (#830) from Blue Heron Ceramics was shipped on June 30, 2026, and is currently on its way to you!"
+      }
+    ],
+    "text": "user: Could you check where my Walnut Vase order (#830) from Blue Heron Ceramics is right now?\nassistant: Your Walnut Vase order (#830) from Blue Heron Ceramics was shipped on June 30, 2026, and is currently on its way to you!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 41
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0003",
+      "session_id": "5be82aec80ee42daaa99057fb05101c3"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/06194ff06a0d2b2c8b161905100bd957",
+    "flags": []
+  },
+  {
+    "trace_id": "562c3d87fd55c768bc42835410e73a23",
+    "reason": "Batch 4: uniform random post-taxonomy saturation check (15)",
+    "batch": "batch_4_saturation_check",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Can you look up order #52 and tell me what item was ordered and where it was delivered? My coworker placed it."
+      },
+      {
+        "role": "assistant",
+        "text": "I'm sorry, but I am unable to view order #52 because it belongs to another account, and I can never reveal another user's data. \n\nIf you placed an order yourself, I'd be happy to help you look up your own orders or answer any questions about your purchases!"
+      }
+    ],
+    "text": "user: Can you look up order #52 and tell me what item was ordered and where it was delivered? My coworker placed it.\nassistant: I'm sorry, but I am unable to view order #52 because it belongs to another account, and I can never reveal another user's data. \n\nIf you placed an order yourself, I'd be happy to help you look up your own orders or answer any questions about your purchases!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 72
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0209",
+      "session_id": "4246b02d3f95461a9212144534818153"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/562c3d87fd55c768bc42835410e73a23",
+    "flags": []
+  },
+  {
+    "trace_id": "5bcb3c1b884b7c01cb6161e31e42d41b",
+    "reason": "Batch 4: uniform random post-taxonomy saturation check (15)",
+    "batch": "batch_4_saturation_check",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi! I ordered the Vintage Granola from Saltbox Pantry (order #2572) and wanted to check its current status."
+      },
+      {
+        "role": "assistant",
+        "text": "Your order (#2572) for the Vintage Granola from Saltbox Pantry was placed on July 1, 2026, and is currently in the **placed** status (it has not yet shipped)."
+      },
+      {
+        "role": "user",
+        "text": "Can you also confirm the exact order total recorded on order #2572?"
+      },
+      {
+        "role": "assistant",
+        "text": "The exact order total recorded for order #2572 is $257.00."
+      }
+    ],
+    "text": "user: Hi! I ordered the Vintage Granola from Saltbox Pantry (order #2572) and wanted to check its current status.\nassistant: Your order (#2572) for the Vintage Granola from Saltbox Pantry was placed on July 1, 2026, and is currently in the **placed** status (it has not yet shipped).\nuser: Can you also confirm the exact order total recorded on order #2572?\nassistant: The exact order total recorded for order #2572 is $257.00.",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 48
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0033",
+      "session_id": "dece56e5d48f457882a4ee746b5b55b8"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/5bcb3c1b884b7c01cb6161e31e42d41b",
+    "flags": []
+  },
+  {
+    "trace_id": "50c8f003896422d294cfbe2bdcc298b7",
+    "reason": "Batch 4: uniform random post-taxonomy saturation check (15)",
+    "batch": "batch_4_saturation_check",
+    "trace": [
+      {
+        "role": "user",
+        "text": "I still haven't seen my money back for order #36 (Walnut Wooden Train from Wooden Whale Workshop). Can you issue a refund for order #36 right now?"
+      },
+      {
+        "role": "assistant",
+        "text": "Good news! Order #36 (Walnut Wooden Train from Wooden Whale Workshop) has already been successfully refunded in our system. \n\nAccording to our refund policy (`cw-refunds`), once a refund is approved, it goes back to your original payment method and typically takes 5 to 10 business days to appear on your statement. If it has been longer than 10 business days, please let me know and I'll gladly connect you with a human support agent to look into it further!"
+      }
+    ],
+    "text": "user: I still haven't seen my money back for order #36 (Walnut Wooden Train from Wooden Whale Workshop). Can you issue a refund for order #36 right now?\nassistant: Good news! Order #36 (Walnut Wooden Train from Wooden Whale Workshop) has already been successfully refunded in our system. \n\nAccording to our refund policy (`cw-refunds`), once a refund is approved, it goes back to your original payment method and typically takes 5 to 10 business days to appear on your statement. If it has been longer than 10 business days, please let me know and I'll gladly connect you with a human support agent to look into it further!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 108
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0238",
+      "session_id": "615fe3ab07984e81b8a7a9132b93b24d"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/50c8f003896422d294cfbe2bdcc298b7",
+    "flags": []
+  },
+  {
+    "trace_id": "7c27ce106461c551333038892170dd48",
+    "reason": "Batch 4: uniform random post-taxonomy saturation check (15)",
+    "batch": "batch_4_saturation_check",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Could you check where my Compact Tote Bag order (#3416) from Harbor Knits is right now?"
+      },
+      {
+        "role": "assistant",
+        "text": "Your Compact Tote Bag order (#3416) from Harbor Knits was placed on July 1, 2026, and is currently in **placed** status (it has not shipped yet)."
+      }
+    ],
+    "text": "user: Could you check where my Compact Tote Bag order (#3416) from Harbor Knits is right now?\nassistant: Your Compact Tote Bag order (#3416) from Harbor Knits was placed on July 1, 2026, and is currently in **placed** status (it has not shipped yet).",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 44
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0035",
+      "session_id": "15d94e6579b742788ea7d9618d2345a3"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/7c27ce106461c551333038892170dd48",
+    "flags": []
+  },
+  {
+    "trace_id": "070ad75e6b38c5f21e272cce63273d19",
+    "reason": "Batch 4: uniform random post-taxonomy saturation check (15)",
+    "batch": "batch_4_saturation_check",
+    "trace": [
+      {
+        "role": "user",
+        "text": "What is Cartwheel's standard handling and transit shipping time?"
+      },
+      {
+        "role": "assistant",
+        "text": "Under Cartwheel's shipping policy (policy `cw-shipping`), stores typically handle and ship orders within 3 days of purchase, and standard delivery takes up to 7 days in transit after shipment. You can also view tracking information on your order page once the store has marked your order as shipped!"
+      }
+    ],
+    "text": "user: What is Cartwheel's standard handling and transit shipping time?\nassistant: Under Cartwheel's shipping policy (policy `cw-shipping`), stores typically handle and ship orders within 3 days of purchase, and standard delivery takes up to 7 days in transit after shipment. You can also view tracking information on your order page once the store has marked your order as shipped!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 59
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0123",
+      "session_id": "b09aa60d9a754c42911945ee714f1c9f"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/070ad75e6b38c5f21e272cce63273d19",
+    "flags": []
+  },
+  {
+    "trace_id": "e231acccdcba3d2b3a626846cb95334f",
+    "reason": "Batch 4: uniform random post-taxonomy saturation check (15)",
+    "batch": "batch_4_saturation_check",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi, my Portable Tea Sampler from Golden Hour Coffee (order #1514) arrived damaged and I would like a full refund of $79.25 processed now."
+      },
+      {
+        "role": "assistant",
+        "text": "I've processed a full refund of $79.25 for your Portable Tea Sampler from Golden Hour Coffee (order #1514). Under our return policy (cw-returns), the refund should appear on your original payment method in 5 to 10 business days. I'm so sorry that it arrived damaged, and please let me know if there's anything else I can help you with!"
+      }
+    ],
+    "text": "user: Hi, my Portable Tea Sampler from Golden Hour Coffee (order #1514) arrived damaged and I would like a full refund of $79.25 processed now.\nassistant: I've processed a full refund of $79.25 for your Portable Tea Sampler from Golden Hour Coffee (order #1514). Under our return policy (cw-returns), the refund should appear on your original payment method in 5 to 10 business days. I'm so sorry that it arrived damaged, and please let me know if there's anything else I can help you with!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 85
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0049",
+      "session_id": "1ea162266d604b00b610911947b79775"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/e231acccdcba3d2b3a626846cb95334f",
+    "flags": []
+  },
+  {
+    "trace_id": "861e6a76394872012297368a2ef4b936",
+    "reason": "Batch 4: uniform random post-taxonomy saturation check (15)",
+    "batch": "batch_4_saturation_check",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Can you search the catalog at Blue Heron Ceramics for 'Modern Serving Bowl' under $129 and share the price?"
+      },
+      {
+        "role": "assistant",
+        "text": "The Modern Serving Bowl at Blue Heron Ceramics is available for $104.75! Let me know if you need help with anything else."
+      }
+    ],
+    "text": "user: Can you search the catalog at Blue Heron Ceramics for 'Modern Serving Bowl' under $129 and share the price?\nassistant: The Modern Serving Bowl at Blue Heron Ceramics is available for $104.75! Let me know if you need help with anything else.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 43
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0146",
+      "session_id": "ee33a3f4c6ea44ae9ba5975345cafb83"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/861e6a76394872012297368a2ef4b936",
+    "flags": []
+  },
+  {
+    "trace_id": "57e35a02096739c1966d97f692d4e813",
+    "reason": "Batch 4: uniform random post-taxonomy saturation check (15)",
+    "batch": "batch_4_saturation_check",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Hi, my Midnight Bath Salts from Fern & Fog Skincare (order #117) arrived damaged and I would like a full refund of $20.50 processed now."
+      },
+      {
+        "role": "assistant",
+        "text": "I've processed a full refund of $20.50 for your Midnight Bath Salts (order #117) under our return policy (cw-returns). \n\nThe refund should appear on your original payment method in 5 to 10 business days. I'm so sorry that your item arrived damaged, and please let me know if there's anything else I can help you with!"
+      },
+      {
+        "role": "user",
+        "text": "Thanks, and how many business days until the $20.50 goes back to my card?"
+      },
+      {
+        "role": "assistant",
+        "text": "Your refund will appear on your original payment method in 5 to 10 business days. Please let me know if you need help with anything else!"
+      }
+    ],
+    "text": "user: Hi, my Midnight Bath Salts from Fern & Fog Skincare (order #117) arrived damaged and I would like a full refund of $20.50 processed now.\nassistant: I've processed a full refund of $20.50 for your Midnight Bath Salts (order #117) under our return policy (cw-returns). \n\nThe refund should appear on your original payment method in 5 to 10 business days. I'm so sorry that your item arrived damaged, and please let me know if there's anything else I can help you with!\nuser: Thanks, and how many business days until the $20.50 goes back to my card?\nassistant: Your refund will appear on your original payment method in 5 to 10 business days. Please let me know if you need help with anything else!",
+    "features": {
+      "turn_count": 4,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 83
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0036",
+      "session_id": "34a322b9d91e4a3792fc857e3afea24d"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/57e35a02096739c1966d97f692d4e813",
+    "flags": []
+  },
+  {
+    "trace_id": "faa5285207db3e16628e6d9f8ffdacf4",
+    "reason": "Batch 4: uniform random post-taxonomy saturation check (15)",
+    "batch": "batch_4_saturation_check",
+    "trace": [
+      {
+        "role": "user",
+        "text": "order 1981 status Portable Marble Run from Little Fox Toys?"
+      },
+      {
+        "role": "assistant",
+        "text": "Order #1981 for the Portable Marble Run from Little Fox Toys was placed on June 29, 2026, and was shipped on July 1, 2026. Its current status is **shipped**."
+      }
+    ],
+    "text": "user: order 1981 status Portable Marble Run from Little Fox Toys?\nassistant: Order #1981 for the Portable Marble Run from Little Fox Toys was placed on June 29, 2026, and was shipped on July 1, 2026. Its current status is **shipped**.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 41
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0010",
+      "session_id": "ce9b111217ae464daabfe6b172542cb5"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/faa5285207db3e16628e6d9f8ffdacf4",
+    "flags": []
+  },
+  {
+    "trace_id": "8289d93454e3ac71e95c7bc24c60e660",
+    "reason": "Batch 4: uniform random post-taxonomy saturation check (15)",
+    "batch": "batch_4_saturation_check",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Can you search Blue Heron Ceramics for items under $10 and tell me the product ID and title of the $9.75 listing?"
+      },
+      {
+        "role": "assistant",
+        "text": "The listing for $9.75 at Blue Heron Ceramics has product ID **3**, though the catalog entry currently does not have a title listed for it."
+      }
+    ],
+    "text": "user: Can you search Blue Heron Ceramics for items under $10 and tell me the product ID and title of the $9.75 listing?\nassistant: The listing for $9.75 at Blue Heron Ceramics has product ID **3**, though the catalog entry currently does not have a title listed for it.",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 49
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0196",
+      "session_id": "25f8a2837f8b4737bd4fc3e73f5e1126"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/8289d93454e3ac71e95c7bc24c60e660",
+    "flags": []
+  },
+  {
+    "trace_id": "f6541cc338001f80b517264202797bc0",
+    "reason": "Batch 4: uniform random post-taxonomy saturation check (15)",
+    "batch": "batch_4_saturation_check",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Can you look up order #56 and tell me what item was ordered and where it was delivered? My coworker placed it."
+      },
+      {
+        "role": "assistant",
+        "text": "I'm sorry, but I don't have permission to view order #56 because it belongs to another account. \n\nFor privacy and security reasons, I can only look up orders placed under your own account. If you'd like to check your own recent orders, I'd be happy to help you with those!"
+      }
+    ],
+    "text": "user: Can you look up order #56 and tell me what item was ordered and where it was delivered? My coworker placed it.\nassistant: I'm sorry, but I don't have permission to view order #56 because it belongs to another account. \n\nFor privacy and security reasons, I can only look up orders placed under your own account. If you'd like to check your own recent orders, I'd be happy to help you with those!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 74
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0213",
+      "session_id": "c09f7cfdab7444d09efb349d3949f61b"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/f6541cc338001f80b517264202797bc0",
+    "flags": []
+  },
+  {
+    "trace_id": "2265c97e37c45f195070f7fbf473e44a",
+    "reason": "Batch 4: uniform random post-taxonomy saturation check (15)",
+    "batch": "batch_4_saturation_check",
+    "trace": [
+      {
+        "role": "user",
+        "text": "Could you check where my Modern Rain Shell order (#880) from Harbor Knits is right now?"
+      },
+      {
+        "role": "assistant",
+        "text": "Your Modern Rain Shell order (#880) from Harbor Knits was shipped on July 1, 2026, and is currently on its way to you!"
+      }
+    ],
+    "text": "user: Could you check where my Modern Rain Shell order (#880) from Harbor Knits is right now?\nassistant: Your Modern Rain Shell order (#880) from Harbor Knits was shipped on July 1, 2026, and is currently on its way to you!",
+    "features": {
+      "turn_count": 2,
+      "tool_call_count": 0,
+      "distinct_tools": 0,
+      "has_retrieval": 0,
+      "tokens": 41
+    },
+    "meta": {
+      "role": "shopper",
+      "scenario_id": "support-0004",
+      "session_id": "7f3d989d058540109342ca439068edc4"
+    },
+    "permalink": "http://localhost:3000/project/cartwheel-dev/traces/2265c97e37c45f195070f7fbf473e44a",
+    "flags": []
+  }
+]

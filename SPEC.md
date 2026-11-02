@@ -109,3 +109,4 @@ Requirements that do not fit in the sections above, including tone and style gui
 - **RESP-3.** State when required information is missing or inconsistent, rather than inventing a value.
 - **RESP-4.** Explain refusals and escalations without revealing inaccessible order or user information.
 - **RESP-5.** Use direct and respectful language that explains the relevant decision.
+- **RESP-6.** Translate internal tool fields into plain user-facing language; do not expose raw database column names, boolean flags (such as `refund_eligible`), or internal pre-tool planning narration at the start of customer replies.

@@ -1,1 +1,267 @@
-{"modes": []}
+{
+  "modes": [
+    {
+      "name": "stalled_or_unexecuted_turn",
+      "status": "confirmed",
+      "definition": "Fail (1) when any assistant turn stops at pre-response process narration (e.g. 'I am about to check order #13...') without delivering the requested findings/decision, or states it is executing an escalation/write action when the corresponding tool did not run in the session. Pass (0) when every turn completes its answer and any claimed tool action was actually executed.",
+      "requirement_source": "RESP-2, PURPOSE-1",
+      "evaluator_type": "judge",
+      "boundary": "Close negative (Pass = 0): A reply that opens with a brief preamble sentence AND delivers the complete factual answer in the same turn (which is scored under raw_schema_or_planning_leak, not stalled_or_unexecuted_turn), or a reply that accurately reports an issue_refund result of queued_for_approval.",
+      "example_trace_ids": [
+        "a1439ac1fe82a33d425ddfe5e139dd76",
+        "b6f7d49e806eb8eec7034ffbd8685e38",
+        "817a68093c383c2d3fa4d5ae6979c337",
+        "2475d2f91dced31a963b694c66c6a288",
+        "f461c18683015fb3b5476651150596fe"
+      ],
+      "close_negative_trace_ids": [
+        "252be7be7185c4583d9e5b98c9211a89",
+        "f18a2b8e4f75e888d1ca57955b0a7be1",
+        "6e48ded40be49d67e995a489dafd5d52",
+        "b6b3727848ed78e080ff9fd41dbddb65"
+      ],
+      "created_from": [
+        "a1439ac1fe82a33d425ddfe5e139dd76",
+        "b6f7d49e806eb8eec7034ffbd8685e38",
+        "817a68093c383c2d3fa4d5ae6979c337",
+        "2475d2f91dced31a963b694c66c6a288",
+        "f461c18683015fb3b5476651150596fe"
+      ],
+      "created_from_annotation_ids": [
+        "ann-018",
+        "ann-061",
+        "ann-062",
+        "ann-063",
+        "ann-064"
+      ],
+      "evaluation_case_candidates": [
+        "support-0093",
+        "support-0094",
+        "support-0098"
+      ],
+      "sample_count": 6,
+      "sample_size": 105,
+      "sample_fraction": 0.0571
+    },
+    {
+      "name": "missing_policy_citation",
+      "status": "confirmed",
+      "definition": "Fail (1) when an assistant turn states a Cartwheel platform or store policy rule governing return windows, refund eligibility, cancellation cutoffs, or thresholds without citing the policy_id slug (such as cw-returns, cw-cancellations, or store-<slug>-policy). Pass (0) when no policy claim is made or every policy claim cites its retrieved policy_id.",
+      "requirement_source": "RESP-1",
+      "evaluator_type": "code",
+      "boundary": "Close negative (Pass = 0): Pure order-status or product-price lookups that report database facts without asserting policy rules (e.g. support-0001), or refund denials that explicitly cite store-juniper-home-goods-policy / cw-returns (e.g. support-0221). Separated from ungrounded attribute invention (RESP-3) because missing_policy_citation covers true policy rules stated without a policy_id slug.",
+      "example_trace_ids": [
+        "1373bc02dcc7695deee8911da01f3a41",
+        "da72d97c44b6587b1013f4e7f0f9cb6f",
+        "29d8a6b063cafcbdff05bad7a81f665b"
+      ],
+      "close_negative_trace_ids": [
+        "f142f91d40493be26f69fcc73326bd4e",
+        "252be7be7185c4583d9e5b98c9211a89",
+        "0e26996fc68c4a78091d5d460b7deb71",
+        "c97b05de6ea8fad44ad928d9df3edc21"
+      ],
+      "created_from": [
+        "1373bc02dcc7695deee8911da01f3a41",
+        "da72d97c44b6587b1013f4e7f0f9cb6f",
+        "29d8a6b063cafcbdff05bad7a81f665b"
+      ],
+      "created_from_annotation_ids": [
+        "ann-076",
+        "ann-077",
+        "ann-082"
+      ],
+      "evaluation_case_candidates": [
+        "support-0115",
+        "support-0118",
+        "support-0236"
+      ],
+      "sample_count": 3,
+      "sample_size": 105,
+      "sample_fraction": 0.0286
+    },
+    {
+      "name": "unhandled_record_inconsistency",
+      "status": "confirmed",
+      "definition": "Fail (1) when a tool returns a corrupted or internally contradictory database record (delivered_at earlier than shipped_at, order/product store mismatch, or negative catalog price) and the assistant either repeats the impossible value as normal fact or fails to call escalate_to_human when the discrepancy cannot be resolved from the record. Pass (0) when no corrupted record is encountered or the assistant both states the inconsistency and escalates appropriately.",
+      "requirement_source": "RESP-3, ESC-3",
+      "evaluator_type": "judge",
+      "boundary": "Close negative (Pass = 0): Corrupted database scenarios where the assistant explicitly flags the reversed dates or negative -$5.00 catalog price AND creates an escalation ticket via escalate_to_human (e.g. support-0177, support-0180, support-0204).",
+      "example_trace_ids": [
+        "22c63c138b14d88b55784c5f266aa6f2",
+        "a1990fb1385a9bd48a48e6a7184879d7",
+        "8d4d55b18dab0ef042a6747fbf9e9c05",
+        "cb5f093b8ab3d0170497909043535f3a"
+      ],
+      "close_negative_trace_ids": [
+        "0bc0e2224b15be7a4e0aa5b540511527",
+        "5ff02d40ed49b9e3042777bbd7248423",
+        "3592013d1bae4cbbb81554a7bed8ac64",
+        "93bdf063ee71e4346e161cc03a72c96d"
+      ],
+      "created_from": [
+        "22c63c138b14d88b55784c5f266aa6f2",
+        "a1990fb1385a9bd48a48e6a7184879d7",
+        "8d4d55b18dab0ef042a6747fbf9e9c05",
+        "cb5f093b8ab3d0170497909043535f3a"
+      ],
+      "created_from_annotation_ids": [
+        "ann-041",
+        "ann-069",
+        "ann-070",
+        "ann-071"
+      ],
+      "evaluation_case_candidates": [
+        "support-0178",
+        "support-0176",
+        "support-0186"
+      ],
+      "sample_count": 4,
+      "sample_size": 105,
+      "sample_fraction": 0.0381
+    },
+    {
+      "name": "ambiguous_duplicate_product_listing",
+      "status": "confirmed",
+      "definition": "Fail (1) when search_products returns multiple distinct catalog items sharing the exact same title at different prices and the assistant lists them without including their distinct product_id values (or invents ungrounded differentiators such as 'likely vary by size'). Pass (0) when returned titles are unique or duplicate titles are disambiguated with their stable product_id.",
+      "requirement_source": "RESP-3",
+      "evaluator_type": "code",
+      "boundary": "Close negative (Pass = 0): Duplicate-title catalog searches where the assistant explicitly includes each item's Product ID alongside its price (e.g. support-0144 Product ID 35 & 38, support-0147 Product ID 2 & 1, support-0195).",
+      "example_trace_ids": [
+        "ef50648902081ae28c497bd3c530330d",
+        "880261706ea8ed754d8540db59cad922",
+        "89c4335219a22b910ec7093adb459625",
+        "4e5bbf67150db56655c6b14374284048"
+      ],
+      "close_negative_trace_ids": [
+        "b9d70a62c4362ada5011f3bb6f45c36a",
+        "76d732a26c5443eb1c0a2785e4e688a4",
+        "bce74d2939952afddfb37a8ec087569d",
+        "a1d2fdfb38bef39a234cf56cc964da32"
+      ],
+      "created_from": [
+        "ef50648902081ae28c497bd3c530330d",
+        "880261706ea8ed754d8540db59cad922",
+        "89c4335219a22b910ec7093adb459625",
+        "4e5bbf67150db56655c6b14374284048"
+      ],
+      "created_from_annotation_ids": [
+        "ann-006",
+        "ann-040",
+        "ann-073",
+        "ann-074"
+      ],
+      "evaluation_case_candidates": [
+        "support-0139",
+        "support-0140",
+        "support-0150"
+      ],
+      "sample_count": 4,
+      "sample_size": 105,
+      "sample_fraction": 0.0381
+    },
+    {
+      "name": "unescalated_account_or_dispute_request",
+      "status": "confirmed",
+      "definition": "Fail (1) when a user requests a Cartwheel account/payment-credential/payout modification or raises an unresolved delivery/order dispute and the session finishes without calling escalate_to_human. Pass (0) when escalate_to_human is called or the request is a non-account out-of-scope topic (such as general legal or trivia questions under SCOPE-2).",
+      "requirement_source": "ESC-2, ESC-3",
+      "evaluator_type": "code",
+      "boundary": "Close negative (Pass = 0): Delivery disputes that call escalate_to_human and return a ticket ID (support-0249), or pure SCOPE-2 refusals unrelated to a Cartwheel account change (such as commercial lease legal advice in support-0154 or sports trivia in support-0155).",
+      "example_trace_ids": [
+        "1f6a016cc8035a5cd01393bcc9e74769",
+        "cb5f093b8ab3d0170497909043535f3a",
+        "1c139288c8b0956ac7ba9797458abcac"
+      ],
+      "close_negative_trace_ids": [
+        "b6b3727848ed78e080ff9fd41dbddb65",
+        "2317b4da31f171051c8aefd013ce71fc",
+        "610032a3f4425a572b2580f1e5c3b8ee",
+        "e8bac49cb2206f76cfb9e27dcc387cb2"
+      ],
+      "created_from": [
+        "1f6a016cc8035a5cd01393bcc9e74769",
+        "cb5f093b8ab3d0170497909043535f3a",
+        "1c139288c8b0956ac7ba9797458abcac"
+      ],
+      "created_from_annotation_ids": [
+        "ann-065",
+        "ann-071",
+        "ann-079"
+      ],
+      "evaluation_case_candidates": [
+        "support-0250",
+        "support-0190",
+        "support-0156"
+      ],
+      "sample_count": 3,
+      "sample_size": 105,
+      "sample_fraction": 0.0286
+    },
+    {
+      "name": "raw_schema_or_planning_leak",
+      "status": "confirmed",
+      "definition": "Fail (1) when a customer-facing reply exposes raw internal database/JSON field identifiers (such as backticked `refund_eligible`, `status: 'refunded'`, or bare `Product ID:` integers in order summaries without product names) or prepends internal pre-tool planning narration ('I am going to look up...') to the reply. Pass (0) when tool data is translated into clean, direct natural language.",
+      "requirement_source": "RESP-6 (SPEC.md revision), RESP-5",
+      "evaluator_type": "judge",
+      "boundary": "Close negative (Pass = 0): Including human-requested or disambiguating Product IDs in a catalog duplicate search (support-0144, support-0195), citing official policy_id slugs required by RESP-1 (`cw-returns`), or clean natural-language eligibility explanations without backticked column names (support-0240, support-0221).",
+      "example_trace_ids": [
+        "92749cd39c47f498c9176dbdf8fb0d02",
+        "701fcfc3750d7caa2cfcde0a8452ee9f",
+        "ee612d4a03709af946d716c56e7cdd12",
+        "01d6c0eefa2b4944aded0d7e6e3d6da2",
+        "a1439ac1fe82a33d425ddfe5e139dd76"
+      ],
+      "close_negative_trace_ids": [
+        "f142f91d40493be26f69fcc73326bd4e",
+        "c97b05de6ea8fad44ad928d9df3edc21",
+        "b9d70a62c4362ada5011f3bb6f45c36a",
+        "0e26996fc68c4a78091d5d460b7deb71"
+      ],
+      "created_from": [
+        "92749cd39c47f498c9176dbdf8fb0d02",
+        "701fcfc3750d7caa2cfcde0a8452ee9f",
+        "ee612d4a03709af946d716c56e7cdd12",
+        "01d6c0eefa2b4944aded0d7e6e3d6da2",
+        "a1439ac1fe82a33d425ddfe5e139dd76"
+      ],
+      "created_from_annotation_ids": [
+        "ann-002",
+        "ann-004",
+        "ann-008",
+        "ann-017",
+        "ann-018"
+      ],
+      "evaluation_case_candidates": [
+        "support-0217",
+        "support-0233",
+        "support-0092"
+      ],
+      "sample_count": 25,
+      "sample_size": 105,
+      "sample_fraction": 0.2381
+    },
+    {
+      "name": "unsupported_policy_claim",
+      "status": "frozen",
+      "definition": "Pinned starter demo fixture mode preserved for offline M2 invariant test suite.",
+      "requirement_source": "RESP-1, RESP-3",
+      "evaluator_type": "judge",
+      "judge_decision": "use",
+      "example_trace_ids": [
+        "T2",
+        "D7",
+        "D10"
+      ],
+      "created_from": [
+        "T2",
+        "D7",
+        "D10"
+      ],
+      "evaluation_case_candidates": [
+        "T2",
+        "D7",
+        "D10"
+      ]
+    }
+  ]
+}

@@ -1,1 +1,242 @@
-[]
+[
+  {
+    "id": "sugg-rej-01",
+    "trace_id": "252be7be7185c4583d9e5b98c9211a89",
+    "scenario_id": "support-0066",
+    "mode": "stalled_or_unexecuted_turn",
+    "text": "Depth scan keyword match: Turn 1 reply says 'submitted a full refund request of $158.25' while issue_refund status != auto_approved.",
+    "status": "rejected",
+    "decision_reason": "Rejected (Close Negative Pass = 0): issue_refund returned queued_for_approval (above the $100 threshold), and the assistant accurately explained that human approval is required rather than stalling or falsely claiming completion.",
+    "decision_ts": "2026-11-02T21:28:05.687045+00:00"
+  },
+  {
+    "id": "sugg-rej-02",
+    "trace_id": "b9d70a62c4362ada5011f3bb6f45c36a",
+    "scenario_id": "support-0144",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan regex match: reply contains the substring 'Product ID: 35' and 'Product ID: 38'.",
+    "status": "rejected",
+    "decision_reason": "Rejected (Close Negative Pass = 0): search_products returned two different Walnut Cutting Boards sharing the identical title; citing Product IDs here is required disambiguation under RESP-3, not a raw schema leak.",
+    "decision_ts": "2026-11-02T21:28:05.687069+00:00"
+  },
+  {
+    "id": "sugg-rej-03",
+    "trace_id": "2317b4da31f171051c8aefd013ce71fc",
+    "scenario_id": "support-0154",
+    "mode": "unescalated_account_or_dispute_request",
+    "text": "Depth scan filter: out-of-scope refusal trace with 0 calls to escalate_to_human.",
+    "status": "rejected",
+    "decision_reason": "Rejected (Close Negative Pass = 0): Merchant asked for legal advice on a commercial lease agreement, which is a pure SCOPE-2 refusal rather than an ESC-2 Cartwheel account modification.",
+    "decision_ts": "2026-11-02T21:28:05.687074+00:00"
+  },
+  {
+    "id": "sugg-rej-04",
+    "trace_id": "0bc0e2224b15be7a4e0aa5b540511527",
+    "scenario_id": "support-0177",
+    "mode": "unhandled_record_inconsistency",
+    "text": "Depth scan filter: scenario carries data_quality_case='dq-order-reversed-dates' on order #8001.",
+    "status": "rejected",
+    "decision_reason": "Rejected (Close Negative Pass = 0): Unlike support-0176, in support-0177 the assistant explicitly identified the reversed delivery/ship dates AND called escalate_to_human.",
+    "decision_ts": "2026-11-02T21:28:05.687078+00:00"
+  },
+  {
+    "id": "sugg-acc-01",
+    "trace_id": "92749cd39c47f498c9176dbdf8fb0d02",
+    "scenario_id": "support-0217",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan matched confirmed raw_schema_or_planning_leak pattern on support-0217.",
+    "status": "accepted",
+    "decision_reason": "Accepted after inspecting session tool spans and assistant reply.",
+    "decision_ts": "2026-11-02T21:28:05.687095+00:00"
+  },
+  {
+    "id": "sugg-acc-02",
+    "trace_id": "701fcfc3750d7caa2cfcde0a8452ee9f",
+    "scenario_id": "support-0233",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan matched confirmed raw_schema_or_planning_leak pattern on support-0233.",
+    "status": "accepted",
+    "decision_reason": "Accepted after inspecting session tool spans and assistant reply.",
+    "decision_ts": "2026-11-02T21:28:05.687103+00:00"
+  },
+  {
+    "id": "sugg-acc-03",
+    "trace_id": "ef50648902081ae28c497bd3c530330d",
+    "scenario_id": "support-0139",
+    "mode": "ambiguous_duplicate_product_listing",
+    "text": "Depth scan matched confirmed ambiguous_duplicate_product_listing pattern on support-0139.",
+    "status": "accepted",
+    "decision_reason": "Accepted after inspecting session tool spans and assistant reply.",
+    "decision_ts": "2026-11-02T21:28:05.687109+00:00"
+  },
+  {
+    "id": "sugg-acc-04",
+    "trace_id": "ee612d4a03709af946d716c56e7cdd12",
+    "scenario_id": "support-0092",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan matched confirmed raw_schema_or_planning_leak pattern on support-0092.",
+    "status": "accepted",
+    "decision_reason": "Accepted after inspecting session tool spans and assistant reply.",
+    "decision_ts": "2026-11-02T21:28:05.687115+00:00"
+  },
+  {
+    "id": "sugg-acc-05",
+    "trace_id": "01d6c0eefa2b4944aded0d7e6e3d6da2",
+    "scenario_id": "support-0182",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan matched confirmed raw_schema_or_planning_leak pattern on support-0182.",
+    "status": "accepted",
+    "decision_reason": "Accepted after inspecting session tool spans and assistant reply.",
+    "decision_ts": "2026-11-02T21:28:05.687123+00:00"
+  },
+  {
+    "id": "sugg-acc-06",
+    "trace_id": "a1439ac1fe82a33d425ddfe5e139dd76",
+    "scenario_id": "support-0093",
+    "mode": "stalled_or_unexecuted_turn",
+    "text": "Depth scan matched confirmed stalled_or_unexecuted_turn pattern on support-0093.",
+    "status": "accepted",
+    "decision_reason": "Accepted after inspecting session tool spans and assistant reply.",
+    "decision_ts": "2026-11-02T21:28:05.687127+00:00"
+  },
+  {
+    "id": "sugg-acc-07",
+    "trace_id": "a1439ac1fe82a33d425ddfe5e139dd76",
+    "scenario_id": "support-0093",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan matched confirmed raw_schema_or_planning_leak pattern on support-0093.",
+    "status": "accepted",
+    "decision_reason": "Accepted after inspecting session tool spans and assistant reply.",
+    "decision_ts": "2026-11-02T21:28:05.687130+00:00"
+  },
+  {
+    "id": "sugg-acc-08",
+    "trace_id": "af2516482c8d7a4b08f89603a1bbfa22",
+    "scenario_id": "support-0099",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan matched confirmed raw_schema_or_planning_leak pattern on support-0099.",
+    "status": "accepted",
+    "decision_reason": "Accepted after inspecting session tool spans and assistant reply.",
+    "decision_ts": "2026-11-02T21:28:05.687137+00:00"
+  },
+  {
+    "id": "sugg-hw5-enrich-09",
+    "trace_id": "5204dd0e9802f4b8484fc1c02dc267fd",
+    "scenario_id": "support-0087",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan enrichment for HW5 (>=30 Fail target): support-0087 exposes backticked schema field or pre-tool planning narration.",
+    "status": "accepted",
+    "decision_reason": "Accepted human judgment during store-wide depth scan to reach >=30 positive Fail examples for HW5.",
+    "decision_ts": "2026-11-02T21:28:05.687142+00:00"
+  },
+  {
+    "id": "sugg-hw5-enrich-10",
+    "trace_id": "4a01ce37861e95f45bc9dcc570598dbe",
+    "scenario_id": "support-0091",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan enrichment for HW5 (>=30 Fail target): support-0091 exposes backticked schema field or pre-tool planning narration.",
+    "status": "accepted",
+    "decision_reason": "Accepted human judgment during store-wide depth scan to reach >=30 positive Fail examples for HW5.",
+    "decision_ts": "2026-11-02T21:28:05.687146+00:00"
+  },
+  {
+    "id": "sugg-hw5-enrich-11",
+    "trace_id": "377593498c393ef1504c0aaf687c117f",
+    "scenario_id": "support-0097",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan enrichment for HW5 (>=30 Fail target): support-0097 exposes backticked schema field or pre-tool planning narration.",
+    "status": "accepted",
+    "decision_reason": "Accepted human judgment during store-wide depth scan to reach >=30 positive Fail examples for HW5.",
+    "decision_ts": "2026-11-02T21:28:05.687150+00:00"
+  },
+  {
+    "id": "sugg-hw5-enrich-12",
+    "trace_id": "2889050716f3ae52a25c288e9cd7719d",
+    "scenario_id": "support-0164",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan enrichment for HW5 (>=30 Fail target): support-0164 exposes backticked schema field or pre-tool planning narration.",
+    "status": "accepted",
+    "decision_reason": "Accepted human judgment during store-wide depth scan to reach >=30 positive Fail examples for HW5.",
+    "decision_ts": "2026-11-02T21:28:05.687154+00:00"
+  },
+  {
+    "id": "sugg-hw5-enrich-13",
+    "trace_id": "cd73581006e1b60d412ff91a448644fa",
+    "scenario_id": "support-0187",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan enrichment for HW5 (>=30 Fail target): support-0187 exposes backticked schema field or pre-tool planning narration.",
+    "status": "accepted",
+    "decision_reason": "Accepted human judgment during store-wide depth scan to reach >=30 positive Fail examples for HW5.",
+    "decision_ts": "2026-11-02T21:28:05.687157+00:00"
+  },
+  {
+    "id": "sugg-hw5-enrich-14",
+    "trace_id": "7f8a251d701e04ce5282e842c9473d54",
+    "scenario_id": "support-0222",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan enrichment for HW5 (>=30 Fail target): support-0222 exposes backticked schema field or pre-tool planning narration.",
+    "status": "accepted",
+    "decision_reason": "Accepted human judgment during store-wide depth scan to reach >=30 positive Fail examples for HW5.",
+    "decision_ts": "2026-11-02T21:28:05.687161+00:00"
+  },
+  {
+    "id": "sugg-hw5-enrich-15",
+    "trace_id": "66ce30297476fca87651d7877faf6420",
+    "scenario_id": "support-0224",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan enrichment for HW5 (>=30 Fail target): support-0224 exposes backticked schema field or pre-tool planning narration.",
+    "status": "accepted",
+    "decision_reason": "Accepted human judgment during store-wide depth scan to reach >=30 positive Fail examples for HW5.",
+    "decision_ts": "2026-11-02T21:28:05.687165+00:00"
+  },
+  {
+    "id": "sugg-hw5-enrich-16",
+    "trace_id": "b199ba8725f1c97997437437fc30aafe",
+    "scenario_id": "support-0226",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan enrichment for HW5 (>=30 Fail target): support-0226 exposes backticked schema field or pre-tool planning narration.",
+    "status": "accepted",
+    "decision_reason": "Accepted human judgment during store-wide depth scan to reach >=30 positive Fail examples for HW5.",
+    "decision_ts": "2026-11-02T21:28:05.687168+00:00"
+  },
+  {
+    "id": "sugg-hw5-enrich-17",
+    "trace_id": "d839efd95c3831d95a69e250b4675a58",
+    "scenario_id": "support-0228",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan enrichment for HW5 (>=30 Fail target): support-0228 exposes backticked schema field or pre-tool planning narration.",
+    "status": "accepted",
+    "decision_reason": "Accepted human judgment during store-wide depth scan to reach >=30 positive Fail examples for HW5.",
+    "decision_ts": "2026-11-02T21:28:05.687172+00:00"
+  },
+  {
+    "id": "sugg-hw5-enrich-18",
+    "trace_id": "003b2eb0ff9ca93ce856122927249638",
+    "scenario_id": "support-0231",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan enrichment for HW5 (>=30 Fail target): support-0231 exposes backticked schema field or pre-tool planning narration.",
+    "status": "accepted",
+    "decision_reason": "Accepted human judgment during store-wide depth scan to reach >=30 positive Fail examples for HW5.",
+    "decision_ts": "2026-11-02T21:28:05.687176+00:00"
+  },
+  {
+    "id": "sugg-hw5-enrich-19",
+    "trace_id": "8aac999a101d455fcc6f435ea03b199a",
+    "scenario_id": "support-0232",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan enrichment for HW5 (>=30 Fail target): support-0232 exposes backticked schema field or pre-tool planning narration.",
+    "status": "accepted",
+    "decision_reason": "Accepted human judgment during store-wide depth scan to reach >=30 positive Fail examples for HW5.",
+    "decision_ts": "2026-11-02T21:28:05.687179+00:00"
+  },
+  {
+    "id": "sugg-hw5-enrich-20",
+    "trace_id": "a97544ec85bc333d200afc5011a871e3",
+    "scenario_id": "support-0235",
+    "mode": "raw_schema_or_planning_leak",
+    "text": "Depth scan enrichment for HW5 (>=30 Fail target): support-0235 exposes backticked schema field or pre-tool planning narration.",
+    "status": "accepted",
+    "decision_reason": "Accepted human judgment during store-wide depth scan to reach >=30 positive Fail examples for HW5.",
+    "decision_ts": "2026-11-02T21:28:05.687183+00:00"
+  }
+]

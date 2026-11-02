@@ -1,0 +1,769 @@
+{
+  "source": "/usr/local/google/home/sumerjagda/cartwheel-homeworks/traces/support_traces.json",
+  "k": 105,
+  "strategy": "hw4_four_batch_stratified",
+  "selected_at": "2026-11-02T21:19:54.427412+00:00",
+  "batches": {
+    "batch_1_random_and_cluster": {
+      "count": 30,
+      "description": "15 uniformly sampled sessions + 15 k-means feature cluster representatives.",
+      "trace_ids": [
+        "e7999f323af780a7f6cdd2d3cd95f59e",
+        "92749cd39c47f498c9176dbdf8fb0d02",
+        "923de982e1b2e3f12a9d9c298cb92e98",
+        "701fcfc3750d7caa2cfcde0a8452ee9f",
+        "0b78cf7753de9d6c0de702df2fd04970",
+        "ef50648902081ae28c497bd3c530330d",
+        "944c9c7b973f4ec13525d8f8f17e93e7",
+        "ee612d4a03709af946d716c56e7cdd12",
+        "498b5b6fb6b71f64a0354d5b3a9dad27",
+        "2187a452ee56550b38b48bd471e9a645",
+        "7b3fc32c006c8614abce83e0b4318e26",
+        "a8648409dbfea3bea5773d3ba6d7ad05",
+        "c36d22a130f35fb1f3d86c5c86436a16",
+        "610032a3f4425a572b2580f1e5c3b8ee",
+        "891f8dd572587ba7e5c732a6b25330ea",
+        "e8bac49cb2206f76cfb9e27dcc387cb2",
+        "01d6c0eefa2b4944aded0d7e6e3d6da2",
+        "a1439ac1fe82a33d425ddfe5e139dd76",
+        "cf7d59c5b61c51cee236a69787347b7f",
+        "e1b1f8633e1d315a736e939d1d04a8da",
+        "57be1bb32aa9fe0833fca18443af7456",
+        "e1568a4cab94422a68e8a9469802d33d",
+        "583710fae8a2f06be8ac0a5ef05ca342",
+        "af2516482c8d7a4b08f89603a1bbfa22",
+        "f9b5204e19a962eb6c70fe547fc01fde",
+        "786bc5261236d9476bfd8a12f8ec5299",
+        "0e26996fc68c4a78091d5d460b7deb71",
+        "58fb440c7a15549775a275dae817d602",
+        "de8230dc6350c7a70ee44d14499bde75",
+        "b5d17812234260015cbd1dee57d58099"
+      ]
+    },
+    "batch_2_role_stratified": {
+      "count": 30,
+      "description": "30 sessions stratified evenly across user_role (10 shopper, 10 merchant, 10 support) chosen prior to outcome inspection.",
+      "trace_ids": [
+        "29448f1ea4f8b3b25ed9512f248d9afe",
+        "bf3a626133b163a7e3065bdf95468f4b",
+        "76d732a26c5443eb1c0a2785e4e688a4",
+        "a25efde70941ca8e41ba839f086ceb8c",
+        "4be7d1b719af1bb850edae9b1f6fb53b",
+        "b6b3727848ed78e080ff9fd41dbddb65",
+        "fe6b6415bcc87714fd999f155cb7c537",
+        "9e1d163c963ee772721dd51fde150e8b",
+        "7f8ce25ddf5037587366a79d31ffcb05",
+        "880261706ea8ed754d8540db59cad922",
+        "22c63c138b14d88b55784c5f266aa6f2",
+        "d6e1da20dba99c326788a1fa1ab59280",
+        "879101a3285b7a7fbb6460a00578ca1b",
+        "5a3b7fb8bbd00df00202198352dee211",
+        "3a8ca33b56d53004cd746340247c582a",
+        "c0dec535056c0e367c27a77bbaf93def",
+        "b37990bbb540e2cc61bae3566b96b7ca",
+        "a73d750d2c9fcabdf067b7c771b78791",
+        "29c7b1e5bc98ef57e3d788ce1646d8a0",
+        "79b851628865478198cba85f2e9eb25f",
+        "f87bd054694d4b12d2324226126dd28f",
+        "5ff02d40ed49b9e3042777bbd7248423",
+        "bce74d2939952afddfb37a8ec087569d",
+        "65043dc411a6a8d1a6b55ba1dbcc4217",
+        "fe20487738ac4988abd6e36d127a6d46",
+        "4872acfb8b181af04153bd7e8aa8c48d",
+        "997383a856f2a4c01ea9698c4a5c1faf",
+        "3a470aaee3665da96b5ab886e2085872",
+        "3592013d1bae4cbbb81554a7bed8ac64",
+        "0b5ea6ed7fdb32fe9cbb1af73b6d02ad"
+      ]
+    },
+    "batch_3_depth_and_close_negatives": {
+      "count": 30,
+      "description": "30 sessions retrieved via targeted depth searches for candidate modes and close-negative boundary cases.",
+      "trace_ids": [
+        "b6f7d49e806eb8eec7034ffbd8685e38",
+        "817a68093c383c2d3fa4d5ae6979c337",
+        "2475d2f91dced31a963b694c66c6a288",
+        "f461c18683015fb3b5476651150596fe",
+        "1f6a016cc8035a5cd01393bcc9e74769",
+        "6e48ded40be49d67e995a489dafd5d52",
+        "252be7be7185c4583d9e5b98c9211a89",
+        "f18a2b8e4f75e888d1ca57955b0a7be1",
+        "a1990fb1385a9bd48a48e6a7184879d7",
+        "8d4d55b18dab0ef042a6747fbf9e9c05",
+        "cb5f093b8ab3d0170497909043535f3a",
+        "0bc0e2224b15be7a4e0aa5b540511527",
+        "89c4335219a22b910ec7093adb459625",
+        "4e5bbf67150db56655c6b14374284048",
+        "b9d70a62c4362ada5011f3bb6f45c36a",
+        "1373bc02dcc7695deee8911da01f3a41",
+        "da72d97c44b6587b1013f4e7f0f9cb6f",
+        "7881bd0d97b726ff05076ff9f147a13f",
+        "1c139288c8b0956ac7ba9797458abcac",
+        "20dbc0c8e9e904bb92160dcc8748cc56",
+        "efa5e000b7a90a9032c6167492001246",
+        "29d8a6b063cafcbdff05bad7a81f665b",
+        "788632c51779c792241476ee159a025a",
+        "a544db8eb37e939405564632cd3928e9",
+        "339d26ed62df72b907d8b4eb50fb67fb",
+        "b20ec86cb532b09eaee11d1b11c9a613",
+        "23723b46ed158ff177fcf5df9e1f2bfd",
+        "7d4f706dad7156ce240a83df121b4e03",
+        "e61f0a2f05f51e772c61d0e121a0d77e",
+        "e8a75a4d6d3a0bb498ef3c0094e01175"
+      ]
+    },
+    "batch_4_saturation_check": {
+      "count": 15,
+      "description": "15 additional uniformly sampled sessions reviewed after taxonomy construction to verify theoretical saturation (0 new modes found).",
+      "trace_ids": [
+        "c1ac67d67cc2d4713c48ed7552954f17",
+        "2317b4da31f171051c8aefd013ce71fc",
+        "06194ff06a0d2b2c8b161905100bd957",
+        "562c3d87fd55c768bc42835410e73a23",
+        "5bcb3c1b884b7c01cb6161e31e42d41b",
+        "50c8f003896422d294cfbe2bdcc298b7",
+        "7c27ce106461c551333038892170dd48",
+        "070ad75e6b38c5f21e272cce63273d19",
+        "e231acccdcba3d2b3a626846cb95334f",
+        "861e6a76394872012297368a2ef4b936",
+        "57e35a02096739c1966d97f692d4e813",
+        "faa5285207db3e16628e6d9f8ffdacf4",
+        "8289d93454e3ac71e95c7bc24c60e660",
+        "f6541cc338001f80b517264202797bc0",
+        "2265c97e37c45f195070f7fbf473e44a"
+      ]
+    }
+  },
+  "picks": [
+    {
+      "trace_id": "e7999f323af780a7f6cdd2d3cd95f59e",
+      "scenario_id": "support-0149",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: uniform random sample (15)"
+    },
+    {
+      "trace_id": "92749cd39c47f498c9176dbdf8fb0d02",
+      "scenario_id": "support-0217",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: uniform random sample (15)"
+    },
+    {
+      "trace_id": "923de982e1b2e3f12a9d9c298cb92e98",
+      "scenario_id": "support-0050",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: uniform random sample (15)"
+    },
+    {
+      "trace_id": "701fcfc3750d7caa2cfcde0a8452ee9f",
+      "scenario_id": "support-0233",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: uniform random sample (15)"
+    },
+    {
+      "trace_id": "0b78cf7753de9d6c0de702df2fd04970",
+      "scenario_id": "support-0248",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: uniform random sample (15)"
+    },
+    {
+      "trace_id": "ef50648902081ae28c497bd3c530330d",
+      "scenario_id": "support-0139",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: uniform random sample (15)"
+    },
+    {
+      "trace_id": "944c9c7b973f4ec13525d8f8f17e93e7",
+      "scenario_id": "support-0237",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: uniform random sample (15)"
+    },
+    {
+      "trace_id": "ee612d4a03709af946d716c56e7cdd12",
+      "scenario_id": "support-0092",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: uniform random sample (15)"
+    },
+    {
+      "trace_id": "498b5b6fb6b71f64a0354d5b3a9dad27",
+      "scenario_id": "support-0120",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: uniform random sample (15)"
+    },
+    {
+      "trace_id": "2187a452ee56550b38b48bd471e9a645",
+      "scenario_id": "support-0013",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: uniform random sample (15)"
+    },
+    {
+      "trace_id": "7b3fc32c006c8614abce83e0b4318e26",
+      "scenario_id": "support-0170",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: uniform random sample (15)"
+    },
+    {
+      "trace_id": "a8648409dbfea3bea5773d3ba6d7ad05",
+      "scenario_id": "support-0129",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: uniform random sample (15)"
+    },
+    {
+      "trace_id": "c36d22a130f35fb1f3d86c5c86436a16",
+      "scenario_id": "support-0055",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: uniform random sample (15)"
+    },
+    {
+      "trace_id": "610032a3f4425a572b2580f1e5c3b8ee",
+      "scenario_id": "support-0155",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: uniform random sample (15)"
+    },
+    {
+      "trace_id": "891f8dd572587ba7e5c732a6b25330ea",
+      "scenario_id": "support-0057",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: uniform random sample (15)"
+    },
+    {
+      "trace_id": "e8bac49cb2206f76cfb9e27dcc387cb2",
+      "scenario_id": "support-0151",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: k-means feature cluster 0 representative"
+    },
+    {
+      "trace_id": "01d6c0eefa2b4944aded0d7e6e3d6da2",
+      "scenario_id": "support-0182",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: k-means feature cluster 1 representative"
+    },
+    {
+      "trace_id": "a1439ac1fe82a33d425ddfe5e139dd76",
+      "scenario_id": "support-0093",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: k-means feature cluster 2 representative"
+    },
+    {
+      "trace_id": "cf7d59c5b61c51cee236a69787347b7f",
+      "scenario_id": "support-0038",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: k-means feature cluster 3 representative"
+    },
+    {
+      "trace_id": "e1b1f8633e1d315a736e939d1d04a8da",
+      "scenario_id": "support-0043",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: k-means feature cluster 4 representative"
+    },
+    {
+      "trace_id": "57be1bb32aa9fe0833fca18443af7456",
+      "scenario_id": "support-0086",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: k-means feature cluster 5 representative"
+    },
+    {
+      "trace_id": "e1568a4cab94422a68e8a9469802d33d",
+      "scenario_id": "support-0121",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: k-means feature cluster 6 representative"
+    },
+    {
+      "trace_id": "583710fae8a2f06be8ac0a5ef05ca342",
+      "scenario_id": "support-0161",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: k-means feature cluster 7 representative"
+    },
+    {
+      "trace_id": "af2516482c8d7a4b08f89603a1bbfa22",
+      "scenario_id": "support-0099",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: k-means feature cluster 8 representative"
+    },
+    {
+      "trace_id": "f9b5204e19a962eb6c70fe547fc01fde",
+      "scenario_id": "support-0002",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: k-means feature cluster 9 representative"
+    },
+    {
+      "trace_id": "786bc5261236d9476bfd8a12f8ec5299",
+      "scenario_id": "support-0037",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: k-means feature cluster 10 representative"
+    },
+    {
+      "trace_id": "0e26996fc68c4a78091d5d460b7deb71",
+      "scenario_id": "support-0001",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: k-means feature cluster 11 representative"
+    },
+    {
+      "trace_id": "58fb440c7a15549775a275dae817d602",
+      "scenario_id": "support-0041",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: k-means feature cluster 12 representative"
+    },
+    {
+      "trace_id": "de8230dc6350c7a70ee44d14499bde75",
+      "scenario_id": "support-0152",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: k-means feature cluster 13 representative"
+    },
+    {
+      "trace_id": "b5d17812234260015cbd1dee57d58099",
+      "scenario_id": "support-0051",
+      "batch": "batch_1_random_and_cluster",
+      "reason": "Batch 1: k-means feature cluster 14 representative"
+    },
+    {
+      "trace_id": "29448f1ea4f8b3b25ed9512f248d9afe",
+      "scenario_id": "support-0114",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=shopper"
+    },
+    {
+      "trace_id": "bf3a626133b163a7e3065bdf95468f4b",
+      "scenario_id": "support-0239",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=shopper"
+    },
+    {
+      "trace_id": "76d732a26c5443eb1c0a2785e4e688a4",
+      "scenario_id": "support-0147",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=shopper"
+    },
+    {
+      "trace_id": "a25efde70941ca8e41ba839f086ceb8c",
+      "scenario_id": "support-0122",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=shopper"
+    },
+    {
+      "trace_id": "4be7d1b719af1bb850edae9b1f6fb53b",
+      "scenario_id": "support-0062",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=shopper"
+    },
+    {
+      "trace_id": "b6b3727848ed78e080ff9fd41dbddb65",
+      "scenario_id": "support-0249",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=shopper"
+    },
+    {
+      "trace_id": "fe6b6415bcc87714fd999f155cb7c537",
+      "scenario_id": "support-0117",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=shopper"
+    },
+    {
+      "trace_id": "9e1d163c963ee772721dd51fde150e8b",
+      "scenario_id": "support-0018",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=shopper"
+    },
+    {
+      "trace_id": "7f8ce25ddf5037587366a79d31ffcb05",
+      "scenario_id": "support-0127",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=shopper"
+    },
+    {
+      "trace_id": "880261706ea8ed754d8540db59cad922",
+      "scenario_id": "support-0140",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=shopper"
+    },
+    {
+      "trace_id": "22c63c138b14d88b55784c5f266aa6f2",
+      "scenario_id": "support-0178",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=merchant"
+    },
+    {
+      "trace_id": "d6e1da20dba99c326788a1fa1ab59280",
+      "scenario_id": "support-0130",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=merchant"
+    },
+    {
+      "trace_id": "879101a3285b7a7fbb6460a00578ca1b",
+      "scenario_id": "support-0188",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=merchant"
+    },
+    {
+      "trace_id": "5a3b7fb8bbd00df00202198352dee211",
+      "scenario_id": "support-0165",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=merchant"
+    },
+    {
+      "trace_id": "3a8ca33b56d53004cd746340247c582a",
+      "scenario_id": "support-0160",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=merchant"
+    },
+    {
+      "trace_id": "c0dec535056c0e367c27a77bbaf93def",
+      "scenario_id": "support-0162",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=merchant"
+    },
+    {
+      "trace_id": "b37990bbb540e2cc61bae3566b96b7ca",
+      "scenario_id": "support-0183",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=merchant"
+    },
+    {
+      "trace_id": "a73d750d2c9fcabdf067b7c771b78791",
+      "scenario_id": "support-0203",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=merchant"
+    },
+    {
+      "trace_id": "29c7b1e5bc98ef57e3d788ce1646d8a0",
+      "scenario_id": "support-0219",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=merchant"
+    },
+    {
+      "trace_id": "79b851628865478198cba85f2e9eb25f",
+      "scenario_id": "support-0216",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=merchant"
+    },
+    {
+      "trace_id": "f87bd054694d4b12d2324226126dd28f",
+      "scenario_id": "support-0185",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=support"
+    },
+    {
+      "trace_id": "5ff02d40ed49b9e3042777bbd7248423",
+      "scenario_id": "support-0180",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=support"
+    },
+    {
+      "trace_id": "bce74d2939952afddfb37a8ec087569d",
+      "scenario_id": "support-0195",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=support"
+    },
+    {
+      "trace_id": "65043dc411a6a8d1a6b55ba1dbcc4217",
+      "scenario_id": "support-0171",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=support"
+    },
+    {
+      "trace_id": "fe20487738ac4988abd6e36d127a6d46",
+      "scenario_id": "support-0173",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=support"
+    },
+    {
+      "trace_id": "4872acfb8b181af04153bd7e8aa8c48d",
+      "scenario_id": "support-0174",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=support"
+    },
+    {
+      "trace_id": "997383a856f2a4c01ea9698c4a5c1faf",
+      "scenario_id": "support-0184",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=support"
+    },
+    {
+      "trace_id": "3a470aaee3665da96b5ab886e2085872",
+      "scenario_id": "support-0246",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=support"
+    },
+    {
+      "trace_id": "3592013d1bae4cbbb81554a7bed8ac64",
+      "scenario_id": "support-0204",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=support"
+    },
+    {
+      "trace_id": "0b5ea6ed7fdb32fe9cbb1af73b6d02ad",
+      "scenario_id": "support-0133",
+      "batch": "batch_2_role_stratified",
+      "reason": "Batch 2: pre-outcome stratification on user_role=support"
+    },
+    {
+      "trace_id": "b6f7d49e806eb8eec7034ffbd8685e38",
+      "scenario_id": "support-0094",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "817a68093c383c2d3fa4d5ae6979c337",
+      "scenario_id": "support-0098",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "2475d2f91dced31a963b694c66c6a288",
+      "scenario_id": "support-0205",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "f461c18683015fb3b5476651150596fe",
+      "scenario_id": "support-0223",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "1f6a016cc8035a5cd01393bcc9e74769",
+      "scenario_id": "support-0250",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "6e48ded40be49d67e995a489dafd5d52",
+      "scenario_id": "support-0034",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "252be7be7185c4583d9e5b98c9211a89",
+      "scenario_id": "support-0066",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "f18a2b8e4f75e888d1ca57955b0a7be1",
+      "scenario_id": "support-0067",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "a1990fb1385a9bd48a48e6a7184879d7",
+      "scenario_id": "support-0176",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "8d4d55b18dab0ef042a6747fbf9e9c05",
+      "scenario_id": "support-0186",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "cb5f093b8ab3d0170497909043535f3a",
+      "scenario_id": "support-0190",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "0bc0e2224b15be7a4e0aa5b540511527",
+      "scenario_id": "support-0177",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "89c4335219a22b910ec7093adb459625",
+      "scenario_id": "support-0150",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "4e5bbf67150db56655c6b14374284048",
+      "scenario_id": "support-0193",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "b9d70a62c4362ada5011f3bb6f45c36a",
+      "scenario_id": "support-0144",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "1373bc02dcc7695deee8911da01f3a41",
+      "scenario_id": "support-0115",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "da72d97c44b6587b1013f4e7f0f9cb6f",
+      "scenario_id": "support-0118",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "7881bd0d97b726ff05076ff9f147a13f",
+      "scenario_id": "support-0153",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "1c139288c8b0956ac7ba9797458abcac",
+      "scenario_id": "support-0156",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "20dbc0c8e9e904bb92160dcc8748cc56",
+      "scenario_id": "support-0225",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "efa5e000b7a90a9032c6167492001246",
+      "scenario_id": "support-0230",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "29d8a6b063cafcbdff05bad7a81f665b",
+      "scenario_id": "support-0236",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "788632c51779c792241476ee159a025a",
+      "scenario_id": "support-0088",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "a544db8eb37e939405564632cd3928e9",
+      "scenario_id": "support-0095",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "339d26ed62df72b907d8b4eb50fb67fb",
+      "scenario_id": "support-0100",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for candidate mode / close negative boundary"
+    },
+    {
+      "trace_id": "b20ec86cb532b09eaee11d1b11c9a613",
+      "scenario_id": "support-0005",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for multi-turn / challenge boundary"
+    },
+    {
+      "trace_id": "23723b46ed158ff177fcf5df9e1f2bfd",
+      "scenario_id": "support-0009",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for multi-turn / challenge boundary"
+    },
+    {
+      "trace_id": "7d4f706dad7156ce240a83df121b4e03",
+      "scenario_id": "support-0017",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for multi-turn / challenge boundary"
+    },
+    {
+      "trace_id": "e61f0a2f05f51e772c61d0e121a0d77e",
+      "scenario_id": "support-0021",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for multi-turn / challenge boundary"
+    },
+    {
+      "trace_id": "e8a75a4d6d3a0bb498ef3c0094e01175",
+      "scenario_id": "support-0025",
+      "batch": "batch_3_depth_and_close_negatives",
+      "reason": "Batch 3: depth search for multi-turn / challenge boundary"
+    },
+    {
+      "trace_id": "c1ac67d67cc2d4713c48ed7552954f17",
+      "scenario_id": "support-0032",
+      "batch": "batch_4_saturation_check",
+      "reason": "Batch 4: uniform random post-taxonomy saturation check (15)"
+    },
+    {
+      "trace_id": "2317b4da31f171051c8aefd013ce71fc",
+      "scenario_id": "support-0154",
+      "batch": "batch_4_saturation_check",
+      "reason": "Batch 4: uniform random post-taxonomy saturation check (15)"
+    },
+    {
+      "trace_id": "06194ff06a0d2b2c8b161905100bd957",
+      "scenario_id": "support-0003",
+      "batch": "batch_4_saturation_check",
+      "reason": "Batch 4: uniform random post-taxonomy saturation check (15)"
+    },
+    {
+      "trace_id": "562c3d87fd55c768bc42835410e73a23",
+      "scenario_id": "support-0209",
+      "batch": "batch_4_saturation_check",
+      "reason": "Batch 4: uniform random post-taxonomy saturation check (15)"
+    },
+    {
+      "trace_id": "5bcb3c1b884b7c01cb6161e31e42d41b",
+      "scenario_id": "support-0033",
+      "batch": "batch_4_saturation_check",
+      "reason": "Batch 4: uniform random post-taxonomy saturation check (15)"
+    },
+    {
+      "trace_id": "50c8f003896422d294cfbe2bdcc298b7",
+      "scenario_id": "support-0238",
+      "batch": "batch_4_saturation_check",
+      "reason": "Batch 4: uniform random post-taxonomy saturation check (15)"
+    },
+    {
+      "trace_id": "7c27ce106461c551333038892170dd48",
+      "scenario_id": "support-0035",
+      "batch": "batch_4_saturation_check",
+      "reason": "Batch 4: uniform random post-taxonomy saturation check (15)"
+    },
+    {
+      "trace_id": "070ad75e6b38c5f21e272cce63273d19",
+      "scenario_id": "support-0123",
+      "batch": "batch_4_saturation_check",
+      "reason": "Batch 4: uniform random post-taxonomy saturation check (15)"
+    },
+    {
+      "trace_id": "e231acccdcba3d2b3a626846cb95334f",
+      "scenario_id": "support-0049",
+      "batch": "batch_4_saturation_check",
+      "reason": "Batch 4: uniform random post-taxonomy saturation check (15)"
+    },
+    {
+      "trace_id": "861e6a76394872012297368a2ef4b936",
+      "scenario_id": "support-0146",
+      "batch": "batch_4_saturation_check",
+      "reason": "Batch 4: uniform random post-taxonomy saturation check (15)"
+    },
+    {
+      "trace_id": "57e35a02096739c1966d97f692d4e813",
+      "scenario_id": "support-0036",
+      "batch": "batch_4_saturation_check",
+      "reason": "Batch 4: uniform random post-taxonomy saturation check (15)"
+    },
+    {
+      "trace_id": "faa5285207db3e16628e6d9f8ffdacf4",
+      "scenario_id": "support-0010",
+      "batch": "batch_4_saturation_check",
+      "reason": "Batch 4: uniform random post-taxonomy saturation check (15)"
+    },
+    {
+      "trace_id": "8289d93454e3ac71e95c7bc24c60e660",
+      "scenario_id": "support-0196",
+      "batch": "batch_4_saturation_check",
+      "reason": "Batch 4: uniform random post-taxonomy saturation check (15)"
+    },
+    {
+      "trace_id": "f6541cc338001f80b517264202797bc0",
+      "scenario_id": "support-0213",
+      "batch": "batch_4_saturation_check",
+      "reason": "Batch 4: uniform random post-taxonomy saturation check (15)"
+    },
+    {
+      "trace_id": "2265c97e37c45f195070f7fbf473e44a",
+      "scenario_id": "support-0004",
+      "batch": "batch_4_saturation_check",
+      "reason": "Batch 4: uniform random post-taxonomy saturation check (15)"
+    }
+  ]
+}

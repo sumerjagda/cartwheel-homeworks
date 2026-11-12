@@ -54,7 +54,7 @@
 {"trace_id": "65043dc411a6a8d1a6b55ba1dbcc4217", "label": 0, "source": "human", "ts": "2026-11-02T21:28:11.491247+00:00", "label_id": "65043dc411a6a8d1a6b55ba1dbcc4217#0"}
 {"trace_id": "fe20487738ac4988abd6e36d127a6d46", "label": 0, "source": "human", "ts": "2026-11-02T21:28:11.500841+00:00", "label_id": "fe20487738ac4988abd6e36d127a6d46#0"}
 {"trace_id": "4872acfb8b181af04153bd7e8aa8c48d", "label": 0, "source": "human", "ts": "2026-11-02T21:28:11.510144+00:00", "label_id": "4872acfb8b181af04153bd7e8aa8c48d#0"}
-{"trace_id": "997383a856f2a4c01ea9698c4a5c1faf", "label": 0, "source": "human", "ts": "2026-11-02T21:28:11.519404+00:00", "label_id": "997383a856f2a4c01ea9698c4a5c1faf#0"}
+{"trace_id": "997383a856f2a4c01ea9698c4a5c1faf", "label": 0, "source": "human", "ts": "2026-11-02T21:28:11.519404+00:00", "label_id": "997383a856f2a4c01ea9698c4a5c1faf#0", "superseded_by": "997383a856f2a4c01ea9698c4a5c1faf#1"}
 {"trace_id": "3a470aaee3665da96b5ab886e2085872", "label": 1, "source": "human", "ts": "2026-11-02T21:28:11.528511+00:00", "label_id": "3a470aaee3665da96b5ab886e2085872#0"}
 {"trace_id": "3592013d1bae4cbbb81554a7bed8ac64", "label": 0, "source": "human", "ts": "2026-11-02T21:28:11.538494+00:00", "label_id": "3592013d1bae4cbbb81554a7bed8ac64#0"}
 {"trace_id": "0b5ea6ed7fdb32fe9cbb1af73b6d02ad", "label": 0, "source": "human", "ts": "2026-11-02T21:28:11.548692+00:00", "label_id": "0b5ea6ed7fdb32fe9cbb1af73b6d02ad#0"}
@@ -115,3 +115,4 @@
 {"trace_id": "003b2eb0ff9ca93ce856122927249638", "label": 1, "source": "accepted_suggestion", "ts": "2026-11-02T21:28:12.093242+00:00", "label_id": "003b2eb0ff9ca93ce856122927249638#0"}
 {"trace_id": "8aac999a101d455fcc6f435ea03b199a", "label": 1, "source": "accepted_suggestion", "ts": "2026-11-02T21:28:12.102978+00:00", "label_id": "8aac999a101d455fcc6f435ea03b199a#0"}
 {"trace_id": "a97544ec85bc333d200afc5011a871e3", "label": 1, "source": "accepted_suggestion", "ts": "2026-11-02T21:28:12.112654+00:00", "label_id": "a97544ec85bc333d200afc5011a871e3#0"}
+{"trace_id": "997383a856f2a4c01ea9698c4a5c1faf", "label": 1, "source": "human_disagreement_review", "ts": "2026-11-12T18:57:01.559375+00:00", "label_id": "997383a856f2a4c01ea9698c4a5c1faf#1"}

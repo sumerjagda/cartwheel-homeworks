@@ -1,0 +1,12 @@
+{
+  "versions": [
+    {
+      "judge_id": "raw_schema_or_planning_leak-v0",
+      "prompt_hash": "3bae189c9d33"
+    },
+    {
+      "judge_id": "raw_schema_or_planning_leak-v1",
+      "prompt_hash": "598e63db4260"
+    }
+  ]
+}

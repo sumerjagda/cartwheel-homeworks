@@ -232,6 +232,7 @@ def _run_docetl_map(  # pragma: no cover - requires the docetl extra + a live ke
         name="classify_failure_mode",
         type="map",
         model=_litellm_model_id(model),
+        timeout=25,
         prompt=(
             f"{prompt_text}\n\n"
             "--- Trace to evaluate ---\n"
@@ -241,10 +242,11 @@ def _run_docetl_map(  # pragma: no cover - requires the docetl extra + a live ke
             "as exactly Pass when the named failure is absent, or Fail when present."
         ),
         output={
+            "mode": "structured_output",
             "schema": {
                 "critique": "string",
                 "result": "string",
-            }
+            },
         },
     )
     pipeline = Pipeline(
@@ -256,7 +258,16 @@ def _run_docetl_map(  # pragma: no cover - requires the docetl extra + a live ke
         ],
         output=PipelineOutput(type="file", path=str(out_path), intermediate_dir=str(tmpdir)),
     )
-    pipeline.run()
+    last_exc: Exception | None = None
+    for _attempt in range(4):
+        try:
+            pipeline.run(max_threads=2)
+            last_exc = None
+            break
+        except Exception as exc:  # pragma: no cover - transient API retry
+            last_exc = exc
+    if last_exc is not None:
+        raise last_exc
 
     produced = json.loads(out_path.read_text(encoding="utf-8"))
     # HW5 labels and public predictions use Pass=1, Fail=0.

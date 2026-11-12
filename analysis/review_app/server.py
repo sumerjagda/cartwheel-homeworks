@@ -351,12 +351,13 @@ def _post_score_to_langfuse(trace_id: str, mode: str, label: int, comment: str =
 
 
 def _save_single_label(trace_id: str, mode: str, label: int, source: str = "human", comment: str = "") -> dict[str, Any]:
-    """Append-only write to state/labels/<mode>.jsonl (marking prior rows superseded_by) + Langfuse sync."""
+    """Append-only write to state/labels/<mode>.jsonl (marking prior rows superseded_by) + hw5_labels + Langfuse sync."""
     path = STATE_DIR / "labels" / f"{mode}.jsonl"
     rows = _read_jsonl(path)
     existing_for_trace = [r for r in rows if str(r.get("trace_id")) == trace_id]
     new_idx = len(existing_for_trace)
     new_label_id = f"{trace_id}#{new_idx}"
+    ts_now = _utcnow()
     updated_rows: list[dict[str, Any]] = []
     for r in rows:
         if str(r.get("trace_id")) == trace_id and not r.get("superseded_by"):
@@ -366,7 +367,7 @@ def _save_single_label(trace_id: str, mode: str, label: int, source: str = "huma
         "trace_id": trace_id,
         "label": int(label),
         "source": source,
-        "ts": _utcnow(),
+        "ts": ts_now,
         "label_id": new_label_id,
     })
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -376,8 +377,81 @@ def _save_single_label(trace_id: str, mode: str, label: int, source: str = "huma
             fh.write(json.dumps(r, ensure_ascii=False) + "\n")
     tmp.replace(path)
 
+    hw5_path = STATE_DIR / "hw5_labels" / f"{mode}.jsonl"
+    if hw5_path.exists():
+        hw5_rows = _read_jsonl(hw5_path)
+        updated_hw5: list[dict[str, Any]] = []
+        for r in hw5_rows:
+            if str(r.get("trace_id")) == trace_id and not r.get("superseded_by"):
+                r = {**r, "superseded_by": new_label_id}
+            updated_hw5.append(r)
+        updated_hw5.append({
+            "trace_id": trace_id,
+            "label": 1 - int(label),
+            "verdict": "Pass" if int(label) == 0 else "Fail",
+            "label_convention": "pass_positive",
+            "source": source,
+            "ts": ts_now,
+            "label_id": new_label_id,
+        })
+        hw5_tmp = hw5_path.with_suffix(".jsonl.tmp")
+        with hw5_tmp.open("w", encoding="utf-8") as fh:
+            for r in updated_hw5:
+                fh.write(json.dumps(r, ensure_ascii=False) + "\n")
+        hw5_tmp.replace(hw5_path)
+
     lf_synced = _post_score_to_langfuse(trace_id, mode, int(label), comment=comment)
     return {"ok": True, "label_id": new_label_id, "langfuse_synced": lf_synced}
+
+
+def _load_hw5_judge_bundle(splits_doc: dict[str, Any]) -> dict[str, Any]:
+    """Load registered judges, dev/test reports, and iteration logs (hiding test preds if unfrozen)."""
+    judges_dir = STATE_DIR / "judges"
+    judges_out: dict[str, dict[str, Any]] = {}
+    if judges_dir.exists():
+        for jpath in sorted(judges_dir.glob("*.json")):
+            if jpath.name.startswith("_history_"):
+                continue
+            jdoc = _read_json(jpath, {})
+            jid = jdoc.get("judge_id") or jpath.stem
+            mode = jdoc.get("mode", "")
+            if mode == "unsupported_policy_claim":
+                continue
+            phash = jdoc.get("prompt_hash", "")
+            raw_preds = (jdoc.get("predictions") or {}).get(phash, {})
+            raw_crits = (jdoc.get("critiques") or {}).get(phash, {})
+            is_frozen = jdoc.get("status") == "frozen" and bool(jdoc.get("frozen_at"))
+            test_ids = set((splits_doc.get(mode) or {}).get("test") or [])
+            # Never expose test-split predictions before freeze_judge
+            visible_preds = {
+                tid: int(val)
+                for tid, val in raw_preds.items()
+                if is_frozen or tid not in test_ids
+            }
+            visible_crits = {
+                tid: str(val)
+                for tid, val in raw_crits.items()
+                if is_frozen or tid not in test_ids
+            }
+            dev_rep = _read_json(REPORT_DIR / f"dev-{jid}.json", None)
+            test_rep = _read_json(REPORT_DIR / f"test-{jid}.json", None) if is_frozen else None
+            judges_out[jid] = {
+                "judge_id": jid,
+                "mode": mode,
+                "version": jdoc.get("version", 0),
+                "model": jdoc.get("model", ""),
+                "status": jdoc.get("status", "draft"),
+                "frozen_at": jdoc.get("frozen_at"),
+                "prompt_hash": phash,
+                "prompt_text": jdoc.get("prompt_text", ""),
+                "label_convention": jdoc.get("label_convention", "pass_positive"),
+                "predictions": visible_preds,
+                "critiques": visible_crits,
+                "iterations": jdoc.get("iterations", []),
+                "dev_report": dev_rep,
+                "test_report": test_rep,
+            }
+    return judges_out
 
 
 class CustomReviewHandler(BaseHTTPRequestHandler):
@@ -425,9 +499,11 @@ class CustomReviewHandler(BaseHTTPRequestHandler):
             patterns_doc = _read_json(STATE_DIR / "patterns.json", {"modes": []})
             suggestions_doc = _read_json(STATE_DIR / "suggestions.json", [])
             manifest_doc = _read_json(STATE_DIR / "sample_manifest.json", {})
+            splits_doc = _read_json(STATE_DIR / "splits.json", {})
+            hw5_judges = _load_hw5_judge_bundle(splits_doc)
             labels_map = _load_all_live_labels()
             reports_map = {}
-            for rname in ("interface_comparison.md", "review_summary.md"):
+            for rname in ("interface_comparison.md", "review_summary.md", "judge_summary.md"):
                 rp = REPORT_DIR / rname
                 if rp.exists():
                     reports_map[rname] = rp.read_text(encoding="utf-8")
@@ -439,6 +515,8 @@ class CustomReviewHandler(BaseHTTPRequestHandler):
                 "all_modes_raw": patterns_doc.get("modes", []),
                 "suggestions": suggestions_doc,
                 "sample_manifest": manifest_doc,
+                "splits": {k: v for k, v in splits_doc.items() if k != "unsupported_policy_claim"},
+                "hw5_judges": hw5_judges,
                 "labels": labels_map,
                 "reports": reports_map,
                 "spec_md": spec_text,

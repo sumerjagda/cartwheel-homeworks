@@ -1,0 +1,24 @@
+{
+  "judge_id": "raw_schema_or_planning_leak-v0",
+  "split": "dev",
+  "tpr": 0.9688,
+  "tnr": 0.9333,
+  "tpr_interval": [
+    0.8426,
+    0.9945
+  ],
+  "tnr_interval": [
+    0.7018,
+    0.9881
+  ],
+  "agreement": 0.9574,
+  "tp": 31,
+  "fn": 1,
+  "tn": 14,
+  "fp": 1,
+  "n": 47,
+  "disagreements": [
+    "92749cd39c47f498c9176dbdf8fb0d02",
+    "997383a856f2a4c01ea9698c4a5c1faf"
+  ]
+}

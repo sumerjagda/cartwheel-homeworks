@@ -145,16 +145,17 @@
 
 <header>
   <div class="brand">
-    <span>🔬 Cartwheel HW4 Review App</span>
+    <span>🔬 Cartwheel HW4 &amp; HW5 Review App</span>
     <span class="pill blue" id="source-badge">Loading...</span>
     <span class="pill green" id="reviewed-kpi">0 / 100 Reviewed</span>
-    <span class="pill amber" id="incomplete-kpi">0 Incomplete</span>
+    <span class="pill purple" id="judge-kpi">HW5 Judge: Loading...</span>
   </div>
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('review', this)">1. Session Review &amp; Coding</button>
-    <button class="tab-btn" onclick="switchTab('taxonomy', this)">2. Failure Taxonomy &amp; SPEC.md</button>
-    <button class="tab-btn" onclick="switchTab('progress', this)">3. Progress &amp; AI Suggestions</button>
-    <button class="tab-btn" onclick="switchTab('reports', this)">4. Analysis Reports</button>
+    <button class="tab-btn active" onclick="switchTab('review', this)">1. Session Review &amp; Judge Critique</button>
+    <button class="tab-btn" onclick="switchTab('hw5', this)">2. HW5 Judge Alignment &amp; Disagreements</button>
+    <button class="tab-btn" onclick="switchTab('taxonomy', this)">3. Failure Taxonomy &amp; SPEC.md</button>
+    <button class="tab-btn" onclick="switchTab('progress', this)">4. Progress &amp; AI Suggestions</button>
+    <button class="tab-btn" onclick="switchTab('reports', this)">5. Analysis Reports</button>
   </div>
 </header>
 
@@ -165,13 +166,21 @@
       <option value="all">All 250 Module 1 Conversations</option>
     </select>
   </label>
-  <label>Batch:
-    <select id="f-batch" onchange="renderQueue()">
-      <option value="all">All Batches</option>
-      <option value="batch_1_random_and_cluster">B1: Uniform + Cluster (30)</option>
-      <option value="batch_2_role_stratified">B2: Role Stratified (30)</option>
-      <option value="batch_3_depth_and_close_negatives">B3: Depth + Close Negatives (30)</option>
-      <option value="batch_4_saturation_check">B4: Final 15 Saturation Check (15)</option>
+  <label>HW5 Judge:
+    <select id="f-judge" onchange="renderQueue()">
+      <option value="latest">Latest Judge Version</option>
+    </select>
+  </label>
+  <label>Judge Disagreements:
+    <select id="f-judge-filter" onchange="renderQueue()">
+      <option value="all">All Conversations</option>
+      <option value="dev_disagree">⚡ Dev Disagreements Only (Human ≠ Judge)</option>
+      <option value="dev_fp">⚡ Dev False Passes (FP: Human=Fail, Judge=Pass)</option>
+      <option value="dev_fn">⚡ Dev False Fails (FN: Human=Pass, Judge=Fail)</option>
+      <option value="dev_all">Dev Split All (47)</option>
+      <option value="train_all">Train Split All (23)</option>
+      <option value="test_all">Test Split All (47 - Frozen Only)</option>
+      <option value="test_disagree">⚡ Test Disagreements (Frozen Only)</option>
     </select>
   </label>
   <label>Role:
@@ -195,8 +204,7 @@
       <option value="incomplete">Incomplete Binary Judgments</option>
     </select>
   </label>
-  <input type="text" id="f-search" placeholder="Search scenario_id, order #, text..." oninput="renderQueue()" style="min-width:210px;" />
-  <span style="color:var(--muted); font-size:12px;">Hotkeys: <code>j/k</code> next/prev • <code>n</code> no failure • <code>1-6</code> toggle mode</span>
+  <input type="text" id="f-search" placeholder="Search scenario_id, order #, text..." oninput="renderQueue()" style="min-width:190px;" />
 </div>
 
 <!-- TAB 1: 3-Pane Session Review -->
@@ -208,17 +216,22 @@
   </div>
 </div>
 
-<!-- TAB 2: Taxonomy & SPEC.md -->
+<!-- TAB 2: HW5 Judge Alignment & Disagreements -->
+<div id="tab-hw5" class="view-container">
+  <div class="full-scroll" id="hw5-content"></div>
+</div>
+
+<!-- TAB 3: Taxonomy & SPEC.md -->
 <div id="tab-taxonomy" class="view-container">
   <div class="full-scroll" id="taxonomy-content"></div>
 </div>
 
-<!-- TAB 3: Progress & AI Suggestions -->
+<!-- TAB 4: Progress & AI Suggestions -->
 <div id="tab-progress" class="view-container">
   <div class="full-scroll" id="progress-content"></div>
 </div>
 
-<!-- TAB 4: Analysis Reports -->
+<!-- TAB 5: Analysis Reports -->
 <div id="tab-reports" class="view-container">
   <div class="full-scroll" id="reports-content"></div>
 </div>
@@ -250,6 +263,7 @@ function switchTab(name, btn) {
   document.querySelectorAll(".view-container").forEach(v => v.classList.remove("active"));
   document.getElementById("tab-" + name).classList.add("active");
   document.getElementById("review-filters").style.display = name === "review" ? "flex" : "none";
+  if (name === "hw5") renderHw5Tab();
   if (name === "taxonomy") renderTaxonomyTab();
   if (name === "progress") renderProgressTab();
   if (name === "reports") renderReportsTab();
@@ -281,6 +295,45 @@ function countFailedModes(sess) {
   return c;
 }
 
+function getActiveJudge() {
+  const judges = STATE.hw5_judges || {};
+  const keys = Object.keys(judges).sort();
+  if (!keys.length) return null;
+  const sel = document.getElementById("f-judge")?.value;
+  if (sel && sel !== "latest" && judges[sel]) return judges[sel];
+  return judges[keys[keys.length - 1]];
+}
+
+function getTraceSplit(traceId, modeName = "raw_schema_or_planning_leak") {
+  const sp = (STATE.splits || {})[modeName] || {};
+  if ((sp.train || []).includes(traceId)) return "train";
+  if ((sp.dev || []).includes(traceId)) return "dev";
+  if ((sp.test || []).includes(traceId)) return "test";
+  return null;
+}
+
+function getJudgeEvalForTrace(traceId) {
+  const j = getActiveJudge();
+  if (!j) return null;
+  const mode = j.mode || "raw_schema_or_planning_leak";
+  const split = getTraceSplit(traceId, mode);
+  const hw4Val = getModeLabel(traceId, mode); // 0=Pass, 1=Fail in HW4
+  const humanPass = hw4Val !== null ? (1 - hw4Val) : null; // 1=Pass, 0=Fail in HW5
+  const preds = j.predictions || {};
+  const crits = j.critiques || {};
+  const judgePass = preds[traceId] !== undefined ? Number(preds[traceId]) : null;
+  const critique = crits[traceId] || "";
+  let cell = null;
+  let disagree = false;
+  if (humanPass !== null && judgePass !== null) {
+    if (humanPass === 1 && judgePass === 1) cell = "TP";
+    else if (humanPass === 0 && judgePass === 0) cell = "TN";
+    else if (humanPass === 0 && judgePass === 1) { cell = "FP"; disagree = true; }
+    else if (humanPass === 1 && judgePass === 0) { cell = "FN"; disagree = true; }
+  }
+  return { judge: j, mode, split, humanPass, judgePass, critique, cell, disagree };
+}
+
 function updateTopKPIs() {
   const sampled = STATE.sessions.filter(s => s.in_sample);
   const targetPool = sampled.length > 0 ? sampled : STATE.sessions;
@@ -288,23 +341,44 @@ function updateTopKPIs() {
     const a = getAnnotation(s.trace_id);
     return a && a.note;
   }).length;
-  const incompleteCount = targetPool.filter(s => !isSessionComplete(s)).length;
   document.getElementById("source-badge").textContent = `${STATE.source} • ${STATE.total_sessions} sessions`;
   document.getElementById("reviewed-kpi").textContent = `${annotatedCount} / ${targetPool.length} Reviewed`;
-  document.getElementById("incomplete-kpi").textContent = `${incompleteCount} Incomplete Judgments`;
+  const j = getActiveJudge();
+  const jKpi = document.getElementById("judge-kpi");
+  if (j && j.dev_report) {
+    const dr = j.dev_report;
+    jKpi.textContent = `${j.judge_id} (${j.status}) • Dev TPR ${(dr.tpr * 100).toFixed(1)}% / TNR ${(dr.tnr * 100).toFixed(1)}% • ${dr.fp + dr.fn} Disagreements`;
+  } else if (j) {
+    jKpi.textContent = `${j.judge_id} (${j.status}) • Scoring...`;
+  } else {
+    jKpi.textContent = `HW5 Judge: None registered`;
+  }
 }
 
 function renderQueue() {
   const scope = document.getElementById("f-scope").value;
-  const batch = document.getElementById("f-batch").value;
+  const judgeFilter = document.getElementById("f-judge-filter").value;
   const role = document.getElementById("f-role").value;
   const modeFilter = document.getElementById("f-mode").value;
   const status = document.getElementById("f-status").value;
   const q = document.getElementById("f-search").value.trim().toLowerCase();
 
+  updateTopKPIs();
+
   FILTERED = STATE.sessions.filter(s => {
-    if (scope === "sampled" && STATE.sessions.some(x => x.in_sample) && !s.in_sample) return false;
-    if (batch !== "all" && s.sample_batch !== batch) return false;
+    if (judgeFilter === "all") {
+      if (scope === "sampled" && STATE.sessions.some(x => x.in_sample) && !s.in_sample) return false;
+    } else {
+      const ev = getJudgeEvalForTrace(s.trace_id);
+      if (!ev) return false;
+      if (judgeFilter === "dev_all" && ev.split !== "dev") return false;
+      if (judgeFilter === "dev_disagree" && !(ev.split === "dev" && ev.disagree)) return false;
+      if (judgeFilter === "dev_fp" && !(ev.split === "dev" && ev.cell === "FP")) return false;
+      if (judgeFilter === "dev_fn" && !(ev.split === "dev" && ev.cell === "FN")) return false;
+      if (judgeFilter === "train_all" && ev.split !== "train") return false;
+      if (judgeFilter === "test_all" && ev.split !== "test") return false;
+      if (judgeFilter === "test_disagree" && !(ev.split === "test" && ev.disagree)) return false;
+    }
     if (role !== "all" && s.role !== role) return false;
     if (modeFilter !== "all" && getModeLabel(s.trace_id, modeFilter) !== 1) return false;
     const fails = countFailedModes(s);
@@ -323,26 +397,34 @@ function renderQueue() {
   listEl.innerHTML = "";
 
   FILTERED.forEach((s, idx) => {
-    const ann = getAnnotation(s.trace_id);
     const fails = countFailedModes(s);
     const complete = isSessionComplete(s);
+    const ev = getJudgeEvalForTrace(s.trace_id);
     const div = document.createElement("div");
     div.className = "queue-item" + (idx === ACTIVE_IDX ? " active" : "");
-    const batchShort = s.sample_batch ? s.sample_batch.replace("batch_", "B").split("_")[0] : "Extra";
+    const splitBadge = ev?.split ? `<span class="pill blue">${ev.split.toUpperCase()}</span>` : "";
+    let judgeBadge = "";
+    if (ev && ev.judgePass !== null) {
+      if (ev.disagree) {
+        judgeBadge = `<span class="pill red">⚡ ${ev.cell}: Human=${ev.humanPass ? 'Pass' : 'Fail'} / Judge=${ev.judgePass ? 'Pass' : 'Fail'}</span>`;
+      } else {
+        judgeBadge = `<span class="pill ${ev.judgePass ? 'green' : 'amber'}">✓ ${ev.cell} (${ev.judgePass ? 'Pass' : 'Fail'})</span>`;
+      }
+    }
     div.innerHTML = `
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
         <strong class="mono" style="color:#60a5fa;">${escapeHtml(s.scenario_id || s.trace_id.slice(0, 10))}</strong>
-        <div style="display:flex; gap:4px;">
-          <span class="pill purple">${escapeHtml(batchShort)}</span>
+        <div style="display:flex; gap:4px; flex-wrap:wrap;">
+          ${splitBadge}
           <span class="pill ${s.role === 'merchant' ? 'amber' : (s.role === 'support' ? 'cyan' : 'green')}">${escapeHtml(s.role)}</span>
         </div>
       </div>
       <div style="font-size:12px; color:#d1d5db; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:5px;">
         ${escapeHtml(s.turns[0]?.user_text || "")}
       </div>
-      <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; color:var(--muted);">
-        <span>${s.turn_count} turn${s.turn_count > 1 ? 's' : ''} • ${s.tool_call_count} tools</span>
-        <span>${fails > 0 ? `<span class="pill red">${fails} Fail</span>` : (complete ? `<span class="pill green">Clean Pass</span>` : `<span class="pill">Pending</span>`)}</span>
+      <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; color:var(--muted); gap:4px; flex-wrap:wrap;">
+        <span>${s.turn_count}t • ${s.tool_call_count} tools</span>
+        <span>${judgeBadge || (fails > 0 ? `<span class="pill red">${fails} Fail</span>` : (complete ? `<span class="pill green">Clean Pass</span>` : `<span class="pill">Pending</span>`))}</span>
       </div>
     `;
     div.onclick = () => { ACTIVE_IDX = idx; renderQueue(); renderActiveSession(); };
@@ -362,6 +444,44 @@ function renderActiveSession() {
   }
   const s = FILTERED[ACTIVE_IDX];
   const dq = s.extra?.data_quality_case;
+  const ev = getJudgeEvalForTrace(s.trace_id);
+
+  let judgeBannerHtml = "";
+  if (ev && (ev.split || ev.judgePass !== null)) {
+    const humanStr = ev.humanPass === 1 ? "Pass (1)" : (ev.humanPass === 0 ? "Fail (0)" : "Unlabelled");
+    const judgeStr = ev.judgePass === 1 ? "Pass (1)" : (ev.judgePass === 0 ? "Fail (0)" : "Not scored on this split yet");
+    const statusCls = ev.disagree ? "red" : (ev.judgePass !== null ? "green" : "purple");
+    const statusText = ev.disagree
+      ? `⚡ DISAGREEMENT (${ev.cell}: ${ev.cell === 'FP' ? 'False Pass - Judge missed leak' : 'False Fail - Judge over-flagged'})`
+      : (ev.judgePass !== null ? `✓ AGREEMENT (${ev.cell})` : `Split: ${(ev.split || 'unknown').toUpperCase()}`);
+    judgeBannerHtml = `
+      <div class="context-card" style="border-color:${ev.disagree ? 'var(--red)' : 'var(--purple)'}; background:${ev.disagree ? 'rgba(239,68,68,0.08)' : 'rgba(139,92,246,0.08)'};">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:6px;">
+          <div>
+            <strong style="color:#c4b5fd;">HW5 LLM Judge Comparison (<span class="mono">${escapeHtml(ev.judge.judge_id)}</span> on <span class="mono">${escapeHtml(ev.mode)}</span>)</strong>
+            <span class="pill blue" style="margin-left:6px;">Split: ${escapeHtml((ev.split || "unassigned").toUpperCase())}</span>
+          </div>
+          <span class="pill ${statusCls}">${escapeHtml(statusText)}</span>
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:8px;">
+          <div style="padding:8px 10px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid var(--border);">
+            <div style="font-size:11px; color:var(--muted); text-transform:uppercase;">Human Ground-Truth Label (HW5 Pass=1, Fail=0)</div>
+            <div style="font-size:14px; font-weight:700; margin-top:2px; color:${ev.humanPass === 1 ? '#6ee7b7' : '#fca5a5'};">${escapeHtml(humanStr)}</div>
+          </div>
+          <div style="padding:8px 10px; border-radius:6px; background:rgba(0,0,0,0.3); border:1px solid var(--border);">
+            <div style="font-size:11px; color:var(--muted); text-transform:uppercase;">LLM Judge Verdict (${escapeHtml(ev.judge.model)})</div>
+            <div style="font-size:14px; font-weight:700; margin-top:2px; color:${ev.judgePass === 1 ? '#6ee7b7' : (ev.judgePass === 0 ? '#fca5a5' : '#9ca3af')};">${escapeHtml(judgeStr)}</div>
+          </div>
+        </div>
+        ${ev.critique ? `
+          <div style="padding:9px 11px; border-radius:6px; background:#070a12; border:1px solid #374151;">
+            <div style="font-size:11px; font-weight:700; color:#93c5fd; text-transform:uppercase; margin-bottom:4px;">Judge Critique:</div>
+            <div style="font-size:12.5px; color:#f3f4f6; line-height:1.45;">${escapeHtml(ev.critique)}</div>
+          </div>
+        ` : ""}
+      </div>
+    `;
+  }
 
   const turnsHtml = s.turns.map(t => {
     const toolsHtml = (t.tool_steps || []).map(ts => {
@@ -402,6 +522,7 @@ function renderActiveSession() {
   }).join("");
 
   detailEl.innerHTML = `
+    ${judgeBannerHtml}
     <div class="context-card">
       <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:8px;">
         <div>
@@ -429,9 +550,27 @@ function renderActiveSession() {
     ${turnsHtml}
   `;
 
-  // Right Pane: 1. Open Coding, 2. Separate AI Suggestions, 3. Structured Binary Mode Toggles
   const ann = getAnnotation(s.trace_id);
   const traceSuggestions = (STATE.suggestions || []).filter(sg => sg.trace_id === s.trace_id);
+
+  let rightJudgeHtml = "";
+  if (ev) {
+    const hPass = ev.humanPass === 1 ? "Pass (1)" : (ev.humanPass === 0 ? "Fail (0)" : "None");
+    const jPass = ev.judgePass === 1 ? "Pass (1)" : (ev.judgePass === 0 ? "Fail (0)" : "Not scored");
+    rightJudgeHtml = `
+      <div class="side-box" style="border-color:${ev.disagree ? 'var(--red)' : 'var(--purple)'};">
+        <h3>HW5 Judge Verdict &amp; Critique (${escapeHtml(ev.judge.judge_id)})</h3>
+        <div style="display:flex; justify-content:space-between; font-size:12px; margin-bottom:6px;">
+          <span>Human: <strong style="color:${ev.humanPass === 1 ? '#6ee7b7' : '#fca5a5'};">${escapeHtml(hPass)}</strong></span>
+          <span>Judge: <strong style="color:${ev.judgePass === 1 ? '#6ee7b7' : (ev.judgePass === 0 ? '#fca5a5' : '#9ca3af')};">${escapeHtml(jPass)}</strong></span>
+          <span class="pill ${ev.disagree ? 'red' : 'green'}">${escapeHtml(ev.cell || ev.split || 'N/A')}</span>
+        </div>
+        <div style="font-size:12px; color:#e5e7eb; background:#070a12; padding:8px; border-radius:6px; border:1px solid var(--border);">
+          ${escapeHtml(ev.critique || "No critique recorded for this split/trace.")}
+        </div>
+      </div>
+    `;
+  }
 
   const suggHtml = traceSuggestions.length ? traceSuggestions.map(sg => `
     <div style="padding:8px; background:rgba(0,0,0,0.25); border-radius:6px; margin-bottom:8px;">
@@ -446,7 +585,7 @@ function renderActiveSession() {
         <button class="btn red" onclick="decideSuggestion('${sg.id}', 'rejected')">✕ Reject Suggestion</button>
       </div>
     </div>
-  `).join("") : `<div style="font-size:12px; color:var(--muted);">No AI depth-scan suggestions queued for this session. (See Tab 3 for all suggestions across the store.)</div>`;
+  `).join("") : `<div style="font-size:12px; color:var(--muted);">No AI depth-scan suggestions queued for this session.</div>`;
 
   const modesHtml = STATE.modes.map((m, i) => {
     const val = getModeLabel(s.trace_id, m.name);
@@ -458,34 +597,35 @@ function renderActiveSession() {
           <div style="font-size:11px; color:var(--muted);">${escapeHtml(m.requirement_source || "")}</div>
         </div>
         <div style="display:flex; gap:4px;">
-          <button class="btn ${val === 0 ? 'green' : ''}" onclick="setBinaryLabel('${s.trace_id}', '${m.name}', 0)">Pass (0)</button>
-          <button class="btn ${val === 1 ? 'red' : ''}" onclick="setBinaryLabel('${s.trace_id}', '${m.name}', 1)">Fail (1)</button>
+          <button class="btn ${val === 0 ? 'green' : ''}" onclick="setBinaryLabel('${s.trace_id}', '${m.name}', 0)">Pass</button>
+          <button class="btn ${val === 1 ? 'red' : ''}" onclick="setBinaryLabel('${s.trace_id}', '${m.name}', 1)">Fail</button>
         </div>
       </div>
     `;
   }).join("");
 
   rightEl.innerHTML = `
+    ${rightJudgeHtml}
     <div class="side-box">
       <h3>1. Human Open Coding (First-Failure Rule)</h3>
-      <textarea id="open-note-input" rows="4" style="width:100%; margin-bottom:8px;" placeholder="Describe the first upstream failure observed in your own words, or click No Failure Observed...">${escapeHtml(ann?.note || "")}</textarea>
+      <textarea id="open-note-input" rows="3" style="width:100%; margin-bottom:8px;" placeholder="Describe the first upstream failure observed in your own words, or click No Failure Observed...">${escapeHtml(ann?.note || "")}</textarea>
       <div style="display:flex; gap:6px; justify-content:space-between;">
         <button class="btn primary" onclick="saveOpenNote('${s.trace_id}', '${s.scenario_id}')">💾 Save Note</button>
         <button class="btn green" onclick="markNoFailure('${s.trace_id}', '${s.scenario_id}')">✓ No Failure Observed [n]</button>
       </div>
     </div>
 
-    <div class="side-box ai-sugg">
-      <h3>2. AI Depth-Scan Suggestions (Separate from Human Notes)</h3>
-      ${suggHtml}
-    </div>
-
     <div class="side-box">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-        <h3 style="margin:0;">3. Structured Binary Modes (Langfuse Synced)</h3>
-        <button class="btn" onclick="markAllModesPass('${s.trace_id}')">All Pass (0)</button>
+        <h3 style="margin:0;">2. Human Binary Mode Labels (Synced to HW4 &amp; HW5)</h3>
+        <button class="btn" onclick="markAllModesPass('${s.trace_id}')">All Pass</button>
       </div>
       ${modesHtml || `<div style="color:var(--muted); font-size:12px;">Modes appear here once axial coding populates patterns.json.</div>`}
+    </div>
+
+    <div class="side-box ai-sugg">
+      <h3>3. AI Depth-Scan Suggestions</h3>
+      ${suggHtml}
     </div>
   `;
 }
@@ -522,7 +662,7 @@ async function setBinaryLabel(traceId, mode, label) {
   STATE.labels[mode][traceId] = label;
   updateTopKPIs();
   renderQueue();
-  showToast(`Saved ${mode}=${label === 1 ? 'Fail (1)' : 'Pass (0)'} + synced to Langfuse`);
+  showToast(`Saved ${mode}=${label === 1 ? 'Fail' : 'Pass'} (append-only flip synced)`);
 }
 
 async function markAllModesPass(traceId) {
@@ -546,9 +686,9 @@ async function decideSuggestion(sugId, decision) {
   showToast(`AI suggestion ${decision}`);
 }
 
-function jumpToTrace(traceId) {
+function jumpToTrace(traceId, judgeFilterVal = "all") {
   document.getElementById("f-scope").value = "all";
-  document.getElementById("f-batch").value = "all";
+  document.getElementById("f-judge-filter").value = judgeFilterVal;
   document.getElementById("f-role").value = "all";
   document.getElementById("f-mode").value = "all";
   document.getElementById("f-status").value = "all";
@@ -560,6 +700,143 @@ function jumpToTrace(traceId) {
     ACTIVE_IDX = idx;
     renderQueue();
   }
+}
+
+function renderHw5Tab() {
+  const el = document.getElementById("hw5-content");
+  const judges = STATE.hw5_judges || {};
+  const keys = Object.keys(judges).sort();
+  if (!keys.length) {
+    el.innerHTML = `<div class="context-card">No HW5 judges registered yet. Run <code>run_development(...)</code> to score the development split.</div>`;
+    return;
+  }
+  const j = getActiveJudge();
+  const sp = (STATE.splits || {})[j.mode] || {train: [], dev: [], test: []};
+  const allIters = [];
+  keys.forEach(k => {
+    (judges[k].iterations || []).forEach(it => {
+      allIters.push({judge_id: k, status: judges[k].status, ...it});
+    });
+  });
+
+  function renderReportCard(title, rep, splitName) {
+    if (!rep) {
+      return `
+        <div class="context-card">
+          <h3 style="margin-top:0; color:#93c5fd;">${escapeHtml(title)}</h3>
+          <div style="color:var(--muted);">Locked or not yet scored. (Remember: held-out <code>test</code> split is locked until <code>freeze_judge</code> is called.)</div>
+        </div>
+      `;
+    }
+    return `
+      <div class="context-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+          <h3 style="margin:0; color:#93c5fd;">${escapeHtml(title)} (n=${rep.n})</h3>
+          <span class="pill ${rep.tpr >= 0.85 && rep.tnr >= 0.80 ? 'green' : 'amber'}">Agreement: ${(rep.agreement * 100).toFixed(1)}%</span>
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
+          <div style="padding:10px; background:#0d1320; border:1px solid var(--border); border-radius:6px;">
+            <div style="font-size:11px; color:var(--muted);">TPR (Pass Sensitivity = TP / (TP + FN))</div>
+            <div style="font-size:18px; font-weight:700; color:#6ee7b7;">${(rep.tpr * 100).toFixed(1)}%</div>
+            <div class="mono" style="font-size:11px; color:var(--muted);">95% Wilson CI: [${(rep.tpr_interval[0] * 100).toFixed(1)}%, ${(rep.tpr_interval[1] * 100).toFixed(1)}%]</div>
+          </div>
+          <div style="padding:10px; background:#0d1320; border:1px solid var(--border); border-radius:6px;">
+            <div style="font-size:11px; color:var(--muted);">TNR (Fail Specificity = TN / (TN + FP))</div>
+            <div style="font-size:18px; font-weight:700; color:#fcd34d;">${(rep.tnr * 100).toFixed(1)}%</div>
+            <div class="mono" style="font-size:11px; color:var(--muted);">95% Wilson CI: [${(rep.tnr_interval[0] * 100).toFixed(1)}%, ${(rep.tnr_interval[1] * 100).toFixed(1)}%]</div>
+          </div>
+        </div>
+        <table class="grid">
+          <thead>
+            <tr><th>Confusion Matrix (Pass=1, Fail=0)</th><th>Judge = Pass (1)</th><th>Judge = Fail (0)</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Human = Pass (1)</strong></td>
+              <td class="mono" style="color:#6ee7b7;"><strong>TP = ${rep.tp}</strong> (True Pass)</td>
+              <td class="mono" style="color:#fca5a5;"><strong>FN = ${rep.fn}</strong> (False Fail)</td>
+            </tr>
+            <tr>
+              <td><strong>Human = Fail (0)</strong></td>
+              <td class="mono" style="color:#fca5a5;"><strong>FP = ${rep.fp}</strong> (False Pass)</td>
+              <td class="mono" style="color:#6ee7b7;"><strong>TN = ${rep.tn}</strong> (True Fail)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  const sessByTrace = {};
+  STATE.sessions.forEach(s => { sessByTrace[s.trace_id] = s; });
+
+  const devDisagreeRows = (sp.dev || []).map(tid => {
+    const ev = getJudgeEvalForTrace(tid);
+    if (!ev || !ev.disagree) return "";
+    const s = sessByTrace[tid] || {};
+    return `
+      <tr>
+        <td>
+          <button class="btn mono" onclick="jumpToTrace('${tid}', 'dev_disagree')">${escapeHtml(s.scenario_id || tid.slice(0, 10))}</button>
+          <div class="mono" style="font-size:11px; color:var(--muted); margin-top:3px;">${escapeHtml(tid.slice(0, 16))}…</div>
+        </td>
+        <td><span class="pill ${ev.humanPass ? 'green' : 'red'}">${ev.humanPass ? 'Pass (1)' : 'Fail (0)'}</span></td>
+        <td><span class="pill ${ev.judgePass ? 'green' : 'red'}">${ev.judgePass ? 'Pass (1)' : 'Fail (0)'}</span></td>
+        <td><span class="pill red">${ev.cell === 'FP' ? 'False Pass (FP)' : 'False Fail (FN)'}</span></td>
+        <td>${escapeHtml(ev.critique || "")}</td>
+      </tr>
+    `;
+  }).filter(Boolean).join("");
+
+  const iterRows = allIters.map(it => `
+    <tr>
+      <td class="mono"><strong>${escapeHtml(it.judge_id)}</strong> (v${it.version})</td>
+      <td><span class="pill ${it.status === 'frozen' ? 'green' : 'amber'}">${escapeHtml(it.status)}</span></td>
+      <td class="mono">${(it.dev_tpr * 100).toFixed(1)}%</td>
+      <td class="mono">${(it.dev_tnr * 100).toFixed(1)}%</td>
+      <td class="mono">${it.label_flips || 0}</td>
+      <td>${escapeHtml(it.change_note || "Initial / refined dev run")}</td>
+    </tr>
+  `).join("");
+
+  el.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
+      <div>
+        <h2 style="margin:0;">HW5 LLM-as-Judge Alignment &amp; Disagreement Inspector</h2>
+        <div style="color:var(--muted); margin-top:4px;">
+          Target Mode: <strong class="mono" style="color:#60a5fa;">${escapeHtml(j.mode)}</strong> •
+          Stratified 20/40/40 Split: <strong>${(sp.train || []).length} Train / ${(sp.dev || []).length} Dev / ${(sp.test || []).length} Test</strong> •
+          Active Judge: <strong class="mono" style="color:#c4b5fd;">${escapeHtml(j.judge_id)}</strong> (${escapeHtml(j.model)}, status=<span class="mono">${escapeHtml(j.status)}</span>)
+        </div>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn red" onclick="document.getElementById('f-judge-filter').value='dev_disagree'; switchTab('review', document.querySelectorAll('.tab-btn')[0]); renderQueue();">
+          ⚡ Filter Tab 1 to Dev Disagreements
+        </button>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:18px;">
+      ${renderReportCard(`Development Split Alignment (${j.judge_id})`, j.dev_report, "dev")}
+      ${renderReportCard(`Held-Out Test Split Alignment (${j.judge_id})`, j.test_report, "test")}
+    </div>
+
+    <h3>Iteration Hill-Climbing Log (Dev TPR / TNR Progression)</h3>
+    <table class="grid" style="margin-bottom:18px;">
+      <thead>
+        <tr><th>Judge Version</th><th>Status</th><th>Dev TPR (Pass)</th><th>Dev TNR (Fail)</th><th>Label Flips</th><th>Notes</th></tr>
+      </thead>
+      <tbody>${iterRows || `<tr><td colspan="6">No iterations logged yet.</td></tr>`}</tbody>
+    </table>
+
+    <h3>Development Disagreements (${escapeHtml(j.judge_id)}) — Click Any Trace to Inspect Side-by-Side</h3>
+    <table class="grid">
+      <thead>
+        <tr><th>Scenario / Trace ID</th><th>Human Label</th><th>Judge Verdict</th><th>Disagreement Type</th><th>Judge Critique</th></tr>
+      </thead>
+      <tbody>${devDisagreeRows || `<tr><td colspan="5" style="color:#6ee7b7;">Zero disagreements on the development split!</td></tr>`}</tbody>
+    </table>
+  `;
 }
 
 function renderTaxonomyTab() {
@@ -669,7 +946,11 @@ function renderProgressTab() {
 function renderReportsTab() {
   const el = document.getElementById("reports-content");
   el.innerHTML = `
-    <h2 style="margin-top:0;">Committed Error Analysis Reports (analysis/report/)</h2>
+    <h2 style="margin-top:0;">Committed Error Analysis &amp; HW5 Judge Reports (analysis/report/)</h2>
+    <div class="context-card" style="margin-bottom:16px;">
+      <h3 style="margin-top:0; color:#c4b5fd;">analysis/report/judge_summary.md (HW5 Judge Evaluation)</h3>
+      <pre>${escapeHtml(STATE.reports?.["judge_summary.md"] || "")}</pre>
+    </div>
     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px;">
       <div class="context-card">
         <h3 style="margin-top:0; color:#93c5fd;">analysis/report/interface_comparison.md</h3>
@@ -708,6 +989,12 @@ async function bootstrap() {
   modeSel.innerHTML = `<option value="all">Any Mode</option>` +
     STATE.modes.map(m => `<option value="${escapeHtml(m.name)}">${escapeHtml(m.name)}</option>`).join("");
   modeSel.value = prev || "all";
+
+  const judgeSel = document.getElementById("f-judge");
+  const jKeys = Object.keys(STATE.hw5_judges || {}).sort();
+  judgeSel.innerHTML = `<option value="latest">Latest (${escapeHtml(jKeys[jKeys.length - 1] || "none")})</option>` +
+    jKeys.map(k => `<option value="${escapeHtml(k)}">${escapeHtml(k)} (${escapeHtml(STATE.hw5_judges[k].status)})</option>`).join("");
+
   updateTopKPIs();
   renderQueue();
 }

@@ -702,6 +702,30 @@ function jumpToTrace(traceId, judgeFilterVal = "all") {
   }
 }
 
+async function runLiveRecalculation() {
+  const box = document.getElementById("live-recalc-box");
+  if (!box) return;
+  box.style.display = "block";
+  box.innerHTML = `<div class="mono" style="color:#93c5fd;">Running live recalculation from saved predictions: judge_alignment('raw_schema_or_planning_leak-v1', 'test')...</div>`;
+  const res = await fetch("/api/recalculate-test");
+  const data = await res.json();
+  box.innerHTML = `
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+      <strong class="mono" style="color:#6ee7b7;">✓ Live Recalculation Output (${escapeHtml(data.command)})</strong>
+      <span class="pill green">Recalculated at ${escapeHtml(data.recalculated_at)}</span>
+    </div>
+    <pre>${escapeHtml(JSON.stringify(data.test_metrics, null, 2))}</pre>
+  `;
+  showToast("Recalculated test TPR/TNR live from saved predictions");
+}
+
+function selectHw5JudgeInTab(jid) {
+  const sel = document.getElementById("f-judge");
+  if (sel) sel.value = jid;
+  updateTopKPIs();
+  renderHw5Tab();
+}
+
 function renderHw5Tab() {
   const el = document.getElementById("hw5-content");
   const judges = STATE.hw5_judges || {};
@@ -711,6 +735,8 @@ function renderHw5Tab() {
     return;
   }
   const j = getActiveJudge();
+  const v0 = judges["raw_schema_or_planning_leak-v0"] || j;
+  const v1 = judges["raw_schema_or_planning_leak-v1"] || j;
   const sp = (STATE.splits || {})[j.mode] || {train: [], dev: [], test: []};
   const allIters = [];
   keys.forEach(k => {
@@ -724,7 +750,7 @@ function renderHw5Tab() {
       return `
         <div class="context-card">
           <h3 style="margin-top:0; color:#93c5fd;">${escapeHtml(title)}</h3>
-          <div style="color:var(--muted);">Locked or not yet scored. (Remember: held-out <code>test</code> split is locked until <code>freeze_judge</code> is called.)</div>
+          <div style="color:var(--muted);">Locked or not yet scored. (Held-out <code>test</code> split is locked until <code>freeze_judge</code> is called.)</div>
         </div>
       `;
     }
@@ -777,7 +803,7 @@ function renderHw5Tab() {
     return `
       <tr>
         <td>
-          <button class="btn mono" onclick="jumpToTrace('${tid}', 'dev_disagree')">${escapeHtml(s.scenario_id || tid.slice(0, 10))}</button>
+          <button class="btn mono" onclick="jumpToTrace('${tid}', 'all')">${escapeHtml(s.scenario_id || tid.slice(0, 10))}</button>
           <div class="mono" style="font-size:11px; color:var(--muted); margin-top:3px;">${escapeHtml(tid.slice(0, 16))}…</div>
         </td>
         <td><span class="pill ${ev.humanPass ? 'green' : 'red'}">${ev.humanPass ? 'Pass (1)' : 'Fail (0)'}</span></td>
@@ -799,6 +825,10 @@ function renderHw5Tab() {
     </tr>
   `).join("");
 
+  const v0Crit184 = (v0.critiques || {})["997383a856f2a4c01ea9698c4a5c1faf"] || "";
+  const v0Crit217 = (v0.critiques || {})["92749cd39c47f498c9176dbdf8fb0d02"] || "";
+  const v1Crit217 = (v1.critiques || {})["92749cd39c47f498c9176dbdf8fb0d02"] || "";
+
   el.innerHTML = `
     <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
       <div>
@@ -809,12 +839,15 @@ function renderHw5Tab() {
           Active Judge: <strong class="mono" style="color:#c4b5fd;">${escapeHtml(j.judge_id)}</strong> (${escapeHtml(j.model)}, status=<span class="mono">${escapeHtml(j.status)}</span>)
         </div>
       </div>
-      <div style="display:flex; gap:8px;">
-        <button class="btn red" onclick="document.getElementById('f-judge-filter').value='dev_disagree'; switchTab('review', document.querySelectorAll('.tab-btn')[0]); renderQueue();">
-          ⚡ Filter Tab 1 to Dev Disagreements
+      <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        ${keys.map(k => `<button class="btn ${j.judge_id === k ? 'primary' : ''}" onclick="selectHw5JudgeInTab('${k}')">View ${escapeHtml(k)} (${escapeHtml(judges[k].status)})</button>`).join("")}
+        <button class="btn green" onclick="runLiveRecalculation()">
+          ▶ Recalculate Test Metrics Live from Saved Predictions
         </button>
       </div>
     </div>
+
+    <div id="live-recalc-box" class="context-card" style="display:none; border-color:var(--green); background:rgba(16,185,129,0.08); margin-bottom:16px;"></div>
 
     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-bottom:18px;">
       ${renderReportCard(`Development Split Alignment (${j.judge_id})`, j.dev_report, "dev")}
@@ -829,13 +862,45 @@ function renderHw5Tab() {
       <tbody>${iterRows || `<tr><td colspan="6">No iterations logged yet.</td></tr>`}</tbody>
     </table>
 
-    <h3>Development Disagreements (${escapeHtml(j.judge_id)}) — Click Any Trace to Inspect Side-by-Side</h3>
-    <table class="grid">
+    <h3>v0 -> v1 Development Disagreement Case Studies (Click to Inspect Conversation in Tab 1)</h3>
+    <table class="grid" style="margin-bottom:18px;">
+      <thead>
+        <tr><th>Scenario / Trace ID</th><th>v0 Disagreement</th><th>v0 Judge Critique</th><th>Resolution in v1</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <button class="btn mono" onclick="jumpToTrace('92749cd39c47f498c9176dbdf8fb0d02', 'all')">support-0217</button>
+            <div class="mono" style="font-size:11px; color:var(--muted); margin-top:3px;">92749cd39c47f498…</div>
+          </td>
+          <td><span class="pill red">False Pass (FP in v0)</span><br/><span style="font-size:11.5px; color:var(--muted);">Human=Fail (0), v0 Judge=Pass (1)</span></td>
+          <td>${escapeHtml(v0Crit217)}</td>
+          <td><span class="pill green">Fixed Prompt Boundary in v1</span><br/>Added explicit <code>RESP-6</code> rule that unrequested numeric <code>(Store ID &lt;N&gt;)</code> disclosures in merchant replies are <code>Fail</code> (anchored on <code>train</code> example <code>2889050716f3ae52a25c288e9cd7719d</code>).<br/><em style="color:#93c5fd;">v1 Critique:</em> ${escapeHtml(v1Crit217)}</td>
+        </tr>
+        <tr>
+          <td>
+            <button class="btn mono" onclick="jumpToTrace('997383a856f2a4c01ea9698c4a5c1faf', 'all')">support-0184</button>
+            <div class="mono" style="font-size:11px; color:var(--muted); margin-top:3px;">997383a856f2a4c0…</div>
+          </td>
+          <td><span class="pill amber">False Fail (FN in v0)</span><br/><span style="font-size:11.5px; color:var(--muted);">Initial Human=Pass (1), v0 Judge=Fail (0)</span></td>
+          <td>${escapeHtml(v0Crit184)}</td>
+          <td><span class="pill green">Fixed Human Label (Append-Only Flip)</span><br/>Assistant reply exposed <code>(\`delivered_at\` is currently \`None\`)</code> in backticks. The judge caught a genuine human labelling oversight from HW4, so we flipped <code>997383a856f2a4c01ea9698c4a5c1faf#1</code> to <code>Fail</code> via <code>superseded_by</code>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Remaining Development Disagreements on ${escapeHtml(j.judge_id)}</h3>
+    <table class="grid" style="margin-bottom:18px;">
       <thead>
         <tr><th>Scenario / Trace ID</th><th>Human Label</th><th>Judge Verdict</th><th>Disagreement Type</th><th>Judge Critique</th></tr>
       </thead>
-      <tbody>${devDisagreeRows || `<tr><td colspan="5" style="color:#6ee7b7;">Zero disagreements on the development split!</td></tr>`}</tbody>
+      <tbody>${devDisagreeRows || `<tr><td colspan="5" style="color:#6ee7b7;">Zero disagreements!</td></tr>`}</tbody>
     </table>
+
+    <details class="context-card">
+      <summary style="cursor:pointer; font-weight:700; color:#93c5fd;">View Frozen Judge Prompt (${escapeHtml(j.judge_id)} • hash ${escapeHtml(j.prompt_hash)})</summary>
+      <pre style="margin-top:10px;">${escapeHtml(j.prompt_text || "")}</pre>
+    </details>
   `;
 }
 

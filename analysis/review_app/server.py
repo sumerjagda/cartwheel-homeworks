@@ -534,6 +534,22 @@ class CustomReviewHandler(BaseHTTPRequestHandler):
         if path == "/api/labels":
             self._send_json(_load_all_live_labels())
             return
+        if path == "/api/recalculate-test":
+            from analysis.helpers import iteration_log, judge_alignment
+
+            jid = "raw_schema_or_planning_leak-v1"
+            dev_v0 = judge_alignment("raw_schema_or_planning_leak-v0", "dev")
+            dev_v1 = judge_alignment(jid, "dev")
+            test_v1 = judge_alignment(jid, "test")
+            self._send_json({
+                "recalculated_at": _utcnow(),
+                "command": "judge_alignment('raw_schema_or_planning_leak-v1', split='test')",
+                "test_metrics": test_v1,
+                "dev_v1_metrics": dev_v1,
+                "dev_v0_metrics": dev_v0,
+                "iteration_log": iteration_log("raw_schema_or_planning_leak"),
+            })
+            return
         self._send_json({"error": f"not found: {path}"}, status=404)
 
     def do_POST(self) -> None:  # noqa: N802

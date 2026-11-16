@@ -34,6 +34,11 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 
+try:
+    from fastapi import Request
+except ImportError:  # pragma: no cover
+    Request = Any  # type: ignore[misc,assignment]
+
 HERE = Path(__file__).resolve().parent
 ANALYSIS_DIR = HERE.parent
 REPO_ROOT = ANALYSIS_DIR.parent
@@ -454,196 +459,201 @@ def _load_hw5_judge_bundle(splits_doc: dict[str, Any]) -> dict[str, Any]:
     return judges_out
 
 
-class CustomReviewHandler(BaseHTTPRequestHandler):
-    """HTTP handler for the Cartwheel Homework 4 Custom Review Interface."""
+_SESSIONS_CACHE: dict[str, Any] | None = None
 
-    def log_message(self, fmt: str, *args: Any) -> None:  # noqa: A002
-        return
 
-    def _send_json(self, data: Any, status: int = 200) -> None:
-        body = json.dumps(data, ensure_ascii=False).encode("utf-8")
-        self.send_response(status)
-        self.send_header("Content-Type", "application/json; charset=utf-8")
-        self.send_header("Content-Length", str(len(body)))
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-        self.send_header("Access-Control-Allow-Headers", "Content-Type")
-        self.end_headers()
-        self.wfile.write(body)
+def get_cached_sessions() -> dict[str, Any]:
+    """Return cached session conversations, building once at startup for <10ms responses."""
+    global _SESSIONS_CACHE
+    if _SESSIONS_CACHE is None:
+        _SESSIONS_CACHE = build_session_conversations()
+    return _SESSIONS_CACHE
 
-    def _send_html(self, path: Path) -> None:
-        body = path.read_bytes()
-        self.send_response(200)
-        self.send_header("Content-Type", "text/html; charset=utf-8")
-        self.send_header("Content-Length", str(len(body)))
-        self.end_headers()
-        self.wfile.write(body)
 
-    def _read_body(self) -> Any:
-        length = int(self.headers.get("Content-Length", 0))
-        if length == 0:
-            return None
-        return json.loads(self.rfile.read(length).decode("utf-8"))
+def _build_bootstrap_payload() -> dict[str, Any]:
+    sessions_payload = get_cached_sessions()
+    annotations_doc = _read_json(STATE_DIR / "annotations.json", {"annotations": []})
+    patterns_doc = _read_json(STATE_DIR / "patterns.json", {"modes": []})
+    suggestions_doc = _read_json(STATE_DIR / "suggestions.json", [])
+    manifest_doc = _read_json(STATE_DIR / "sample_manifest.json", {})
+    splits_doc = _read_json(STATE_DIR / "splits.json", {})
+    hw5_judges = _load_hw5_judge_bundle(splits_doc)
+    labels_map = _load_all_live_labels()
+    reports_map = {}
+    for rname in ("interface_comparison.md", "review_summary.md", "judge_summary.md"):
+        rp = REPORT_DIR / rname
+        if rp.exists():
+            reports_map[rname] = rp.read_text(encoding="utf-8")
+    spec_text = (REPO_ROOT / "SPEC.md").read_text(encoding="utf-8") if (REPO_ROOT / "SPEC.md").exists() else ""
+    return {
+        **sessions_payload,
+        "annotations": annotations_doc.get("annotations", []) if isinstance(annotations_doc, dict) else annotations_doc,
+        "modes": [m for m in patterns_doc.get("modes", []) if m.get("name") != "unsupported_policy_claim"],
+        "all_modes_raw": patterns_doc.get("modes", []),
+        "suggestions": suggestions_doc,
+        "sample_manifest": manifest_doc,
+        "splits": {k: v for k, v in splits_doc.items() if k != "unsupported_policy_claim"},
+        "hw5_judges": hw5_judges,
+        "labels": labels_map,
+        "reports": reports_map,
+        "spec_md": spec_text,
+    }
 
-    def do_OPTIONS(self) -> None:  # noqa: N802
-        self._send_json({}, status=204)
 
-    def do_GET(self) -> None:  # noqa: N802
-        path = self.path.split("?", 1)[0]
-        if path in ("/", "/index.html"):
-            self._send_html(UI_DIR / "index.html")
-            return
-        if path == "/api/bootstrap":
-            sessions_payload = build_session_conversations()
-            annotations_doc = _read_json(STATE_DIR / "annotations.json", {"annotations": []})
-            patterns_doc = _read_json(STATE_DIR / "patterns.json", {"modes": []})
-            suggestions_doc = _read_json(STATE_DIR / "suggestions.json", [])
-            manifest_doc = _read_json(STATE_DIR / "sample_manifest.json", {})
-            splits_doc = _read_json(STATE_DIR / "splits.json", {})
-            hw5_judges = _load_hw5_judge_bundle(splits_doc)
-            labels_map = _load_all_live_labels()
-            reports_map = {}
-            for rname in ("interface_comparison.md", "review_summary.md", "judge_summary.md"):
-                rp = REPORT_DIR / rname
-                if rp.exists():
-                    reports_map[rname] = rp.read_text(encoding="utf-8")
-            spec_text = (REPO_ROOT / "SPEC.md").read_text(encoding="utf-8") if (REPO_ROOT / "SPEC.md").exists() else ""
-            self._send_json({
-                **sessions_payload,
-                "annotations": annotations_doc.get("annotations", []) if isinstance(annotations_doc, dict) else annotations_doc,
-                "modes": [m for m in patterns_doc.get("modes", []) if m.get("name") != "unsupported_policy_claim"],
-                "all_modes_raw": patterns_doc.get("modes", []),
-                "suggestions": suggestions_doc,
-                "sample_manifest": manifest_doc,
-                "splits": {k: v for k, v in splits_doc.items() if k != "unsupported_policy_claim"},
-                "hw5_judges": hw5_judges,
-                "labels": labels_map,
-                "reports": reports_map,
-                "spec_md": spec_text,
-            })
-            return
-        if path == "/api/annotations":
-            self._send_json(_read_json(STATE_DIR / "annotations.json", {"annotations": []}))
-            return
-        if path == "/api/patterns":
-            self._send_json(_read_json(STATE_DIR / "patterns.json", {"modes": []}))
-            return
-        if path == "/api/suggestions":
-            self._send_json(_read_json(STATE_DIR / "suggestions.json", []))
-            return
-        if path == "/api/labels":
-            self._send_json(_load_all_live_labels())
-            return
-        if path == "/api/recalculate-test":
-            from analysis.helpers import iteration_log, judge_alignment
+def create_app():
+    from fastapi import FastAPI, Request
+    from fastapi.middleware.gzip import GZipMiddleware
+    from fastapi.responses import HTMLResponse, JSONResponse, Response
 
-            jid = "raw_schema_or_planning_leak-v1"
-            dev_v0 = judge_alignment("raw_schema_or_planning_leak-v0", "dev")
-            dev_v1 = judge_alignment(jid, "dev")
-            test_v1 = judge_alignment(jid, "test")
-            self._send_json({
-                "recalculated_at": _utcnow(),
-                "command": "judge_alignment('raw_schema_or_planning_leak-v1', split='test')",
-                "test_metrics": test_v1,
-                "dev_v1_metrics": dev_v1,
-                "dev_v0_metrics": dev_v0,
-                "iteration_log": iteration_log("raw_schema_or_planning_leak"),
-            })
-            return
-        self._send_json({"error": f"not found: {path}"}, status=404)
+    app = FastAPI(title="Cartwheel HW4 & HW5 Review App")
+    app.add_middleware(GZipMiddleware, minimum_size=1000)
 
-    def do_POST(self) -> None:  # noqa: N802
-        path = self.path.split("?", 1)[0]
-        body = self._read_body()
-        if body is None:
-            self._send_json({"error": "invalid JSON body"}, status=400)
-            return
+    @app.api_route("/", methods=["GET", "HEAD"])
+    @app.api_route("/index.html", methods=["GET", "HEAD"])
+    async def serve_index(request: Request) -> Response:
+        html_bytes = (UI_DIR / "index.html").read_bytes()
+        if request.method == "HEAD":
+            return Response(status_code=200, headers={"Content-Type": "text/html; charset=utf-8", "Content-Length": str(len(html_bytes))})
+        return HTMLResponse(content=html_bytes.decode("utf-8"))
 
-        if path == "/api/annotate":
-            trace_id = str(body["trace_id"])
-            note = str(body.get("note", "")).strip()
-            scenario_id = str(body.get("scenario_id", ""))
-            doc = _read_json(STATE_DIR / "annotations.json", {"annotations": []})
-            anns = doc.get("annotations", []) if isinstance(doc, dict) else list(doc)
-            updated = False
-            for idx, a in enumerate(anns):
-                if a.get("trace_id") == trace_id and a.get("author") == "human":
-                    anns[idx] = {
-                        **a,
-                        "note": note,
-                        "scenario_id": scenario_id or a.get("scenario_id", ""),
-                        "no_failure": note.lower() == "no failure observed",
-                        "ts": _utcnow(),
-                    }
-                    updated = True
-                    break
-            if not updated:
-                anns.append({
-                    "id": f"ann-{len(anns) + 1:03d}",
-                    "trace_id": trace_id,
-                    "scenario_id": scenario_id,
+    @app.api_route("/favicon.ico", methods=["GET", "HEAD"])
+    async def serve_favicon() -> Response:
+        return Response(status_code=204)
+
+    @app.get("/api/bootstrap")
+    async def api_bootstrap() -> JSONResponse:
+        return JSONResponse(content=_build_bootstrap_payload())
+
+    @app.get("/api/annotations")
+    async def api_annotations() -> JSONResponse:
+        return JSONResponse(content=_read_json(STATE_DIR / "annotations.json", {"annotations": []}))
+
+    @app.get("/api/patterns")
+    async def api_patterns() -> JSONResponse:
+        return JSONResponse(content=_read_json(STATE_DIR / "patterns.json", {"modes": []}))
+
+    @app.get("/api/suggestions")
+    async def api_suggestions() -> JSONResponse:
+        return JSONResponse(content=_read_json(STATE_DIR / "suggestions.json", []))
+
+    @app.get("/api/labels")
+    async def api_labels() -> JSONResponse:
+        return JSONResponse(content=_load_all_live_labels())
+
+    @app.get("/api/recalculate-test")
+    async def api_recalculate_test() -> JSONResponse:
+        from analysis.helpers import iteration_log, judge_alignment
+
+        jid = "raw_schema_or_planning_leak-v1"
+        dev_v0 = judge_alignment("raw_schema_or_planning_leak-v0", "dev")
+        dev_v1 = judge_alignment(jid, "dev")
+        test_v1 = judge_alignment(jid, "test")
+        return JSONResponse(content={
+            "recalculated_at": _utcnow(),
+            "command": "judge_alignment('raw_schema_or_planning_leak-v1', split='test')",
+            "test_metrics": test_v1,
+            "dev_v1_metrics": dev_v1,
+            "dev_v0_metrics": dev_v0,
+            "iteration_log": iteration_log("raw_schema_or_planning_leak"),
+        })
+
+    @app.post("/api/annotate")
+    async def api_post_annotate(request: Request) -> JSONResponse:
+        body = await request.json()
+        trace_id = str(body["trace_id"])
+        note = str(body.get("note", "")).strip()
+        scenario_id = str(body.get("scenario_id", ""))
+        doc = _read_json(STATE_DIR / "annotations.json", {"annotations": []})
+        anns = doc.get("annotations", []) if isinstance(doc, dict) else list(doc)
+        updated = False
+        for idx, a in enumerate(anns):
+            if a.get("trace_id") == trace_id and a.get("author") == "human":
+                anns[idx] = {
+                    **a,
                     "note": note,
+                    "scenario_id": scenario_id or a.get("scenario_id", ""),
                     "no_failure": note.lower() == "no failure observed",
-                    "author": "human",
                     "ts": _utcnow(),
-                })
-            _write_json(STATE_DIR / "annotations.json", {"annotations": anns})
-            self._send_json({"ok": True, "count": len(anns)})
-            return
+                }
+                updated = True
+                break
+        if not updated:
+            anns.append({
+                "id": f"ann-{len(anns) + 1:03d}",
+                "trace_id": trace_id,
+                "scenario_id": scenario_id,
+                "note": note,
+                "no_failure": note.lower() == "no failure observed",
+                "author": "human",
+                "ts": _utcnow(),
+            })
+        _write_json(STATE_DIR / "annotations.json", {"annotations": anns})
+        return JSONResponse(content={"ok": True, "count": len(anns)})
 
-        if path == "/api/label":
-            res = _save_single_label(
-                trace_id=str(body["trace_id"]),
-                mode=str(body["mode"]),
-                label=int(body["label"]),
-                source=str(body.get("source", "human")),
-                comment=str(body.get("comment", "")),
+    @app.post("/api/label")
+    async def api_post_label(request: Request) -> JSONResponse:
+        body = await request.json()
+        res = _save_single_label(
+            trace_id=str(body["trace_id"]),
+            mode=str(body["mode"]),
+            label=int(body["label"]),
+            source=str(body.get("source", "human")),
+            comment=str(body.get("comment", "")),
+        )
+        return JSONResponse(content=res)
+
+    @app.post("/api/suggestion-decision")
+    async def api_post_suggestion_decision(request: Request) -> JSONResponse:
+        body = await request.json()
+        sug_id = str(body["id"])
+        decision = str(body["decision"])
+        reason = str(body.get("reason", ""))
+        suggestions = _read_json(STATE_DIR / "suggestions.json", [])
+        target = None
+        for s in suggestions:
+            if s.get("id") == sug_id:
+                s["status"] = decision
+                s["decision_ts"] = _utcnow()
+                if reason:
+                    s["decision_reason"] = reason
+                target = s
+                break
+        _write_json(STATE_DIR / "suggestions.json", suggestions)
+        if target and decision == "accepted":
+            _save_single_label(
+                trace_id=str(target["trace_id"]),
+                mode=str(target["mode"]),
+                label=1,
+                source="accepted_suggestion",
+                comment=str(target.get("text", "")),
             )
-            self._send_json(res)
-            return
+        return JSONResponse(content={"ok": True, "suggestion": target})
 
-        if path == "/api/suggestion-decision":
-            sug_id = str(body["id"])
-            decision = str(body["decision"])  # "accepted" or "rejected"
-            reason = str(body.get("reason", ""))
-            suggestions = _read_json(STATE_DIR / "suggestions.json", [])
-            target = None
-            for s in suggestions:
-                if s.get("id") == sug_id:
-                    s["status"] = decision
-                    s["decision_ts"] = _utcnow()
-                    if reason:
-                        s["decision_reason"] = reason
-                    target = s
-                    break
-            _write_json(STATE_DIR / "suggestions.json", suggestions)
-            if target and decision == "accepted":
-                _save_single_label(
-                    trace_id=str(target["trace_id"]),
-                    mode=str(target["mode"]),
-                    label=1,
-                    source="accepted_suggestion",
-                    comment=str(target.get("text", "")),
-                )
-            self._send_json({"ok": True, "suggestion": target})
-            return
-
-        self._send_json({"error": f"unknown POST endpoint: {path}"}, status=404)
+    return app
 
 
 def main() -> None:
+    import socket
+    import uvicorn
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--host", default="0.0.0.0")
     parser.add_argument("--port", type=int, default=8020)
     args = parser.parse_args()
 
     STATE_DIR.mkdir(parents=True, exist_ok=True)
-    server = ThreadingHTTPServer((args.host, args.port), CustomReviewHandler)
-    print(f"Cartwheel HW4 Review App listening on http://{args.host}:{args.port}")
-    try:
-        server.serve_forever()
-    except KeyboardInterrupt:
-        server.shutdown()
+    # Warm session cache once at startup so /api/bootstrap responds in <65ms
+    get_cached_sessions()
+    app = create_app()
+
+    sock = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    sock.setsockopt(socket.IPPROTO_IPV6, socket.IPV6_V6ONLY, 0)
+    sock.bind(("::", args.port))
+    sock.listen(2048)
+    print(f"Cartwheel HW4 & HW5 Review App (FastAPI + GZip Dual-Stack) listening on *:{args.port}")
+    config = uvicorn.Config(app, fd=sock.fileno(), log_level="warning")
+    uvicorn.Server(config).run()
 
 
 if __name__ == "__main__":

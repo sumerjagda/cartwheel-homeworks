@@ -5,8 +5,8 @@ on:
     branches: [hw6]
 
 jobs:
-  harbor-baseline:
-    name: Harbor 5-attempt baseline (10 cases)
+  harbor-baseline-rerun:
+    name: Harbor 5-attempt baseline rerun (5 affected code-check cases)
     runs-on: ubuntu-latest
     env:
       CARTWHEEL_MODEL: ${{ vars.CARTWHEEL_MODEL }}
@@ -25,9 +25,16 @@ jobs:
         run: |
           uv tool install 'harbor==0.23.0'
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-      - name: Export 10 unclassified baseline tasks
-        run: uv run --frozen python scripts/export_harbor_tasks.py --baseline
-      - name: Run Harbor baseline (5 attempts per case)
+      - name: Export 5 affected baseline tasks (e-004, e-005, e-006, e-007, e-009)
+        run: |
+          uv run --frozen python scripts/export_harbor_tasks.py \
+            --baseline \
+            --case e-004 \
+            --case e-005 \
+            --case e-006 \
+            --case e-007 \
+            --case e-009
+      - name: Run Harbor baseline rerun (5 attempts x 5 cases)
         run: |
           PYTHONPATH="$PWD" harbor run \
             -p .harbor/tasks \
@@ -35,21 +42,21 @@ jobs:
             -m "$CARTWHEEL_MODEL" \
             -e docker \
             --n-attempts 5 \
-            --n-concurrent 2 \
-            --job-name hw6-baseline \
+            --n-concurrent 3 \
+            --job-name hw6-baseline-rerun5 \
             --jobs-dir .harbor/jobs \
             --yes
-      - name: Summarize baseline and produce classifications
+      - name: Summarize baseline rerun
         if: always()
         run: |
           uv run --frozen python scripts/summarize_harbor_job.py \
-            .harbor/jobs/hw6-baseline \
+            .harbor/jobs/hw6-baseline-rerun5 \
             --expected-attempts 5 \
             --classify
-      - name: Upload Harbor baseline artifact
+      - name: Upload Harbor baseline rerun artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: hw6-baseline
-          path: .harbor/jobs/hw6-baseline
+          name: hw6-baseline-rerun5
+          path: .harbor/jobs/hw6-baseline-rerun5
           if-no-files-found: warn

@@ -5,8 +5,8 @@ on:
     branches: [hw6]
 
 jobs:
-  harbor-smoke:
-    name: Harbor 1-case smoke check (e-001)
+  harbor-baseline:
+    name: Harbor 5-attempt baseline (10 cases)
     runs-on: ubuntu-latest
     env:
       CARTWHEEL_MODEL: ${{ vars.CARTWHEEL_MODEL }}
@@ -25,62 +25,31 @@ jobs:
         run: |
           uv tool install 'harbor==0.23.0'
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-      - name: Check configuration (non-secret)
-        run: |
-          echo "CARTWHEEL_MODEL=${CARTWHEEL_MODEL:-<UNSET>}"
-          test -n "${CARTWHEEL_MODEL:-}" || { echo "ERROR: CARTWHEEL_MODEL repository variable is not set"; exit 1; }
-          test -n "${GEMINI_API_KEY:-}" || { echo "ERROR: GEMINI_API_KEY repository secret is not set"; exit 1; }
-          echo "GEMINI_API_KEY is configured (non-empty)"
-      - name: Export baseline task e-001
-        run: uv run --frozen python scripts/export_harbor_tasks.py --baseline --case e-001
-      - name: Run Harbor 1-case smoke check
+      - name: Export 10 unclassified baseline tasks
+        run: uv run --frozen python scripts/export_harbor_tasks.py --baseline
+      - name: Run Harbor baseline (5 attempts per case)
         run: |
           PYTHONPATH="$PWD" harbor run \
             -p .harbor/tasks \
             -a harbor_adapter.agent:CartwheelAgent \
             -m "$CARTWHEEL_MODEL" \
             -e docker \
-            --n-attempts 1 \
-            --job-name hw6-smoke-e001 \
+            --n-attempts 5 \
+            --n-concurrent 2 \
+            --job-name hw6-baseline \
             --jobs-dir .harbor/jobs \
             --yes
-      - name: Summarize smoke check and inspect diagnostics
+      - name: Summarize baseline and produce classifications
         if: always()
         run: |
-          uv run --frozen python - << 'EOF'
-          import json
-          from pathlib import Path
-
-          job_dir = Path(".harbor/jobs/hw6-smoke-e001")
-          result_path = job_dir / "result.json"
-          if not result_path.exists():
-              print("No result.json found; listing job_dir:")
-              for p in sorted(job_dir.rglob("*")) if job_dir.exists() else []:
-                  print(" ", p)
-              raise SystemExit(0)
-
-          data = json.loads(result_path.read_text())
-          trials = data.get("trial_results", [])
-          print(f"Trials count: {len(trials)}")
-          for t in trials:
-              print("TASK:", t.get("task_name"), "TRIAL:", t.get("trial_name"))
-              print("  REWARDS:", (t.get("verifier_result") or {}).get("rewards"))
-              print("  EXCEPTION:", t.get("exception_info"))
-              print("  AGENT_INFO:", t.get("agent_info"))
-          for log_file in sorted(job_dir.rglob("verifier*")):
-              if log_file.is_file() and log_file.stat().st_size < 30000:
-                  print(f"\n--- {log_file} ---")
-                  print(log_file.read_text(errors="replace")[:4000])
-          for log_file in sorted(job_dir.rglob("cartwheel-result.json")):
-              if log_file.is_file():
-                  print(f"\n--- {log_file} ---")
-                  d = json.loads(log_file.read_text())
-                  print("FINAL_REPLY:", d.get("transcript", {}).get("final_reply", "")[:500])
-          EOF
-      - name: Upload Harbor smoke job artifact
+          uv run --frozen python scripts/summarize_harbor_job.py \
+            .harbor/jobs/hw6-baseline \
+            --expected-attempts 5 \
+            --classify
+      - name: Upload Harbor baseline artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: hw6-smoke-e001
-          path: .harbor/jobs/hw6-smoke-e001
+          name: hw6-baseline
+          path: .harbor/jobs/hw6-baseline
           if-no-files-found: warn

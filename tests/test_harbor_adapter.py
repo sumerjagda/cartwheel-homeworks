@@ -326,3 +326,44 @@ def test_capability_analysis_uses_5_10_and_15_observed_runs(
         "10",
         "15",
     }
+
+
+def test_per_trial_result_files_are_loaded_when_job_result_excludes_trial_results(
+    tmp_path: Path,
+) -> None:
+    cases_path = tmp_path / "cases.jsonl"
+    case = {
+        "id": "e-501",
+        "mode": "response_quality",
+        "input": {"role": "shopper", "user_id": 1, "message": "hello"},
+        "initial_state": {"world": "reseed", "fixture": None},
+        "expected": {"checks": [{"check": "reply_asks_question"}]},
+    }
+    _write_cases(cases_path, [case])
+    job = tmp_path / "job"
+    job.mkdir()
+    (job / "result.json").write_text(json.dumps({"n_total_trials": 5, "stats": {}}))
+    for i, reward in enumerate([1, 1, 1, 0, 1]):
+        trial_dir = job / f"e-501__trial{i}"
+        trial_dir.mkdir()
+        (trial_dir / "result.json").write_text(
+            json.dumps(
+                {
+                    "task_name": "e-501",
+                    "trial_name": f"e-501__trial{i}",
+                    "started_at": f"2026-11-24T21:00:0{i}Z",
+                    "verifier_result": {"rewards": {"reward": reward}},
+                    "exception_info": None,
+                }
+            )
+        )
+
+    markdown, passed = summarize_job(
+        job,
+        cases_path=cases_path,
+        expected_attempts=5,
+        classify=True,
+    )
+
+    assert passed is True
+    assert '`kind: "capability"`, `baseline_pass_rate: 0.8`' in markdown

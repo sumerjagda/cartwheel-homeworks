@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import math
+import random
 from typing import Any, Callable
 
 
@@ -43,8 +45,53 @@ def select_traces(
     Raises:
         ValueError: if random_rate is outside (0, 1] or a trace has no "id".
     """
-    ### YOUR CODE HERE (hw7)
-    raise NotImplementedError("hw7: implement select_traces")
+    if (
+        isinstance(random_rate, bool)
+        or not isinstance(random_rate, (int, float))
+        or math.isnan(random_rate)
+        or random_rate <= 0
+        or random_rate > 1
+    ):
+        raise ValueError(f"random_rate must be in (0, 1], got {random_rate!r}")
+
+    for index, trace in enumerate(traces):
+        if not isinstance(trace, dict) or not trace.get("id"):
+            raise ValueError(f"trace at index {index} is missing a nonempty 'id'")
+
+    if not traces:
+        return {
+            "random": [],
+            "risk_groups": {name: [] for name in risk_groups},
+            "to_judge": [],
+        }
+
+    sample_size = min(len(traces), max(1, round(random_rate * len(traces))))
+    random_sample = random.Random(seed).sample(list(traces), sample_size)
+
+    risk_selected: dict[str, list[dict[str, Any]]] = {
+        name: [trace for trace in traces if bool(predicate(trace))]
+        for name, predicate in risk_groups.items()
+    }
+
+    to_judge: list[dict[str, Any]] = []
+    seen_ids: set[Any] = set()
+    for trace in random_sample:
+        trace_id = trace["id"]
+        if trace_id not in seen_ids:
+            seen_ids.add(trace_id)
+            to_judge.append(trace)
+    for group_traces in risk_selected.values():
+        for trace in group_traces:
+            trace_id = trace["id"]
+            if trace_id not in seen_ids:
+                seen_ids.add(trace_id)
+                to_judge.append(trace)
+
+    return {
+        "random": random_sample,
+        "risk_groups": risk_selected,
+        "to_judge": to_judge,
+    }
 
 
 # Each function identifies one risk group in the Cartwheel traces.

@@ -70,8 +70,54 @@ def build_score_records(
         A list of score record dicts with keys: score_id, name, value,
         data_type, trace_id, comment (comment is None for verdicts).
     """
-    ### YOUR CODE HERE (hw7)
-    raise NotImplementedError("hw7: implement build_score_records")
+    if not mode or not isinstance(mode, str):
+        raise ValueError("mode must be a nonempty string")
+    if not batch_label or not isinstance(batch_label, str):
+        raise ValueError("batch_label must be a nonempty string")
+
+    records: list[dict[str, Any]] = []
+    for trace_id, verdict in random_verdicts.items():
+        if isinstance(verdict, bool) or verdict not in (0, 1):
+            raise ValueError(f"random verdict for {trace_id!r} must be 0 or 1")
+        records.append(
+            {
+                "score_id": _stable_id(mode, "verdict", str(trace_id)),
+                "name": f"{mode}_verdict",
+                "value": float(verdict),
+                "data_type": "NUMERIC",
+                "trace_id": str(trace_id),
+                "comment": None,
+            }
+        )
+
+    for trace_id, verdict in risk_verdicts.items():
+        if isinstance(verdict, bool) or verdict not in (0, 1):
+            raise ValueError(f"risk verdict for {trace_id!r} must be 0 or 1")
+        records.append(
+            {
+                "score_id": _stable_id(mode, "risk_verdict", str(trace_id)),
+                "name": f"{mode}_risk_verdict",
+                "value": float(verdict),
+                "data_type": "NUMERIC",
+                "trace_id": str(trace_id),
+                "comment": None,
+            }
+        )
+
+    records.append(
+        {
+            "score_id": _stable_id(mode, "prevalence", batch_label),
+            "name": f"{mode}_corrected_prevalence",
+            "value": float(estimate["corrected"]),
+            "data_type": "NUMERIC",
+            "trace_id": None,
+            "comment": (
+                f"95% CI {estimate['ci_low']}-{estimate['ci_high']}, "
+                f"raw {estimate['raw']}, n={estimate['n_sample']}"
+            ),
+        }
+    )
+    return records
 
 
 # ---------------------------------------------------------------------------

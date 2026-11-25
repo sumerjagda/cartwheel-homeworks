@@ -1,0 +1,35 @@
+name: monitor
+
+on:
+  schedule:
+    - cron: "0 9 * * *"
+  workflow_dispatch:
+
+jobs:
+  monitor:
+    name: Daily post-deployment monitor
+    runs-on: ubuntu-latest
+    env:
+      LANGFUSE_HOST: ${{ vars.LANGFUSE_HOST || vars.LANGFUSEHOST || secrets.LANGFUSEHOST }}
+      LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY || secrets.LANGFUSE }}
+      LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY || secrets.LANGFUSESEC }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY || secrets.NAME }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      TOGETHER_API_KEY: ${{ secrets.TOGETHER_API_KEY }}
+      PYTHONPATH: ${{ github.workspace }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: astral-sh/setup-uv@v5
+      - run: uv sync --frozen
+      - name: Run 24-hour trace monitor
+        run: uv run --frozen python -m monitoring.run --last-hours 24
+      - name: Upload monitoring output artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monitoring-output
+          path: monitoring/out
+          if-no-files-found: warn

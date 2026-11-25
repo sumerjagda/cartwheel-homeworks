@@ -1,0 +1,22 @@
+{
+  "judge_id": "raw_schema_or_planning_leak-v1",
+  "judge_mode": "raw_schema_or_planning_leak",
+  "model": "gemini/gemini-3.5-flash-lite",
+  "random_rate": 0.2,
+  "risk_groups": [
+    "write_action"
+  ],
+  "threshold": 0.15,
+  "periods": [
+    {
+      "label": "before",
+      "from": "2026-11-22T18:05:00Z",
+      "to": "2026-11-22T18:07:00Z"
+    },
+    {
+      "label": "after",
+      "from": "2026-11-25T18:48:00Z",
+      "to": "2026-11-25T19:03:00Z"
+    }
+  ]
+}

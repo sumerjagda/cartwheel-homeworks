@@ -49,7 +49,7 @@ jobs:
             -m "$CARTWHEEL_MODEL" \
             -e docker \
             --n-attempts 5 \
-            --n-concurrent 3 \
+            --n-concurrent 2 \
             --job-name hw6-evals \
             --jobs-dir .harbor/jobs \
             --yes

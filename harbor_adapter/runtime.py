@@ -46,7 +46,7 @@ def run(case_path: Path, output_path: Path, model: str) -> dict[str, Any]:
     """
     case = json.loads(case_path.read_text())
     state_root = Path("/app/data")
-    backoff_seconds = (5, 15, 30)
+    backoff_seconds = (5, 15, 30, 60)
     transcript: dict[str, Any] | None = None
     for attempt in range(len(backoff_seconds) + 1):
         try:

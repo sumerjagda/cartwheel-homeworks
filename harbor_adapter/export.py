@@ -236,6 +236,7 @@ def _judge_py(mode: str, expected: str, judge: dict[str, Any]) -> str:
 
 import json
 import tempfile
+import time
 from pathlib import Path
 
 from docetl.api import Dataset, MapOp, Pipeline, PipelineOutput, PipelineStep
@@ -246,6 +247,29 @@ from replay.rollout import judge_trace_text
 PROMPT = __PROMPT__
 MODEL = __MODEL__
 EXPECTED = __EXPECTED__
+_TRANSIENT_TOKENS = (
+    "429",
+    "500",
+    "502",
+    "503",
+    "504",
+    "ratelimit",
+    "rate_limit",
+    "resource_exhausted",
+    "serviceunavailable",
+    "service unavailable",
+    "internalservererror",
+    "badgateway",
+    "apiconnectionerror",
+    "timeout",
+    "overloaded",
+    "temporarily unavailable",
+)
+
+
+def _is_transient_infra_error(exc: Exception) -> bool:
+    haystack = f"{type(exc).__name__}: {exc}".lower()
+    return any(token in haystack for token in _TRANSIENT_TOKENS)
 
 
 def _decode(row: dict) -> str:
@@ -302,7 +326,15 @@ def cartwheel_judge(workspace: Path) -> bool:
                 intermediate_dir=str(root),
             ),
         )
-        pipeline.run()
+        backoff_seconds = (5, 15, 30, 60)
+        for attempt in range(len(backoff_seconds) + 1):
+            try:
+                pipeline.run()
+                break
+            except Exception as exc:
+                if attempt >= len(backoff_seconds) or not _is_transient_infra_error(exc):
+                    raise
+                time.sleep(backoff_seconds[attempt])
         rows = json.loads(output_path.read_text())
     if len(rows) != 1:
         raise ValueError("judge returned an unexpected number of results")

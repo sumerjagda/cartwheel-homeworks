@@ -1,0 +1,117 @@
+{
+  "case_id": "e-008",
+  "model": "gemini/gemini-3.5-flash-lite",
+  "trial_order": "result.json trial_results order",
+  "trials": [
+    {
+      "trial_name": "e-008__h5m7mps",
+      "passed": 0
+    },
+    {
+      "trial_name": "e-008__2dEpvV3",
+      "passed": 0
+    },
+    {
+      "trial_name": "e-008__Q9TGvDQ",
+      "passed": 1
+    },
+    {
+      "trial_name": "e-008__e4rLtag",
+      "passed": 1
+    },
+    {
+      "trial_name": "e-008__x3unFpc",
+      "passed": 0
+    },
+    {
+      "trial_name": "e-008__CK4h6af",
+      "passed": 1
+    },
+    {
+      "trial_name": "e-008__wjzyebt",
+      "passed": 1
+    },
+    {
+      "trial_name": "e-008__2YTExfV",
+      "passed": 0
+    },
+    {
+      "trial_name": "e-008__bbWHQZj",
+      "passed": 1
+    },
+    {
+      "trial_name": "e-008__9EBi5hH",
+      "passed": 1
+    },
+    {
+      "trial_name": "e-008__g8SEUDZ",
+      "passed": 0
+    },
+    {
+      "trial_name": "e-008__p4WHg5C",
+      "passed": 0
+    },
+    {
+      "trial_name": "e-008__ju2BzsD",
+      "passed": 1
+    },
+    {
+      "trial_name": "e-008__jYPURBF",
+      "passed": 0
+    },
+    {
+      "trial_name": "e-008__EwJCVj5",
+      "passed": 0
+    }
+  ],
+  "rewards": [
+    0,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
+    1,
+    0,
+    0
+  ],
+  "n": 15,
+  "successes": 7,
+  "comparisons": [
+    {
+      "n": 5,
+      "successes": 2,
+      "pass_at_k": {
+        "1": 0.4,
+        "3": 0.9,
+        "5": 1.0
+      }
+    },
+    {
+      "n": 10,
+      "successes": 6,
+      "pass_at_k": {
+        "1": 0.6,
+        "3": 0.9666666666666667,
+        "5": 1.0
+      }
+    },
+    {
+      "n": 15,
+      "successes": 7,
+      "pass_at_k": {
+        "1": 0.4666666666666667,
+        "3": 0.8769230769230769,
+        "5": 0.9813519813519813,
+        "10": 1.0,
+        "15": 1.0
+      }
+    }
+  ]
+}

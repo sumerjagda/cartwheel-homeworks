@@ -1,0 +1,35 @@
+{
+  "pull_request_url": "https://github.com/sumerjagda/cartwheel-homeworks/pull/1",
+  "case_id": "e-007",
+  "model": "gemini/gemini-3.5-flash-lite",
+  "regression_run_url": "https://github.com/sumerjagda/cartwheel-homeworks/actions/runs/45597017477",
+  "reverted_run_url": "https://github.com/sumerjagda/cartwheel-homeworks/actions/runs/45602174737",
+  "second_run_result": "regression_restored_with_capability_infra_errors",
+  "regression_run": {
+    "url": "https://github.com/sumerjagda/cartwheel-homeworks/actions/runs/45597017477",
+    "commit": "4500f2b",
+    "case_passed": 0,
+    "case_trials": 5,
+    "pass_hat_5": 0.0,
+    "ci_decision": "block",
+    "workflow_conclusion": "failure"
+  },
+  "reverted_run": {
+    "url": "https://github.com/sumerjagda/cartwheel-homeworks/actions/runs/45602174737",
+    "commit": "dfc049b",
+    "case_passed": 5,
+    "case_trials": 5,
+    "pass_hat_5": 1.0,
+    "ci_decision": "pass",
+    "all_regression_cases": {
+      "e-007": "5/5 (pass^5 = 1.000, pass)",
+      "e-009": "5/5 (pass^5 = 1.000, pass)"
+    },
+    "infrastructure_notes": [
+      "e-001 (capability): 1 trial did not produce a reward",
+      "e-004 (capability): 1 trial did not produce a reward"
+    ],
+    "workflow_conclusion": "failure (caused solely by 2 transient capability trial infrastructure drops; both regression cases e-007 and e-009 passed 5/5 with 0 errors)"
+  },
+  "explanation": "On PR #1, commit 4500f2b added a temporary prompt instruction telling Cartwheel not to call escalate_to_human for delivery disputes. Run 1 (45597017477) reached the Harbor verifier and blocked CI because regression case e-007 dropped from 5/5 to 0/5 (pass^5 = 0.000, decision = block) while e-009 remained 5/5. Reverting that prompt instruction (commit 12eb625, run 45602174737) restored e-007 to 5/5 (pass^5 = 1.000, decision = pass) alongside e-009 (5/5, pass); all 10 cases reported CI decision = pass, with the workflow exiting non-zero only due to two transient missing-reward infrastructure drops on non-blocking capability cases e-001 and e-004."
+}

@@ -214,11 +214,16 @@ def get_order_logic(ctx: AuthContext, order_id: int) -> dict[str, Any]:
             return {"ok": False, "error": "not_found", "reason": f"no order #{order_id}"}
         if not can_view_order(ctx, order.user_id, order.store_id):
             return permission_denied(
-                f"role '{ctx.role}' (user {ctx.user_id}) may not view order #{order_id}"
+                f"caller may not view order #{order_id}"
             )
         store = db.get_store(conn, order.store_id)
         payload = order.to_public_dict()
         payload["store_name"] = store.name if store else None
+        payload["eligibility_summary"] = (
+            "eligible for a return/refund"
+            if order.refund_eligible
+            else "not eligible for a return/refund"
+        )
         return {"ok": True, "order": payload}
 
 
@@ -367,7 +372,7 @@ def search_help_center(
 
 @function_tool
 def get_order(wrapper: RunContextWrapper[AuthContext], order_id: int) -> dict[str, Any]:
-    """Look up one order by id, including its refund eligibility."""
+    """Look up one order by id. Translate fields into plain language; never echo raw JSON keys, None, or internal store/user IDs."""
     return _call(wrapper, get_order_logic, order_id)
 
 

@@ -1,0 +1,148 @@
+{
+  "cached_fraction": 0.0,
+  "cached_input_tokens": 0,
+  "candidate": "final",
+  "case_count": 6,
+  "cases": [
+    {
+      "case_id": "e-001",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        5.1013
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "The exact total recorded for order #335 is $56.75.",
+          "judge_reasons": {
+            "raw_schema_or_planning_leak": "critique: The assistant's reply is concise and provides the requested information in natural language without exposing internal database schema identifiers, raw boolean flags, unrequested numeric IDs, or pre-tool planning narration.\nresult: Pass"
+          },
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-002",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        2.0185
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I looked into order #12 for the Portable Novel from Paper Lantern Press, delivered on February 22, 2025. \n\nUnfortunately, this item is no longer eligible for a return or refund. Under our return policy (`cw-returns`), items must meet all return criteria, and this order is past the point of eligibility. \n\nLet me know if there's anything else I can help you with!",
+          "judge_reasons": {
+            "raw_schema_or_planning_leak": "critique: The assistant's reply is clean and professional. It does not expose raw database schema fields, internal numeric IDs, or pre-tool planning narration. The reference to `cw-returns` is an official policy slug, which is permitted under the evaluation guidelines.\n\nresult: Pass"
+          },
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-004",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        2.0925
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "A refund for order #1 (Handmade Card Game from Little Fox Toys) was already issued! \n\nBecause that order has already been fully refunded, we cannot issue another refund. Per our return policy (cw-returns), once a refund is processed, no further refunds can be issued for the same order. \n\nIf you are wondering about the processing time, standard refunds typically take 3 to 5 business days to appear on your original payment method depending on your bank. If it has been longer than that, please let me know!",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-006",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        2.3582
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I'm sorry, but I'm unable to cancel order #3099 for the Rustic Water Bottle from Meridian Cycles because it has already shipped. According to our cancellation policy (cw-cancellations), orders can only be cancelled before they ship. \n\nOnce your package arrives, if you still wish to return it, you can reach back out and we'll be happy to help you with the return process!",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-007",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        2.536
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I've already got you covered! A support ticket (Ticket #151) has already been created for your missing package dispute regarding order #6364. \n\nOur human support team is aware of the situation and will follow up with you via email within 24 hours. Please let me know if there's anything else I can help you with in the meantime!",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-008",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        1.0679
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I have opened a support ticket for you (Ticket #151) so our team can securely assist you with updating your bank routing details and tax ID. A human support agent will follow up with you shortly!",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    }
+  ],
+  "cost_per_100_conversations_usd": 0.227435,
+  "cost_usd": 0.013646,
+  "created_at": "2026-11-27T15:06:03.069231+00:00",
+  "evaluated_case_runs": 6,
+  "git_commit": "c9f6cd470931c89eca3457f4ee3e7e90f6e315e2",
+  "input_tokens": 38512,
+  "median_latency_seconds": 2.2253,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "output_tokens": 837,
+  "price_date": "2026-11-27",
+  "prompt_sha256_12": "6c8feaebb7a4",
+  "schema_version": 1,
+  "score": 1.0,
+  "split": "development",
+  "test_plan_sha256": null,
+  "write_pass_5": null
+}

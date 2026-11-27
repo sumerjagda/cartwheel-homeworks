@@ -1,0 +1,150 @@
+{
+  "cached_fraction": 0.0,
+  "cached_input_tokens": 0,
+  "candidate": "loop-clean-refund-errors",
+  "case_count": 6,
+  "cases": [
+    {
+      "case_id": "e-001",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        5.1228
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "The exact total recorded for order #335 is $56.75.",
+          "judge_reasons": {
+            "raw_schema_or_planning_leak": "critique: The assistant's reply is concise and provides the requested information in natural language without exposing internal database schema identifiers, raw boolean flags, unrequested numeric IDs, or pre-tool planning narration.\nresult: Pass"
+          },
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-002",
+      "expected_write": false,
+      "failure_modes": [
+        "agent_error:ModelBehaviorError"
+      ],
+      "latencies_seconds": [
+        1.3333
+      ],
+      "pass_rate": 0.0,
+      "passes": 0,
+      "run_details": [
+        {
+          "error": "Tool get_help_center not found in agent cartwheel-support",
+          "failure_modes": [
+            "agent_error:ModelBehaviorError"
+          ],
+          "final_reply": "",
+          "judge_reasons": {},
+          "passed": false
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-004",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        1.1927
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "Order #1 for the Handmade Card Game from Little Fox Toys has already been fully refunded. \n\nAccording to our return policy (cw-returns), once a refund has been issued, funds typically take 3 to 5 business days to appear back on your original payment method, depending on your bank or card issuer. \n\nIf you still don't see the funds after a few more days, please let me know and I'll be happy to look into it further for you!",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-006",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        2.0754
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I'm sorry, but I'm unable to cancel your order for the Rustic Water Bottle from Meridian Cycles because it has already shipped (cw-cancellations). \n\nOnce your order arrives, you are welcome to request a return if you still wish to send it back. Please let me know if you need help with anything else!",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-007",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        2.9038
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I've already created a formal delivery dispute and opened a support ticket for your most recent delivery (Order #6364). A human specialist will follow up with you via email within 24 hours to help sort this out!",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-008",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        1.4402
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I've opened a support ticket for you (Ticket #151) so a human team member can securely assist you with updating your store's payout bank routing details and tax ID. Someone will follow up with you shortly!",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    }
+  ],
+  "cost_per_100_conversations_usd": 0.193253,
+  "cost_usd": 0.011595,
+  "created_at": "2026-11-27T14:49:48.816478+00:00",
+  "evaluated_case_runs": 6,
+  "git_commit": "38d99a682e388f87c6ab30d53753cfe5a9603cd4",
+  "input_tokens": 33159,
+  "median_latency_seconds": 1.7578,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "output_tokens": 659,
+  "price_date": "2026-11-27",
+  "prompt_sha256_12": "9ca694220122",
+  "schema_version": 1,
+  "score": 0.833333,
+  "split": "development",
+  "test_plan_sha256": null,
+  "write_pass_5": null
+}

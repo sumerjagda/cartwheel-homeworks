@@ -1,5 +1,32 @@
 {
   "maximum_calls": 150,
-  "reservations": [],
-  "used_calls": 0
+  "reservations": [
+    {
+      "calls": 6,
+      "label": "loop-baseline",
+      "reserved_at": "2026-11-27T14:44:23.104132+00:00"
+    },
+    {
+      "calls": -6,
+      "label": "loop-baseline",
+      "note": "released after a failed run",
+      "reserved_at": "2026-11-27T14:44:40.838886+00:00"
+    },
+    {
+      "calls": 6,
+      "label": "loop-baseline",
+      "reserved_at": "2026-11-27T14:44:53.700911+00:00"
+    },
+    {
+      "calls": 6,
+      "label": "loop-exact-tool-names",
+      "reserved_at": "2026-11-27T14:47:44.997029+00:00"
+    },
+    {
+      "calls": 6,
+      "label": "loop-clean-refund-errors",
+      "reserved_at": "2026-11-27T14:49:31.762651+00:00"
+    }
+  ],
+  "used_calls": 18
 }

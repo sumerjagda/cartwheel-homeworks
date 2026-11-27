@@ -258,7 +258,7 @@ def issue_refund_logic(
             return {"ok": False, "error": "not_found", "reason": f"no order #{order_id}"}
         if not can_refund_order(ctx, order.user_id, order.store_id):
             return permission_denied(
-                f"role '{ctx.role}' (user {ctx.user_id}) may not refund order #{order_id}"
+                f"role '{ctx.role}' may not refund order #{order_id}"
             )
         if amount_usd > order.total_usd:
             return {
@@ -267,12 +267,17 @@ def issue_refund_logic(
                 "reason": f"refund amount ${amount_usd:.2f} exceeds order total ${order.total_usd:.2f}",
             }
         if not order.refund_eligible:
+            delivery_note = (
+                f"delivered {order.delivered_at}"
+                if order.delivered_at
+                else "not yet delivered"
+            )
             return {
                 "ok": False,
                 "error": "not_eligible",
                 "reason": (
                     f"order #{order_id} is not refund-eligible "
-                    f"(status '{order.status}', delivered {order.delivered_at}); "
+                    f"(status '{order.status}', {delivery_note}); "
                     f"the return window counts from the delivery date"
                 ),
             }

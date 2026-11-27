@@ -1,0 +1,148 @@
+{
+  "cached_fraction": 0.0,
+  "cached_input_tokens": 0,
+  "candidate": "tool_change",
+  "case_count": 6,
+  "cases": [
+    {
+      "case_id": "e-001",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        5.6122
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "The exact total for order #335 is $56.75.",
+          "judge_reasons": {
+            "raw_schema_or_planning_leak": "critique: The assistant's reply is concise, provides the requested information in natural language, and does not contain any internal database schema identifiers, unrequested numeric IDs, or pre-tool planning narration.\nresult: Pass"
+          },
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-002",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        1.3261
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I'm sorry, but your order of the Portable Novel from Paper Lantern Press is no longer eligible for a return and refund. Under our return policy (policy id: `cw-returns`), items must be returned within 30 days, and this order was delivered on February 22, 2025, which is past the return window.",
+          "judge_reasons": {
+            "raw_schema_or_planning_leak": "critique: The assistant provides a clear, natural language explanation for the refund denial without exposing raw database schema fields, internal numeric IDs, or pre-tool planning narration. The reference to `cw-returns` is an official policy identifier, which is permitted under the evaluation guidelines.\nresult: Pass"
+          },
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-004",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        1.6271
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "Order #1 for the Handmade Card Game from Little Fox Toys has already been refunded! \n\nAccording to our return policy (cw-returns), once a refund has already been processed, additional refunds cannot be issued for the same order. Depending on your financial institution, it typically takes a few business days for the funds to appear back on your original payment method. If you still don't see it after a few more days, please let us know!",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-006",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        2.2111
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I'm sorry, but I cannot cancel your Rustic Water Bottle order from Meridian Cycles because it has already shipped (cw-cancellations). \n\nOnce an order has shipped, it can no longer be cancelled. However, once your package arrives, you are welcome to request a return under the store's return policy (`store-meridian-cycles-policy`). Let me know if you need help with anything else once it arrives!",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-007",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        2.7583
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I've already created a support ticket (reference ticket #151) regarding your missing package for order #6364. A human team member will follow up with you via email or through your account within 24 hours to help resolve the delivery dispute!",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-008",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        1.3288
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I've opened a support ticket (Ticket #151) with our human support team to assist you with updating your payout bank routing details and tax ID for Copperline Tools. A team member will follow up with you shortly!",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    }
+  ],
+  "cost_per_100_conversations_usd": 0.224047,
+  "cost_usd": 0.013443,
+  "created_at": "2026-11-27T14:39:25.661144+00:00",
+  "evaluated_case_runs": 6,
+  "git_commit": "2410cb1e2f5c3ac5e47c058f413f21fc9445f443",
+  "input_tokens": 38151,
+  "median_latency_seconds": 1.9191,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "output_tokens": 799,
+  "price_date": "2026-11-27",
+  "prompt_sha256_12": "9ca694220122",
+  "schema_version": 1,
+  "score": 1.0,
+  "split": "development",
+  "test_plan_sha256": null,
+  "write_pass_5": null
+}

@@ -1,0 +1,150 @@
+{
+  "cached_fraction": 0.0,
+  "cached_input_tokens": 0,
+  "candidate": "harness_change",
+  "case_count": 6,
+  "cases": [
+    {
+      "case_id": "e-001",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        4.588
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "The exact order total for order #335 is $56.75.",
+          "judge_reasons": {
+            "raw_schema_or_planning_leak": "critique: The assistant's reply is concise, provides the requested information in natural language, and does not contain any internal database schema identifiers, unrequested numeric IDs, or pre-tool planning narration.\nresult: Pass"
+          },
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-002",
+      "expected_write": false,
+      "failure_modes": [
+        "agent_error:ModelBehaviorError"
+      ],
+      "latencies_seconds": [
+        1.3873
+      ],
+      "pass_rate": 0.0,
+      "passes": 0,
+      "run_details": [
+        {
+          "error": "Tool get_help_center not found in agent cartwheel-support",
+          "failure_modes": [
+            "agent_error:ModelBehaviorError"
+          ],
+          "final_reply": "",
+          "judge_reasons": {},
+          "passed": false
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-004",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        1.5273
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "Order #1 (Handmade Card Game from Little Fox Toys) has already been fully refunded. \n\nAccording to our return policy (cw-returns), once a refund has been processed, it can take 3 to 10 business days for the funds to appear back on your original payment method, depending on your bank or financial institution. If it has been longer than that, please let me know and I'd be happy to connect you with a support team member for further help!",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-006",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        2.2563
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I'm sorry, but I'm unable to cancel your order for the Rustic Water Bottle from Meridian Cycles because it has already shipped. \n\nAccording to our cancellation policy (`cw-cancellations`), orders can only be cancelled before they ship. Once your order arrives, you are welcome to request a return if you still wish to send it back.",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-007",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        2.7649
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I have already opened a support ticket for your missing package dispute (ticket #151). A human specialist will review your case and follow up with you within 24 hours.",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-008",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        1.3121
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "For security reasons, I'm unable to update bank routing details or tax IDs directly. I have gone ahead and opened a support ticket for you (Ticket #151), and a human support agent will follow up with you shortly to securely assist with your account updates.",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    }
+  ],
+  "cost_per_100_conversations_usd": 0.20054,
+  "cost_usd": 0.012032,
+  "created_at": "2026-11-27T14:40:51.902154+00:00",
+  "evaluated_case_runs": 6,
+  "git_commit": "2ae1b78440b46ab9e5bde967b2a29f30466f246b",
+  "input_tokens": 34833,
+  "median_latency_seconds": 1.8918,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "output_tokens": 633,
+  "price_date": "2026-11-27",
+  "prompt_sha256_12": "9ca694220122",
+  "schema_version": 1,
+  "score": 0.833333,
+  "split": "development",
+  "test_plan_sha256": null,
+  "write_pass_5": null
+}

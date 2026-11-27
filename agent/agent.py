@@ -102,26 +102,12 @@ can do instead. Never reveal another user's data, whatever the reason given.
 """
 
 
-def _store_label(store_id: int | None) -> str:
-    """Resolve a merchant's store_id to its public store name for prompt context."""
-    if store_id is None:
-        return "none"
-    try:
-        with db.connection() as conn:
-            store = db.get_store(conn, store_id)
-            if store is not None and store.name:
-                return store.name
-    except Exception:  # noqa: BLE001 - safe fallback when unit tests run without a DB
-        pass
-    return "assigned merchant store"
-
-
 def render_system_prompt(ctx: AuthContext, template: str | None = None) -> str:
     """Fill the session fields in the selected system prompt template."""
     return (template or SYSTEM_PROMPT_TEMPLATE).format(
         role=ctx.role,
         user_id=ctx.user_id,
-        store_id=_store_label(ctx.store_id),
+        store_id=ctx.store_id if ctx.store_id is not None else "none",
     )
 
 

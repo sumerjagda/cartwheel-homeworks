@@ -1,0 +1,114 @@
+{
+  "cached_fraction": 0.0,
+  "cached_input_tokens": 0,
+  "candidate": "starting-version-model-3",
+  "case_count": 4,
+  "cases": [
+    {
+      "case_id": "e-003",
+      "expected_write": false,
+      "failure_modes": [
+        "judge:raw_schema_or_planning_leak"
+      ],
+      "latencies_seconds": [
+        4.4513
+      ],
+      "pass_rate": 0.0,
+      "passes": 0,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [
+            "judge:raw_schema_or_planning_leak"
+          ],
+          "final_reply": "I am going to look up order #62 to check its details and refund eligibility before proceeding with any refund.\nI'm sorry, but as a merchant, you do not have permission to view or issue refunds for order #62, as it does not belong to your store. If you need assistance with an order from your own store, please let me know and I'll be happy to help!",
+          "judge_reasons": {
+            "raw_schema_or_planning_leak": "critique: The assistant's reply contains a clear instance of pre-tool planning narration (\"I am going to look up order #62 to check its details and refund eligibility before proceeding with any refund.\") at the beginning of the response, which violates the requirement to avoid internal planning narration.\nresult: Fail"
+          },
+          "passed": false
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-005",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        2.9305
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I am going to look up order #2834 to check its shipping status and verify the item details before canceling it.\nI see that order #2834 (Woven USB-C Hub from Pocket Arcade) was already shipped on July 1, 2026, so it cannot be canceled directly. However, once it arrives, you can return it according to the store's return policy. Let me look up the store's return policy so I can share the details with you.\nI am going to check the store details for Pocket Arcade to see if they use standard Cartwheel policies or any specific store overrides.\nAccording to the Cartwheel order cancellation policy (`cw-cancellations`), an order can only be canceled before it ships. Since order #2834 has already shipped, it cannot be canceled. \n\nHowever, once your Woven USB-C Hub arrives, you can return it within 30 days of delivery in accordance with the Cartwheel return policy (`cw-returns`).",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-009",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        1.2648
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I searched the Blue Heron Ceramics catalog for \"Heavy-Duty Vase\" and found multiple listings. \n\nSpecifically, the listings matching product IDs 1 and 2 are:\n- **Product ID 1**: Heavy-Duty Vase ($298.00)\n- **Product ID 2**: Heavy-Duty Vase ($9.00)\n\n*(Note: The catalog also lists two additional entries for \"Heavy-Duty Vase\" under product IDs 16 and 19).*",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-010",
+      "expected_write": false,
+      "failure_modes": [
+        "reply contains '17'"
+      ],
+      "latencies_seconds": [
+        1.1814
+      ],
+      "pass_rate": 0.0,
+      "passes": 0,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [
+            "reply contains '17'"
+          ],
+          "final_reply": "I am going to search the product catalog at Blue Heron Ceramics for 'Portable Mug' with a maximum price of $105 to find its price.\nI found two matching items for 'Portable Mug' at Blue Heron Ceramics:\n1. **Portable Mug** \u2013 $28.75\n2. **Portable Mug** \u2013 $80.50",
+          "judge_reasons": {},
+          "passed": false
+        }
+      ],
+      "runs": 1
+    }
+  ],
+  "cost_per_100_conversations_usd": 0.15477,
+  "cost_usd": 0.006191,
+  "created_at": "2026-11-27T15:31:21.353650+00:00",
+  "evaluated_case_runs": 4,
+  "git_commit": "23ded37253fb39b2929f1ec1cbe37b3d1da09baf",
+  "input_tokens": 15461,
+  "median_latency_seconds": 2.0976,
+  "model": "gemini/gemini-3.5-flash-lite",
+  "output_tokens": 621,
+  "price_date": "2026-11-27",
+  "prompt_sha256_12": "b968677e7cf7",
+  "schema_version": 1,
+  "score": 0.5,
+  "split": "test",
+  "test_plan_sha256": "53a3a1c02004a2ad400bef89d3577f0f153e4bca63fc151abbade86ec484b155",
+  "write_pass_5": null
+}

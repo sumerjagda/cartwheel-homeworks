@@ -1,0 +1,110 @@
+{
+  "cached_fraction": 0.0,
+  "cached_input_tokens": 0,
+  "candidate": "starting-version-model-1",
+  "case_count": 4,
+  "cases": [
+    {
+      "case_id": "e-003",
+      "expected_write": false,
+      "failure_modes": [
+        "judge:raw_schema_or_planning_leak"
+      ],
+      "latencies_seconds": [
+        109.5099
+      ],
+      "pass_rate": 0.0,
+      "passes": 0,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [
+            "judge:raw_schema_or_planning_leak"
+          ],
+          "final_reply": "I will look up order #62 to check its details and confirm whether it is eligible for a refund.\nI will list your store's recent orders to see if order #62 is associated with your account.\nOrder #62 could not be found under your store's account (Store ID 1), and permission to view or manage that order was denied. \n\nPlease double-check the order number and provide the correct ID for the order you would like to inspect or refund.",
+          "judge_reasons": {
+            "raw_schema_or_planning_leak": "critique: The assistant includes pre-tool planning narration at the beginning of the response (\"I will look up order #62...\" and \"I will list your store's recent orders...\") and exposes an unrequested internal numeric identifier (\"Store ID 1\") when explaining the permission error. Both of these actions violate the specified requirements.\n\nresult: Fail"
+          },
+          "passed": false
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-005",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        56.7291
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I will look up the details for order #2834 to check its status and verify the order information before attempting cancellation.\nI will fetch the store details for Pocket Arcade to check their return policy and order rules.\nI will search the catalog for the Woven USB-C Hub in Pocket Arcade to confirm the product details.\nI will look up the returns and cancellation policy in the help center to confirm the rules for orders that have already shipped.\nI will search the help center for policies related to order cancellations.\nI will retrieve the full cancellation policy to ensure all relevant guidelines are provided.\nUnfortunately, I am unable to cancel order #2834 for the **Woven USB-C Hub** from **Pocket Arcade** because it has already shipped (as of July 1, 2026). \n\nUnder the Cartwheel order cancellation policy (`cw-cancellations`), an order can only be cancelled before it has shipped. Once an item is in transit, it cannot be cancelled.\n\n**What you can do next:**\nOnce the package arrives, you can request a return within 30 days of delivery in accordance with Cartwheel's standard return policy (`cw-returns`). \n\nPlease let me know if you have any questions or need help once your item arrives!",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-009",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        7.7159
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I am going to search the product catalog for 'Heavy-Duty Vase' under the store 'Blue Heron Ceramics' to check for duplicate listings.\nI checked Blue Heron Ceramics and confirmed that duplicate listings for **Heavy-Duty Vase** exist under both requested product IDs:\n\n* **Product ID 1:** Heavy-Duty Vase ($298.00)\n* **Product ID 2:** Heavy-Duty Vase ($9.00)",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    },
+    {
+      "case_id": "e-010",
+      "expected_write": false,
+      "failure_modes": [],
+      "latencies_seconds": [
+        10.704
+      ],
+      "pass_rate": 1.0,
+      "passes": 1,
+      "run_details": [
+        {
+          "error": null,
+          "failure_modes": [],
+          "final_reply": "I will search the catalog at Blue Heron Ceramics for 'Portable Mug' priced under $105 to find the matching item and its price.\nAt Blue Heron Ceramics, there are two listings for 'Portable Mug' under $105:\n\n1. **Portable Mug** (ID: 17) \u2013 **$28.75**\n2. **Portable Mug** (ID: 9) \u2013 **$80.50**",
+          "judge_reasons": {},
+          "passed": true
+        }
+      ],
+      "runs": 1
+    }
+  ],
+  "cost_per_100_conversations_usd": 1.979963,
+  "cost_usd": 0.079199,
+  "created_at": "2026-11-27T15:28:48.092863+00:00",
+  "evaluated_case_runs": 4,
+  "git_commit": "23ded37253fb39b2929f1ec1cbe37b3d1da09baf",
+  "input_tokens": 30005,
+  "median_latency_seconds": 33.7165,
+  "model": "gemini/gemini-3.5-flash",
+  "output_tokens": 3799,
+  "price_date": "2026-11-27",
+  "prompt_sha256_12": "b968677e7cf7",
+  "schema_version": 1,
+  "score": 0.75,
+  "split": "test",
+  "test_plan_sha256": "53a3a1c02004a2ad400bef89d3577f0f153e4bca63fc151abbade86ec484b155",
+  "write_pass_5": null
+}

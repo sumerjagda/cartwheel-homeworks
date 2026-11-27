@@ -1,0 +1,12 @@
+{
+  "failure_mode": "raw_schema_or_planning_leak",
+  "source": "Homework 4/5 failure analysis (analysis/report/review_summary.md and analysis/report/judge_summary.md)",
+  "prevalence": 0.2381,
+  "requirement": "RESP-6",
+  "example_trace_ids": [
+    "01d6c0eefa2b4944aded0d7e6e3d6da2",
+    "997383a856f2a4c01ea9698c4a5c1faf",
+    "92749cd39c47f498c9176dbdf8fb0d02"
+  ],
+  "why_agent_can_change_it": "All three leaks stem directly from the agent's prompt, tool outputs, and context formatting: trace 01d6c0eefa2b4944aded0d7e6e3d6da2 (support-0182) prepends pre-tool planning narration ('I am going to look up the details for order #8002...') triggered by SYSTEM_PROMPT_TEMPLATE lines 67-69 and exposes raw 'delivered_at'; trace 997383a856f2a4c01ea9698c4a5c1faf (support-0184) echoes raw database syntax ('delivered_at is currently None') directly from get_order JSON; and trace 92749cd39c47f498c9176dbdf8fb0d02 (support-0217) echoes the injected internal key '(Store ID 1)' instead of the store name on permission denial. Changing the prompt, tool payloads, or response/context harness can eliminate all three without weakening auth."
+}

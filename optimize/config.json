@@ -1,13 +1,26 @@
 {
-  "price_date": "REPLACE_WITH_YYYY-MM-DD",
+  "price_date": "2026-11-27",
   "models": {
-    "development_and_search": "glm-5.2",
-    "comparison": ["gpt-5.5", "claude-opus-4-6", "glm-5.2"],
-    "gepa_reflection": "anthropic/claude-opus-4-6"
+    "development_and_search": "gemini/gemini-3.5-flash-lite",
+    "comparison": [
+      "gemini/gemini-3.5-flash",
+      "gemini/gemini-3-flash-preview",
+      "gemini/gemini-3.5-flash-lite"
+    ],
+    "gepa_reflection": "gemini/gemini-3.5-flash"
   },
   "prices_per_million_tokens_usd": {
-    "claude-opus-4-6": {"input": null, "output": null},
-    "glm-5.2": {"input": null, "output": null},
-    "gpt-5.5": {"input": null, "output": null}
+    "gemini/gemini-3.5-flash": {
+      "input": 1.5,
+      "output": 9.0
+    },
+    "gemini/gemini-3-flash-preview": {
+      "input": 0.5,
+      "output": 3.0
+    },
+    "gemini/gemini-3.5-flash-lite": {
+      "input": 0.3,
+      "output": 2.5
+    }
   }
 }
